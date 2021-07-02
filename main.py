@@ -21,4 +21,4 @@ wait(2)
 for bright in range(0, 100, 1):
   screen.set_screen_brightness(bright)
   wait_ms(20)
-label0 = M5Label('M5 STACK', x=70, y=80, color=0x000, font=FONT_MONT_40, parent=None)
+label0 = M5Label('HELLO SAJIN', x=70, y=80, color=0x000, font=FONT_MONT_40, parent=None)
