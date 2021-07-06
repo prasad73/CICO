@@ -1560,7 +1560,7 @@ def home_screen(): # home screen
       history()
       
     
-def  dsp(line_count,data_file,list_length):
+def  dsp(line_count,data_file,list_length,list_limit):
   
    string=data_file[line_count]
    list_length=int(list_length)
@@ -1588,6 +1588,8 @@ def  dsp(line_count,data_file,list_length):
    lcd.print(str(line_count+1), 200, 0, 0xffff33)
    lcd.print(str("/"), 230, 0, 0xffff33)
    lcd.print(str(list_length+1), 250, 0, 0xffff33)
+   lcd.print(str("LIMIT:"), 200, 30, 0xffff33)
+   lcd.print(str(list_limit+1), 270, 30, 0xffff33)
    lcd.print(str(int_read_emp_id), 0, 30, 0xffffff)
    lcd.print(str(int_read_day), 0, 50, 0xffffff)
   #lcd.print(str(":"), 100, 70, 0xffffff)
@@ -1647,6 +1649,7 @@ def history():
      sd = fs.read()
      data_file = sd.split()
      list_length=str(len(data_file)-1)
+     list_limit=99
      
      
      if list_length==str(-1):
@@ -1662,7 +1665,7 @@ def history():
        
       
      lcd.clear()
-     dsp(line_count,data_file,list_length)
+     dsp(line_count,data_file,list_length, list_limit)
      history_status=1
      #line_count=0
      
@@ -1681,14 +1684,14 @@ def history():
              wait_ms(50)
              power.setVibrationEnable(False)
              lcd.clear()
-             dsp(line_count,data_file,list_length)
+             dsp(line_count,data_file,list_length, list_limit)
          else:
            lcd.clear()
            power.setVibrationEnable(True)
            wait_ms(50)
            power.setVibrationEnable(False)
            line_count=line_count-1
-           dsp(line_count,data_file,list_length)
+           dsp(line_count,data_file,list_length,list_limit)
       
        if (touch.status())==1 and (touch.read()[0]) >220 and (touch.read()[0]) <280  and (touch.read()[1]) >200 and  (touch.read()[1]) <250: 
          power.setVibrationEnable(True)
@@ -1701,8 +1704,16 @@ def history():
            wait_ms(50)
            power.setVibrationEnable(False)
            lcd.clear()
-           dsp(line_count,data_file,list_length)
-          
+           dsp(line_count,data_file,list_length, list_limit)
+        
+         if str(line_count)==str(list_limit):
+                                                                                 
+           line_count=0
+           power.setVibrationEnable(True)
+           wait_ms(50)
+           power.setVibrationEnable(False)
+           lcd.clear()
+           dsp(line_count,data_file,list_length, list_limit)
              
              
          else:
@@ -1711,7 +1722,7 @@ def history():
             power.setVibrationEnable(True)
             wait_ms(50)
             power.setVibrationEnable(False)
-            dsp(line_count,data_file,list_length)
+            dsp(line_count,data_file,list_length, list_limit)
         
         
             
