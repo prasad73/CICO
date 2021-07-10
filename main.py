@@ -1457,6 +1457,7 @@ def home_screen(): # home screen
     #lcd.print((rtc.datetime()[5]), 55, 40, 0xffffff) #40
     lcd.print("MAC ID : ", 20, 200,  0xffffff)
     lcd.print((espnow.get_mac_addr()), 120, 200, 0xffffff)
+   
     #lcd.print((touch.read()[0]), 0, 80, 0xffffff)
     #lcd.print((touch.read()[1]), 50, 80, 0xffffff)
     #wait(1)
@@ -1558,7 +1559,8 @@ def home_screen(): # home screen
       power.setVibrationEnable(False)
       history_status=1
       history()
-      
+    lcd.font(lcd.FONT_Default)
+    lcd.print("VER : 1.0", 220, 70,  0xffffff)
     
 def  dsp(line_count,data_file,list_length,list_limit):
   
@@ -1611,7 +1613,7 @@ def  dsp(line_count,data_file,list_length,list_limit):
    read_hex_min=hex(int_read_Min)[2:]
    read_read_clk=hex(int_read_clk)[2:]
    
-   lcd.font(lcd.FONT_Default)
+   lcd.font(lcd.FONT_DejaVu18)
    lcd.print(str(read_hex_emp_id+"."+read_hex_day+"."+read_hex_month+"."+read_hex_year+"."+read_hex_hour+"."+read_hex_min+"."+read_read_clk+"."+read_dvid), 0, 130, 0xffffff)
   
    
