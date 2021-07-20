@@ -1560,7 +1560,7 @@ def home_screen(): # home screen
       history_status=1
       history()
     lcd.font(lcd.FONT_Default)
-    lcd.print("VER : 1.0", 220, 70,  0xffffff)
+    lcd.print("VER : 1.1", 220, 70,  0xffffff)
     
 def  dsp(line_count,data_file,list_length,list_limit):
   
