@@ -52,6 +52,7 @@ login_password="01"
 sd_data=None
 id_count=0
 data_file = []
+clockout_list=[]
 
 new_day=0
 new_month=0
@@ -293,60 +294,15 @@ def pass_window(pass_status):
       
        
       
-        
-      
-      
-     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-  
-    
-  
-    
-  
-  
-    
- 
-  
-    
-    
-  
-    
-  
-  
-    
-  
-  
-    
-  
-    
- 
-    
- 
- 
-  
-
-
-
-
-
-
-
 
 
 
 def data_formatting(Emp_ID,Day,Month,Year,Hour,Min,clk, mac_id_hex):
   power.setVibrationEnable(False)
   if clk==1:
-    id_check(Emp_ID)
+    id_check_clkin(Emp_ID)
+  if clk==0:
+    id_check_clkout(Emp_ID)
   int_Emp=int(Emp_ID,10)
   hex_emp=hex(int_Emp)[2:]
   qr_emp=hex_emp
@@ -841,7 +797,7 @@ def date(new_hour,new_minute):
        ch_status=ch_status+1
        lcd.clear()
        
-    if (touch.status())==1 and (touch.read()[0]) >30 and (touch.read()[0]) <100  and (touch.read()[1]) >200 and  (touch.read()[1]) <250:
+    if (touch.status())==1 and (touch.read()[0]) >30 and (touch.read()[0]) <100  and (touch.read()[1]) >200 and  (touch.read()[1]) <250: #SAVE
       power.setVibrationEnable(True)
       wait_ms(100)
       power.setVibrationEnable(False)
@@ -866,7 +822,7 @@ def date(new_hour,new_minute):
       lcd.clear()
       setgs(new_day,new_month,new_year,new_hour,new_minute)
       
-    if (touch.status())==1 and (touch.read()[0]) >200 and (touch.read()[0]) <300  and (touch.read()[1]) >200 and  (touch.read()[1]) <300:
+    if (touch.status())==1 and (touch.read()[0]) >200 and (touch.read()[0]) <300  and (touch.read()[1]) >200 and  (touch.read()[1]) <300:  # back
       power.setVibrationEnable(True)
       wait_ms(100)
       power.setVibrationEnable(False)
@@ -900,8 +856,9 @@ def setgs(new_day,new_month,new_year,new_hour,new_minute):
     lcd.print('DATE', 50, 80, 0xffffff)
     lcd.print('TIME', 200, 80, 0xffffff)
     lcd.print('BACK', 10, 200, 0xffffff)
+    lcd.print('ERASE',200, 140, 0xffffff)
    
-    if (touch.status())==1 and (touch.read()[0]) >40 and (touch.read()[0]) <150  and (touch.read()[1]) >100 and  (touch.read()[1]) <150: # cin## Date selection
+    if (touch.status())==1 and (touch.read()[0]) >40 and (touch.read()[0]) <150  and (touch.read()[1]) >100 and  (touch.read()[1]) <150: #  Date selection
        power.setVibrationEnable(True)
        wait_ms(100)
        power.setVibrationEnable(False)
@@ -909,7 +866,7 @@ def setgs(new_day,new_month,new_year,new_hour,new_minute):
        settings=0
        date(new_hour,new_minute)
        
-    if (touch.status())==1 and (touch.read()[0]) >190 and (touch.read()[0]) <300  and (touch.read()[1]) >100 and  (touch.read()[1]) <150: # cout # time selection
+    if (touch.status())==1 and (touch.read()[0]) >190 and (touch.read()[0]) <300  and (touch.read()[1]) >100 and  (touch.read()[1]) <150: # time selection
       power.setVibrationEnable(True)
       wait_ms(100)
       power.setVibrationEnable(False)
@@ -921,11 +878,51 @@ def setgs(new_day,new_month,new_year,new_hour,new_minute):
       wait_ms(100)
       power.setVibrationEnable(False)
       lcd.clear()
-      lcd.print('BACK', 10, 200, 0xffffff)
       settings=0
       home_status=1
       lcd.clear()
       home_screen()
+    
+    if (touch.status())==1 and (touch.read()[0]) >190 and (touch.read()[0]) <260  and (touch.read()[1]) >170 and  (touch.read()[1]) <200:# erase history
+       
+      erase=0
+      power.setVibrationEnable(True)
+      wait_ms(100)
+      power.setVibrationEnable(False)
+      lcd.clear()
+      while erase==0:
+        lcd.print("ERASE HISTORY IN SD ?", 40, 100,  0xff2727)
+        lcd.print('NO', 10, 200, 0xffffff)
+        lcd.print('YES', 190, 200,  0xffffff)
+        if (touch.status())==1 and (touch.read()[0]) >30 and (touch.read()[0]) <100  and (touch.read()[1]) >200 and  (touch.read()[1]) <250:  # no
+          lcd.clear()
+          erase=1
+          settings=0
+          wait_ms(500)
+          setgs(new_day,new_month,new_year,new_hour,new_minute)
+          
+        if (touch.status())==1 and (touch.read()[0]) >200 and (touch.read()[0]) <300  and (touch.read()[1]) >200 and  (touch.read()[1]) <300:# yes
+           
+           lcd.clear()
+           dot=180
+           lcd.print("ERASING DATA", 40, 100,  0xfffe38)
+           os.remove('/sd/history.text')
+           with open('/sd/history.text', 'a') as fs:
+             for y in range(0, 5, 1):
+               dot+=10
+               lcd.print(".", dot,100,0xfffe38)
+               wait(1)
+           lcd.clear()
+           lcd.print("HISTORY CLEARED", 40, 100,0x18f830)
+           wait(2)
+           lcd.clear()
+           setgs(new_day,new_month,new_year,new_hour,new_minute)
+           
+         
+      
+      
+     
+    
     
     
     
@@ -933,24 +930,8 @@ def setgs(new_day,new_month,new_year,new_hour,new_minute):
     
    
  
-   
 
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-def id_check(Emp_ID):
+def id_check_clkin(Emp_ID):
   loop=1
   lcd.clear()
   data=None
@@ -963,7 +944,7 @@ def id_check(Emp_ID):
       
        data=fs.readline()
        try:
-         if data[0]==Emp_ID[0] and data[1]==Emp_ID[1] and data[2]==Emp_ID[2] and data[3]==Emp_ID[3] and data[4]==Emp_ID[4] and data[5]==Emp_ID[5]:                                                           
+         if data[0]==Emp_ID[0] and data[1]==Emp_ID[1] and data[2]==Emp_ID[2] and data[3]==Emp_ID[3] and data[4]==Emp_ID[4] and data[5]==Emp_ID[5] and  data[6]==Emp_ID[6] and  data[7]==Emp_ID[7]:                                                          
             lcd.print("ALREADY CLOCKED IN !!", 40, 100,  0xff2727)
             #speaker.playWAV("/sd/warning.wav", rate=44100, dataf=speaker.F16B)
             speaker.playWAV('/sd/warning.wav')
@@ -983,30 +964,63 @@ def id_check(Emp_ID):
             Emp_id_status=0
             home_screen()
        except:
+         lcd.print("CIN VERIFIED", 60, 100,  0x18f830)
+         wait(1)
          sd_id_write(Emp_ID+"\n")
          loop=0
         
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+def id_check_clkout(Emp_ID):
+  loop=1
+  lcd.clear()
+  data=None
+  lcd.print(str("Plz wait.."), 100, 100, 0xffffff)
+  wait(1)
+  lcd.clear()
+  
+  while loop==1:
+    with open('/sd/id.text', 'r') as fs:
+      clkindata=fs.read()
+      clockin_list = clkindata.split()
+      clockinlist_length=str(len(clockin_list))
+      int_clockinlist_length=int(clockinlist_length)
+      for x in range(0, int_clockinlist_length, 1):
+         if str(Emp_ID)==str(clockin_list[x]):
+           lcd.clear()
+           lcd.print("COUT VERIFIED", 60, 100,  0x18f830)
+           clockin_list.remove(clockin_list[x])
+           clockinlist_length=str(len(clockin_list))
+           os.remove('/sd/id.text')
+           int_clockinlist_length=int(clockinlist_length)
+           with open('/sd/id.text', 'a') as fs:
+             for x in range(0, int_clockinlist_length, 1):
+                fs.write(str(clockin_list[(x)])+"\n")
+             
+             
+           x=int_clockinlist_length
+           loop=0
+           
+           
+           
+           
+      if loop!=0:
+        lcd.print("NOT CLOCKED IN !!", 50, 100,  0xff2727)
+        wait(3)
+        num1=None
+        num2=None
+        num3=None
+        num4=None
+        num5=None
+        num6=None
+        num7=None
+        num8=None
+        lcd.clear()
+        loop=0
+        Emp_id_status=0
+        home_screen()
+        
+    
 
 
 def bat_status():
@@ -1048,12 +1062,6 @@ def bat_status():
 
 
  
- 
-    
-
-   
-    
-  
   
 def sd_id_write(emp_id):   
     with open('/sd/id.text', 'a') as fs:## normal id writing
@@ -1101,13 +1109,6 @@ def sd_check():
 
   
     
-
-
-  
-  
-  
-  
-
 def Emp(clk):
   num1=None
   num2=None
@@ -1318,21 +1319,11 @@ def Emp(clk):
          if str(num5)==str(None) and str(num6)==str(None) and str(num7)==str(None) and str(num8)==str(None): # strings 5 t0 8 empty
            
             Emp_ID=str("0")+str("0")+str("0")+str("0")+str(num1)+str(num2)+str(num3)+str(num4)
-            lcd.clear()
-            lcd.print(str("Emp_ID:"), 50, 100, 0xffffff)
-            lcd.print(str(Emp_ID), 150, 100, 0xffffff)
-            wait(5)
-            lcd.clear()
             data_formatting(Emp_ID,Day,Month,Year,Hour,Min,clk, mac_id_hex)
            
          if  str(num6)==str(None) and str(num7)==str(None) and str(num8)==str(None): #strings  6 to 8 empty
            
             Emp_ID=str("0")+str("0")+str("0")+str(num1)+str(num2)+str(num3)+str(num4)+str(num5)
-            lcd.clear()
-            lcd.print(str("Emp_ID:"), 50, 100, 0xffffff)
-            lcd.print(str(Emp_ID), 150, 100, 0xffffff)
-            wait(5)
-            lcd.clear()
             data_formatting(Emp_ID,Day,Month,Year,Hour,Min,clk, mac_id_hex)
             
             
@@ -1340,11 +1331,6 @@ def Emp(clk):
          if  str(num7)==str(None) and str(num8)==str(None): #strings  7 to 8 empty
            
             Emp_ID=str("0")+str("0")+str(num1)+str(num2)+str(num3)+str(num4)+str(num5)+str(num6)
-            lcd.clear()
-            lcd.print(str("Emp_ID:"), 50, 100, 0xffffff)
-            lcd.print(str(Emp_ID), 150, 100, 0xffffff)
-            wait(5)
-            lcd.clear()
             data_formatting(Emp_ID,Day,Month,Year,Hour,Min,clk, mac_id_hex)
             #Emp_id_status==0
             #home_screen()
@@ -1352,21 +1338,11 @@ def Emp(clk):
          if  str(num8)==str(None): #strings  7 to 8 empty
            
             Emp_ID=str("0")+str(num1)+str(num2)+str(num3)+str(num4)+str(num5)+str(num6)+str(num7)
-            lcd.clear()
-            lcd.print(str("Emp_ID:"), 50, 100, 0xffffff)
-            lcd.print(str(Emp_ID), 150, 100, 0xffffff)
-            wait(5)
-            lcd.clear()
             data_formatting(Emp_ID,Day,Month,Year,Hour,Min,clk, mac_id_hex)
             
            
          if str(num1)!=str(None) and str(num2)!=str(None) and  str(num3)!=str(None) and str(num4)!=None and str(num5)!=str(None) and str(num6)!=str(None) and str(num7)!=str(None) and str(num8)!=str(None):
              Emp_ID=str(num1)+str(num2)+str(num3)+str(num4)+str(num5)+str(num6)+str(num7)+str(num8)
-             lcd.clear()
-             lcd.print(str("Emp_ID:"), 20, 100, 0xffffff)
-             lcd.print(str(Emp_ID), 100, 100, 0xffffff)
-             wait(5)
-             lcd.clear()
              data_formatting(Emp_ID,Day,Month,Year,Hour,Min,clk, mac_id_hex)
           
            
