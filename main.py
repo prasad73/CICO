@@ -306,9 +306,10 @@ def Task(Emp_ID):
       lcd.print(str("YES TO ALL"), 70, 100, 0xffffff)
       wait(4)
       lcd.clear()
+      return Final_code
       answer_code=1
-      #return Final_code
-      id_check_clkout(Emp_ID)# YES TO ALL
+      
+      #id_check_clkout(Emp_ID)# YES TO ALL
     
     
      
@@ -514,7 +515,10 @@ def Task(Emp_ID):
       codeD=None
       j=0
       lcd.clear()
+      return Final_code
+      #id_check_clkout(Emp_ID)
       answer_code=1
+      
       
       #id_check_clkout(Emp_ID)
     if j==1:
@@ -635,7 +639,7 @@ def Task(Emp_ID):
       lcd.print(code29, 280, 10,  0x66ff99)
     if j==30:
       lcd.print(" ", 290, 10,  0x66ff99)
-  return Final_code
+  
     
   
     
@@ -884,7 +888,7 @@ def data_formatting(Emp_ID,Day,Month,Year,Hour,Min,clk, mac_id_hex):
     wait(3)
     lcd.clear()
     task_value=Task(Emp_ID)
-    #id_check_clkout(Emp_ID)
+    id_check_clkout(Emp_ID)
   
  
   
