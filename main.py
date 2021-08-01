@@ -48,6 +48,7 @@ Year=None
 
 clk=0
 
+
 login_password="01"
 sd_data=None
 id_count=0
@@ -62,8 +63,582 @@ new_hour=0
 new_minute=0
 
 
+code1=None
+code2=None
+code4=None
+code5=None
+
+code7=None
+code8=None
+
+code10=None
+code11=None
+
+code13=None
+code14=None
+
+code16=None
+code17=None
+
+code19=None
+code20=None
+
+code22=None
+code23=None
+
+code25=None
+code26=None
+
+code28=None
+code29=None
+
+Final_code=0
+Final_code_len=0
 
 
+codeA=None
+codeB=None
+codeC=None
+codeD=None
+codeE=None
+codeF=None
+codeG=None
+codeH=None
+codeI=None
+codeJ=None
+
+
+
+
+
+
+  
+  
+
+
+
+def Task(Emp_ID):
+ 
+  answer_code=0
+  global Final_code
+  j=0
+  var2=None
+  code1=None
+  code2=None
+  code4=None
+  code5=None      # clear()
+  code7=None
+  code8=None
+  code10=None
+  code11=None
+  code13=None
+  code14=None
+  code16=None
+  code17=None
+  code19=None
+  code20=None
+  code22=None
+  code23=None
+  code25=None
+  code26=None
+  code28=None
+  code29=None
+  while answer_code==0:
+   
+    lcd.font(lcd.FONT_DejaVu18)
+    lcd.circle(30, 60, 20, color=0xffffff)
+    lcd.circle(110, 60, 20, color=0xffffff)
+    lcd.circle(190, 60, 20, color=0xffffff)
+    lcd.circle(270, 60, 20, color=0xffffff)
+    lcd.circle(30, 120, 20, color=0xffffff)
+    lcd.circle(110, 120, 20, color=0xffffff)
+    lcd.circle(190, 120, 20, color=0xffffff)
+    lcd.circle(270, 120, 20, color=0xffffff)
+    lcd.circle(30, 180, 20, color=0xffffff)
+    lcd.circle(110, 180, 20, color=0xffffff)
+    lcd.circle(190, 180, 20, color=0xffffff)
+    lcd.circle(270, 180, 20, color=0xffffff)
+    lcd.print('0', 25, 55, 0xffffff)
+    lcd.print('1', 105, 55, 0xffffff)
+    lcd.print('2', 185, 55, 0xffffff)
+    lcd.print('3', 265, 55, 0xffffff)
+    lcd.print('4', 25, 115, 0xffffff)
+    lcd.print('5', 105, 115, 0xffffff)
+    lcd.print('6', 185, 115, 0xffffff)
+    lcd.print('7', 265, 115, 0xffffff)
+    lcd.print('8', 25, 175, 0xffffff)
+    lcd.print('9', 105, 175, 0xffffff)
+    lcd.print('C', 185, 175, 0xffffff)
+    lcd.print('E', 265, 175, 0xffffff)
+    lcd.print('BACK', 0, 220, 0xffffff)
+    lcd.print('YES TO ALL', 205, 220, 0xffffff)
+    if (touch.status())==1 and (touch.read()[0]) >0 and (touch.read()[0]) <80  and (touch.read()[1]) >75 and  (touch.read()[1]) <90:
+      j=j+1#
+      var2='0'
+      power.setVibrationEnable(True)
+      wait_ms(150)
+      power.setVibrationEnable(False)
+     
+    if (touch.status())==1 and (touch.read()[0]) >100 and (touch.read()[0]) <130  and (touch.read()[1]) >75 and  (touch.read()[1]) <90:
+      j=j+1#
+      var2='1'
+      power.setVibrationEnable(True)
+      wait_ms(150)
+      power.setVibrationEnable(False)
+    if (touch.status())==1 and (touch.read()[0]) >170 and (touch.read()[0]) <200  and (touch.read()[1]) >75 and  (touch.read()[1]) <100:
+     
+      j=j+1#
+      var2='2'
+      power.setVibrationEnable(True)
+      wait_ms(150)
+      power.setVibrationEnable(False)
+   
+    if (touch.status())==1 and (touch.read()[0]) >250 and (touch.read()[0]) <300  and (touch.read()[1]) >75 and  (touch.read()[1]) <100:
+     
+      j=j+1#
+      var2='3'
+      power.setVibrationEnable(True)
+      wait_ms(150)
+      power.setVibrationEnable(False)
+     
+     
+     
+    if (touch.status())==1 and (touch.read()[0]) >0 and (touch.read()[0]) <80  and (touch.read()[1]) >120 and  (touch.read()[1]) <140:
+     
+      j=j+1#
+      var2='4'
+      power.setVibrationEnable(True)
+      wait_ms(150)
+      power.setVibrationEnable(False)
+
+   
+    if (touch.status())==1 and (touch.read()[0]) >90 and (touch.read()[0]) <130  and (touch.read()[1]) >120 and  (touch.read()[1]) <140:
+      
+      j=j+1#
+      var2='5'
+      power.setVibrationEnable(True)
+      wait_ms(150)
+      power.setVibrationEnable(False)
+     
+     
+   
+    if (touch.status())==1 and (touch.read()[0]) >155 and (touch.read()[0]) <195  and (touch.read()[1]) >120 and  (touch.read()[1]) <140:
+      
+      j=j+1#
+      var2='6'
+      power.setVibrationEnable(True)
+      wait_ms(150)
+      power.setVibrationEnable(False)
+     
+     
+   
+    if (touch.status())==1 and (touch.read()[0]) >220 and (touch.read()[0]) <300  and (touch.read()[1]) >120 and  (touch.read()[1]) <140:
+      
+      j=j+1#
+      var2='7'
+      power.setVibrationEnable(True)
+      wait_ms(150)
+      power.setVibrationEnable(False)
+    
+   
+   
+   
+    if (touch.status())==1 and (touch.read()[0]) >0 and (touch.read()[0]) <80  and (touch.read()[1]) >170 and  (touch.read()[1]) <200:
+      
+      j=j+1#
+      var2='8'
+      power.setVibrationEnable(True)
+      wait_ms(150)
+      power.setVibrationEnable(False)
+      
+     
+     
+     
+    if (touch.status())==1 and (touch.read()[0]) >100 and (touch.read()[0]) <130  and (touch.read()[1]) >170 and  (touch.read()[1]) <200:
+      
+      j=j+1#
+      var2='9'
+      power.setVibrationEnable(True)
+      wait_ms(150)
+      power.setVibrationEnable(False)
+    
+     
+    if (touch.status())==1 and (touch.read()[0]) >155 and (touch.read()[0]) <200  and (touch.read()[1]) >170 and  (touch.read()[1]) <200:
+      
+      code1=None
+      code2=None
+      code4=None
+      code5=None      # clear()
+      code7=None
+      code8=None
+      code10=None
+      code11=None
+      code13=None
+      code14=None
+      code16=None
+      code17=None
+      code19=None
+      code20=None
+      code22=None
+      code23=None
+      code25=None
+      code26=None
+      code28=None
+      code29=None
+      j=0
+      lcd.clear()
+    
+    
+    
+    if (touch.status())==1 and (touch.read()[0]) >50 and (touch.read()[0]) <70  and (touch.read()[1]) >200 and  (touch.read()[1]) <250:
+      j=0
+      lcd.clear()
+      answer_code=1
+      Emp_id_status=0
+      home_screen()                                            ## back
+     
+    
+      
+    if (touch.status())==1 and (touch.read()[0]) >200 and (touch.read()[0]) <270  and (touch.read()[1]) >200 and  (touch.read()[1]) <250:
+      
+      Final_code="00000000000000000000"
+      lcd.clear()
+      lcd.print(str("YES TO ALL"), 70, 100, 0xffffff)
+      wait(4)
+      lcd.clear()
+      answer_code=1
+      #return Final_code
+      id_check_clkout(Emp_ID)# YES TO ALL
+    
+    
+     
+     
+    if (touch.status())==1 and (touch.read()[0]) >235 and (touch.read()[0]) <290  and (touch.read()[1]) >170 and  (touch.read()[1]) <200:
+      if code1==None:
+        
+        lcd.clear()
+        lcd.print(str("NO TASk CODE FOUND.!"), 40, 100, 0xffffff)
+        wait(1)
+        lcd.clear()
+        Task(Emp_ID)
+        
+        
+      if code4==None:
+        code4="0"
+      if code5==None:
+        code5="0"
+      if code7==None:
+        code7="0"
+      if code8==None:
+        code8="0"
+      if code10==None:
+         code10="0"
+      if code11==None:
+         code11="0"
+      if code13==None:
+         code13="0"
+      if code14==None:
+         code14="0"
+      if code16==None:
+         code16="0"
+      if code17==None:
+         code17="0"
+      if code19==None:
+         code19="0"
+      if code20==None:
+         code20="0"
+      if code22==None:
+         code22="0"
+      if code23==None:
+         code23="0"
+      if code25==None:
+         code25="0"
+      if code26==None:
+         code26="0"
+      if code28==None:
+         code28="0"
+      if code29==None:
+         code29="0"
+      for n in range(10):
+        if code1==str(n) and code2==None:
+          code2=code1
+          code1=str("0")
+          codeA=str(code1)+str(code2) #
+      n=0
+      for n in range(10):
+        if code4==str(n) and code5==None:
+          code5=code4
+          code4=str("0")
+          codeB=str(code4)+str(code5) # 1
+      n=0
+      
+      for n in range(10):
+        if code7==str(n) and code8==None:
+          code8=code7
+          code7=str("0")
+          codeC=str(code7)+str(code8) # 17
+      n=0
+      for n in range(10):
+        if code10==str(n) and code11==None:
+          code11=code10
+          code10=str("0")
+          codeD=str(code10)+str(code11) # 17
+      n=0 
+      for n in range(10):
+        if code13==str(n) and code14==None:
+          code14=code13
+          code13=str("0")
+          codeE=str(code13)+str(code14) # 17
+      n=0 
+      for n in range(10):
+          if code16==str(n) and code17==None:
+            code17=code16
+            code16=str("0")
+            codeF=str(code16)+str(code17) # 17
+      n=0
+    
+      for n in range(10):
+         if code19==str(n) and code20==None:
+            code20=code19
+            code19=str("0")
+            codeG=str(code19)+str(code20) # 17
+      n=0
+      for n in range(10):
+        if  code22==str(n) and code23==None:
+            code23=code22
+            code22=str("0")
+            codeH=str(code22)+str(code23) # 17
+      n=0
+      for n in range(10):
+        if code25==str(n) and code26==None:
+           code26=code25
+           code25=str("0")
+           codeI=str(code25)+str(code26) # 17
+      n=0 
+    
+      for n in range(10):
+        if code28==str(n) and code28==None:
+           code29=code28
+           code28=str("0")
+           codeJ=str(code28)+str(code29) # 17
+           lcd.clear()
+      n=0 
+    
+      codeA=str(code1)+str(code2) # 170
+      codeB=str(code4)+str(code5)
+      codeC=str(code7)+str(code8)
+      codeD=str(code10)+str(code11)
+      codeE=str(code13)+str(code14)
+      codeF=str(code16)+str(code17)
+      codeG=str(code19)+str(code20)
+      codeH=str(code22)+str(code23)
+      codeI=str(code25)+str(code26)
+      codeJ=str(code28)+str(code29)
+    
+      int_codeA=int(codeA)
+      hex_codeA=hex(int_codeA)[2:]
+      len_hex_codeA=len(hex_codeA)
+      int_codeB=int(codeB)
+      hex_codeB=hex(int_codeB)[2:]
+      len_hex_codeB=len(hex_codeB)
+      int_codeC=int(codeC)
+      hex_codeC=hex(int_codeC)[2:]
+      len_hex_codeC=len(hex_codeC)
+      int_codeD=int(codeD)
+      hex_codeD=hex(int_codeD)[2:]
+      len_hex_codeD=len(hex_codeD)
+      int_codeE=int(codeE)
+      hex_codeE=hex(int_codeE)[2:]
+      len_hex_codeE=len(hex_codeE)
+      int_codeF=int(codeF)
+      hex_codeF=hex(int_codeF)[2:]
+      len_hex_codeF=len(hex_codeF)
+      int_codeG=int(codeG)
+      hex_codeG=hex(int_codeG)[2:]
+      len_hex_codeG=len(hex_codeG)
+      int_codeH=int(codeH)
+      hex_codeH=hex(int_codeH)[2:]
+      len_hex_codeH=len(hex_codeH)
+      int_codeI=int(codeI)
+      hex_codeI=hex(int_codeI)[2:]
+      len_hex_codeI=len(hex_codeI)
+      int_codeJ=int(codeJ)
+      hex_codeJ=hex(int_codeJ)[2:]
+      len_hex_codeJ=len(hex_codeJ)
+    
+      if len_hex_codeA!=2:
+        hex_codeA=str("0")+str(hex_codeA)
+      if len_hex_codeB!=2:
+        hex_codeB=str("0")+str(hex_codeB)
+      if len_hex_codeC!=2:
+        hex_codeC=str("0")+str(hex_codeC)
+      if len_hex_codeD!=2:
+        hex_codeD=str("0")+str(hex_codeD)
+      if len_hex_codeE!=2:
+        hex_codeE=str("0")+str(hex_codeE)
+      if len_hex_codeF!=2:
+        hex_codeF=str("0")+str(hex_codeF)
+      if len_hex_codeG!=2:
+        hex_codeG=str("0")+str(hex_codeG)
+      if len_hex_codeH!=2:
+        hex_codeH=str("0")+str(hex_codeH)
+      if len_hex_codeI!=2:
+        hex_codeI=str("0")+str(hex_codeI)
+      if len_hex_codeJ!=2:
+        hex_codeJ=str("0")+str(hex_codeJ)
+      lcd.clear()
+      Final_code=str(hex_codeA)+str(hex_codeB)+str(hex_codeC)+str(hex_codeD)+str(hex_codeE)+str(hex_codeF)+str(hex_codeG)+str(hex_codeH)+str(hex_codeI)+str(hex_codeJ)
+      code1=None
+      code2=None
+      code4=None
+      code5=None
+      code7=None
+      code8=None
+      code10=None
+      code11=None
+      code13=None
+      code14=None
+      code16=None
+      code17=None
+      code19=None
+      code20=None
+      code22=None
+      code23=None
+      code25=None
+      code26=None
+      code28=None
+      code29=None  
+      codeA=None
+      codeB=None
+      codeC=None
+      codeD=None
+      j=0
+      lcd.clear()
+      answer_code=1
+      
+      #id_check_clkout(Emp_ID)
+    if j==1:
+      code1=var2
+      lcd.font(lcd.FONT_DejaVu18)
+      lcd.print(code1, 0, 10,  0x66ff99)
+    if j==2:
+      code2=var2
+      lcd.print(code2, 10, 10,  0x66ff99)
+      j=j+1
+    if j==3:
+      cod3=var2
+      lcd.font(lcd.FONT_DejaVu18)
+      lcd.print(",", 20, 10,  0x66ff99)
+    if j==4:
+      code4=var2
+      lcd.font(lcd.FONT_DejaVu18)
+      lcd.print(code4, 30, 10,  0x66ff99)
+    if j==5:
+      code5=var2
+      lcd.font(lcd.FONT_DejaVu18)
+      lcd.print(code5, 40, 10,  0x66ff99)
+      j=j+1
+    if j==6:
+      lcd.font(lcd.FONT_DejaVu18)
+      lcd.print(",", 50, 10,  0x66ff99)
+    if j==7:
+      code7=var2
+      lcd.font(lcd.FONT_DejaVu18)
+      lcd.print(code7, 60, 10,  0x66ff99)
+    if j==8:
+      code8=var2
+      lcd.font(lcd.FONT_DejaVu18)
+      lcd.print(code8, 70, 10,  0x66ff99)
+      j=j+1
+    if j==9:
+      lcd.font(lcd.FONT_DejaVu18)
+      lcd.print(",", 80, 10,  0x66ff99)
+    if j==10:
+      code10=var2
+      lcd.font(lcd.FONT_DejaVu18)
+      lcd.print(code10, 90, 10,  0x66ff99)
+    if j==11:
+      code11=var2
+      lcd.font(lcd.FONT_DejaVu18)
+      lcd.print(code11, 100, 10,  0x66ff99)
+      j=j+1
+    if j==12:
+      lcd.font(lcd.FONT_DejaVu18)
+      lcd.print(",", 110, 10,  0x66ff99)
+    if j==13:
+      code13=var2
+      lcd.font(lcd.FONT_DejaVu18)
+      lcd.print(code13, 120, 10,  0x66ff99)
+    if j==14:
+      code14=var2
+      lcd.font(lcd.FONT_DejaVu18)
+      lcd.print(code14, 130, 10,  0x66ff99)
+      j=j+1
+    if j==15:
+       lcd.font(lcd.FONT_DejaVu18)
+       lcd.print(",", 140, 10,  0x66ff99)
+    if j==16:
+       code16=var2
+       lcd.font(lcd.FONT_DejaVu18)
+       lcd.print(code16, 150, 10,  0x66ff99)
+    if j==17:
+      code17=var2
+      lcd.font(lcd.FONT_DejaVu18)
+      lcd.print(code17, 160, 10,  0x66ff99)
+      j=j+1
+    if j==18:
+      lcd.font(lcd.FONT_DejaVu18)
+      lcd.print(",", 170, 10,  0x66ff99)
+    if j==19:
+      code19=var2
+      lcd.font(lcd.FONT_DejaVu18)
+      lcd.print(code19, 180, 10,  0x66ff99)
+    if j==20:
+      code20=var2
+      lcd.font(lcd.FONT_DejaVu18)
+      lcd.print(code20, 190, 10,  0x66ff99)
+      j=j+1
+    if j==21:
+      lcd.font(lcd.FONT_DejaVu18)
+      lcd.print(",", 200, 10,  0x66ff99)
+    if j==22:
+      code22=var2
+      lcd.font(lcd.FONT_DejaVu18)
+      lcd.print(code22, 210, 10,  0x66ff99)
+    if j==23:
+      code23=var2
+      lcd.font(lcd.FONT_DejaVu18)
+      lcd.print(code23, 220, 10,  0x66ff99)
+      j=j+1
+    if j==24:
+      lcd.font(lcd.FONT_DejaVu18)
+      lcd.print(",", 230, 10,  0x66ff99)
+    if j==25:
+      code25=var2
+      lcd.font(lcd.FONT_DejaVu18)
+      lcd.print(code25, 240, 10,  0x66ff99)
+    if j==26:
+      code26=var2
+      lcd.font(lcd.FONT_DejaVu18)
+      lcd.print(code26, 250, 10,  0x66ff99)
+      j=j+1
+    if j==27:
+      lcd.font(lcd.FONT_DejaVu18)
+      lcd.print(",", 260, 10,  0x66ff99)
+    if j==28:
+      code28=var2
+      lcd.font(lcd.FONT_DejaVu18)
+      lcd.print(code28, 270, 10,  0x66ff99)
+    if j==29:
+      code29=var2
+      lcd.font(lcd.FONT_DejaVu18)
+      lcd.print(code29, 280, 10,  0x66ff99)
+    if j==30:
+      lcd.print(" ", 290, 10,  0x66ff99)
+  return Final_code
+    
+  
+    
 
 
 
@@ -298,11 +873,21 @@ def pass_window(pass_status):
 
 
 def data_formatting(Emp_ID,Day,Month,Year,Hour,Min,clk, mac_id_hex):
+  task_value=None
   power.setVibrationEnable(False)
   if clk==1:
     id_check_clkin(Emp_ID)
+    task_value=str("00000000000000000000")
   if clk==0:
-    id_check_clkout(Emp_ID)
+    lcd.clear()
+    lcd.print("ENTER TASK CODES", 65, 100,  0xffffff)
+    wait(3)
+    lcd.clear()
+    task_value=Task(Emp_ID)
+    #id_check_clkout(Emp_ID)
+  
+ 
+  
   int_Emp=int(Emp_ID,10)
   hex_emp=hex(int_Emp)[2:]
   qr_emp=hex_emp
@@ -474,7 +1059,7 @@ def data_formatting(Emp_ID,Day,Month,Year,Hour,Min,clk, mac_id_hex):
     hex_hour="0"+hex_hour #1+6
     
     
-  sd_data=hex_emp+hex_day+hex_month+hex_year+hex_hour+hex_min+hex_clk+mac_id_hex
+  sd_data=hex_emp+hex_day+hex_month+hex_year+hex_hour+hex_min+hex_clk+mac_id_hex+str(task_value)
   qr_sd_data=qr_emp+"."+qr_day+"."+qr_month+"."+qr_year+"."+qr_hour+"."+qr_min+"."+qr_clk+"."+qr_mac_id_hex
   lcd.clear()
   lcd.font(lcd.FONT_DejaVu18)
@@ -509,6 +1094,7 @@ def data_formatting(Emp_ID,Day,Month,Year,Hour,Min,clk, mac_id_hex):
       num8=None
       exit=0
       Emp_id_status=0
+      Emp_ID=None
       home_screen()# exit
     
     
@@ -852,6 +1438,8 @@ def date(new_hour,new_minute):
 def setgs(new_day,new_month,new_year,new_hour,new_minute):
   settings=1
   while settings==1:
+    
+   
     lcd.font(lcd.FONT_DejaVu18)
     lcd.print('DATE', 50, 80, 0xffffff)
     lcd.print('TIME', 200, 80, 0xffffff)
@@ -866,7 +1454,7 @@ def setgs(new_day,new_month,new_year,new_hour,new_minute):
        settings=0
        date(new_hour,new_minute)
        
-    if (touch.status())==1 and (touch.read()[0]) >190 and (touch.read()[0]) <300  and (touch.read()[1]) >100 and  (touch.read()[1]) <150: # time selection
+    if (touch.status())==1 and (touch.read()[0]) >190 and (touch.read()[0]) <300  and (touch.read()[1]) >90 and  (touch.read()[1]) <150: # time selection
       power.setVibrationEnable(True)
       wait_ms(100)
       power.setVibrationEnable(False)
@@ -883,7 +1471,7 @@ def setgs(new_day,new_month,new_year,new_hour,new_minute):
       lcd.clear()
       home_screen()
     
-    if (touch.status())==1 and (touch.read()[0]) >190 and (touch.read()[0]) <260  and (touch.read()[1]) >170 and  (touch.read()[1]) <200:# erase history
+    if (touch.status())==1 and (touch.read()[0]) >180 and (touch.read()[0]) <260  and (touch.read()[1]) >140 and  (touch.read()[1]) <200:# erase history
        
       erase=0
       power.setVibrationEnable(True)
@@ -901,11 +1489,11 @@ def setgs(new_day,new_month,new_year,new_hour,new_minute):
           wait_ms(500)
           setgs(new_day,new_month,new_year,new_hour,new_minute)
           
-        if (touch.status())==1 and (touch.read()[0]) >200 and (touch.read()[0]) <300  and (touch.read()[1]) >200 and  (touch.read()[1]) <300:# yes
+        if (touch.status())==1 and (touch.read()[0]) >200 and (touch.read()[0]) <350  and (touch.read()[1]) >200 and  (touch.read()[1]) <350:# yes
            
            lcd.clear()
            dot=180
-           lcd.print("ERASING DATA", 40, 100,  0xfffe38)
+           lcd.print("ERASING..", 100, 100,  0xfffe38)
            os.remove('/sd/history.text')
            with open('/sd/history.text', 'a') as fs:
              for y in range(0, 5, 1):
@@ -913,7 +1501,7 @@ def setgs(new_day,new_month,new_year,new_hour,new_minute):
                lcd.print(".", dot,100,0xfffe38)
                wait(1)
            lcd.clear()
-           lcd.print("HISTORY CLEARED", 40, 100,0x18f830)
+           lcd.print("DONE", 60, 100,0x18f830)
            wait(2)
            lcd.clear()
            setgs(new_day,new_month,new_year,new_hour,new_minute)
@@ -962,9 +1550,10 @@ def id_check_clkin(Emp_ID):
             lcd.clear()
             loop=0
             Emp_id_status=0
+            Emp_ID=None
             home_screen()
        except:
-         lcd.print("CIN VERIFIED", 60, 100,  0x18f830)
+         lcd.print("CIN VERIFIED", 70, 100,  0x18f830)
          wait(1)
          sd_id_write(Emp_ID+"\n")
          loop=0
@@ -988,7 +1577,8 @@ def id_check_clkout(Emp_ID):
       for x in range(0, int_clockinlist_length, 1):
          if str(Emp_ID)==str(clockin_list[x]):
            lcd.clear()
-           lcd.print("COUT VERIFIED", 60, 100,  0x18f830)
+           lcd.print("COUT VERIFIED", 65, 100,  0x18f830)
+           wait(1)
            clockin_list.remove(clockin_list[x])
            clockinlist_length=str(len(clockin_list))
            os.remove('/sd/id.text')
@@ -1000,10 +1590,7 @@ def id_check_clkout(Emp_ID):
              
            x=int_clockinlist_length
            loop=0
-           
-           
-           
-           
+          
       if loop!=0:
         lcd.print("NOT CLOCKED IN !!", 50, 100,  0xff2727)
         wait(3)
@@ -1018,6 +1605,7 @@ def id_check_clkout(Emp_ID):
         lcd.clear()
         loop=0
         Emp_id_status=0
+        Emp_ID=None
         home_screen()
         
     
@@ -1078,7 +1666,7 @@ def sd_write(sd_data):
     
 def sd_write_s():
   with open('/sd/history.text', 'a') as fs: ## intial data writing for history file creation
-    fs.write("000000000000000000000000000000000000000000000000000000000000"+"\n")
+    fs.write("0000000000000000000000000000000000000000000000000000000000000000000000000000000"+"\n")
   
 def sd_id_write_s():
   with open('/sd/id.text', 'a') as fs:
@@ -1485,7 +2073,7 @@ def home_screen(): # home screen
    
     if refresh==1:
       lcd.clear()
-      wait(.950)
+      wait(.800)
       
     
       
@@ -1551,6 +2139,20 @@ def  dsp(line_count,data_file,list_length,list_limit):
    read_clk    =string[48]+string[49]+string[50]+string[51]+string[52]+string[53]+string[54]+string[55] # reading  8 digit for clk
    read_dvid   =string[56]+string[57]+string[58]+string[59] # reading device id
    
+   read_tc1    =string[60]+string[61]
+   read_tc2    =string[62]+string[63]
+   read_tc3    =string[64]+string[65]
+   read_tc4    =string[66]+string[67]
+   read_tc5    =string[68]+string[69]
+   read_tc5    =string[70]+string[71]
+   read_tc6    =string[72]+string[73]
+   read_tc7    =string[74]+string[75]
+   read_tc8    =string[76]+string[77]
+   read_tc9    =string[78]+string[79]
+   
+   
+  
+   
    
    
    int_read_emp_id=int(read_emp_id,16)
@@ -1560,6 +2162,21 @@ def  dsp(line_count,data_file,list_length,list_limit):
    int_read_hour=int(read_hour,16)
    int_read_Min=int(read_Min,16)
    int_read_clk=int(read_clk,16)
+   
+   int_read_tc1=int(read_tc1,16)
+   int_read_tc2=int(read_tc2,16)
+   int_read_tc3=int(read_tc3,16)
+   int_read_tc4=int(read_tc4,16)
+   int_read_tc5=int(read_tc5,16)
+   int_read_tc6=int(read_tc6,16)
+   int_read_tc7=int(read_tc7,16)
+   int_read_tc8=int(read_tc8,16)
+   int_read_tc9=int(read_tc9,16)
+   
+  
+   
+   
+   task_code=str(int_read_tc1)+str(",")+str(int_read_tc2)+str(",")+str(int_read_tc3)+str(",")+str(int_read_tc4)+str(",")+str(int_read_tc5)+str(",")+str(int_read_tc6)+str(",")+str(int_read_tc7)+str(",")+str(int_read_tc8)+str(",")+str(int_read_tc9)                                                                                                                                                                                                                                                                                                                                                                                                    
    
    lcd.font(lcd.FONT_DejaVu18)
    lcd.print('HISTORY', 0, 0, 0xffff33)
@@ -1578,6 +2195,14 @@ def  dsp(line_count,data_file,list_length,list_limit):
    lcd.print(str(read_dvid), 0, 110, 0xffffff)
    if int_read_clk==0:
       lcd.print(str("COUT"), 0, 90, 0xffffff)
+      if task_code=="0,0,0,0,0,0,0,0,0":
+        lcd.print(str("YES TO ALL"), 0, 150, 0xffffff)
+      if task_code!="0,0,0,0,0,0,0,0,0":
+        lcd.print(str(task_code), 0, 150, 0xffffff)
+        
+        
+      #lcd.print(str("COUT"), 0, 90, 0xffffff)
+      
    if int_read_clk==1:
       lcd.print(str("CIN"), 0, 90, 0xffffff)
       
@@ -1675,7 +2300,7 @@ def history():
          power.setVibrationEnable(True)
          wait_ms(50)
          power.setVibrationEnable(False)
-         if str(line_count)==str(list_length):
+         if str(line_count)==str(list_length) or str(line_count)==str(list_limit):
                                                                                  
            line_count=0
            power.setVibrationEnable(True)
@@ -1684,14 +2309,14 @@ def history():
            lcd.clear()
            dsp(line_count,data_file,list_length, list_limit)
         
-         if str(line_count)==str(list_limit):
+         #if str(line_count)==str(list_limit):
                                                                                  
-           line_count=0
-           power.setVibrationEnable(True)
-           wait_ms(50)
-           power.setVibrationEnable(False)
-           lcd.clear()
-           dsp(line_count,data_file,list_length, list_limit)
+           #line_count=0
+           #power.setVibrationEnable(True)
+           #wait_ms(50)
+           #power.setVibrationEnable(False)
+           #lcd.clear()
+           #dsp(line_count,data_file,list_length, list_limit)
              
              
          else:
