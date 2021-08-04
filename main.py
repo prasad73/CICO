@@ -767,7 +767,7 @@ def data_formatting(Emp_ID,Day,Month,Year,Hour,Min,clk, mac_id_hex):
     task_value=str("00000000000000000000000000000")
   if clk==0:
     while task_status==0:
-      lcd.print('DID YOU COMPLETE ALL TASK ?', 0, 100, 0xffffff)
+      lcd.print('DID YOU COMPLETE ALL TASKS ?', 0, 100, 0xffffff)
       lcd.print('NO', 30, 160, 0xff0808)
       lcd.print('YES TO ALL', 150, 160, 0x08ff62)
       if (touch.status())==1 and (touch.read()[0]) >150 and (touch.read()[0]) <250  and (touch.read()[1]) >170 and  (touch.read()[1]) <200:
