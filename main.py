@@ -145,58 +145,76 @@ def Task(Emp_ID):
     lcd.print('E', 265, 175, 0xffffff)
     lcd.print('BACK', 0, 220, 0xffffff)
     lcd.print('CLEAR', 120, 220, 0xffffff)
-    if (touch.status())==1 and (touch.read()[0]) >0 and (touch.read()[0]) <80  and (touch.read()[1]) >65 and  (touch.read()[1]) <90:
+    if (touch.status())==1 and (touch.read()[0]) >0 and (touch.read()[0]) <80  and (touch.read()[1]) >75 and  (touch.read()[1]) <90:
       speaker.playWAV('/sd/button.wav')
       j=j+1#
       var2='0'
-      
+      power.setVibrationEnable(True)
+      wait_ms(150)
+      power.setVibrationEnable(False)
      
-    if (touch.status())==1 and (touch.read()[0]) >100 and (touch.read()[0]) <130  and (touch.read()[1]) >65 and  (touch.read()[1]) <90:
+    if (touch.status())==1 and (touch.read()[0]) >100 and (touch.read()[0]) <130  and (touch.read()[1]) >75 and  (touch.read()[1]) <90:
       speaker.playWAV('/sd/button.wav')
       j=j+1#
       var2='1'
-     
-    if (touch.status())==1 and (touch.read()[0]) >170 and (touch.read()[0]) <200  and (touch.read()[1]) >65 and  (touch.read()[1]) <100:
+      power.setVibrationEnable(True)
+      wait_ms(150)
+      power.setVibrationEnable(False)
+    if (touch.status())==1 and (touch.read()[0]) >170 and (touch.read()[0]) <200  and (touch.read()[1]) >75 and  (touch.read()[1]) <100:
       speaker.playWAV('/sd/button.wav')
       j=j+1#
       var2='2'
-     
+      power.setVibrationEnable(True)
+      wait_ms(150)
+      power.setVibrationEnable(False)
    
-    if (touch.status())==1 and (touch.read()[0]) >240 and (touch.read()[0]) <300  and (touch.read()[1]) >65 and  (touch.read()[1]) <100:
+    if (touch.status())==1 and (touch.read()[0]) >250 and (touch.read()[0]) <300  and (touch.read()[1]) >75 and  (touch.read()[1]) <100:
       speaker.playWAV('/sd/button.wav')
       j=j+1#
       var2='3'
-      
+      power.setVibrationEnable(True)
+      wait_ms(150)
+      power.setVibrationEnable(False)
      
      
      
-    if (touch.status())==1 and (touch.read()[0]) >0 and (touch.read()[0]) <80  and (touch.read()[1]) >120 and  (touch.read()[1]) <150:
+    if (touch.status())==1 and (touch.read()[0]) >0 and (touch.read()[0]) <80  and (touch.read()[1]) >120 and  (touch.read()[1]) <140:
       speaker.playWAV('/sd/button.wav')
       j=j+1#
       var2='4'
-      
+      power.setVibrationEnable(True)
+      wait_ms(150)
+      power.setVibrationEnable(False)
 
    
-    if (touch.status())==1 and (touch.read()[0]) >90 and (touch.read()[0]) <130  and (touch.read()[1]) >120 and  (touch.read()[1]) <150:
+    if (touch.status())==1 and (touch.read()[0]) >90 and (touch.read()[0]) <130  and (touch.read()[1]) >120 and  (touch.read()[1]) <140:
       speaker.playWAV('/sd/button.wav')
       j=j+1#
       var2='5'
-     
+      power.setVibrationEnable(True)
+      wait_ms(150)
+      power.setVibrationEnable(False)
      
      
    
-    if (touch.status())==1 and (touch.read()[0]) >155 and (touch.read()[0]) <200  and (touch.read()[1]) >120 and  (touch.read()[1]) <150:
+    if (touch.status())==1 and (touch.read()[0]) >155 and (touch.read()[0]) <195  and (touch.read()[1]) >120 and  (touch.read()[1]) <140:
       speaker.playWAV('/sd/button.wav')
       j=j+1#
       var2='6'
-      
+      power.setVibrationEnable(True)
+      wait_ms(150)
+      power.setVibrationEnable(False)
+     
      
    
-    if (touch.status())==1 and (touch.read()[0]) >220 and (touch.read()[0]) <300  and (touch.read()[1]) >120 and  (touch.read()[1]) <150:
+    if (touch.status())==1 and (touch.read()[0]) >220 and (touch.read()[0]) <300  and (touch.read()[1]) >120 and  (touch.read()[1]) <140:
       speaker.playWAV('/sd/button.wav')
       j=j+1#
       var2='7'
-     
+      power.setVibrationEnable(True)
+      wait_ms(150)
+      power.setVibrationEnable(False)
+    
    
    
    
@@ -204,7 +222,10 @@ def Task(Emp_ID):
       speaker.playWAV('/sd/button.wav')
       j=j+1#
       var2='8'
-     
+      power.setVibrationEnable(True)
+      wait_ms(150)
+      power.setVibrationEnable(False)
+      
      
      
      
@@ -212,14 +233,18 @@ def Task(Emp_ID):
       speaker.playWAV('/sd/button.wav')
       j=j+1#
       var2='9'
-      
+      power.setVibrationEnable(True)
+      wait_ms(150)
+      power.setVibrationEnable(False)
     
      
     if (touch.status())==1 and (touch.read()[0]) >155 and (touch.read()[0]) <200  and (touch.read()[1]) >170 and  (touch.read()[1]) <200:
       speaker.playWAV('/sd/button.wav')
       j=j+1#
       var2=','
-     
+      power.setVibrationEnable(True)
+      wait_ms(150)
+      power.setVibrationEnable(False)
       
      
     
@@ -357,9 +382,13 @@ def Task(Emp_ID):
       #wait(3)
       lcd.clear()
       j=0
-      #id_check_clkout(Emp_ID)
-      return Final_code
+      id_check_clkout(Emp_ID)
       answer_code=1
+      return Final_code
+     
+      
+      
+     
       
       
     
@@ -742,7 +771,7 @@ def data_formatting(Emp_ID,Day,Month,Year,Hour,Min,clk, mac_id_hex):
     task_value=str("00000000000000000000000000000")
   if clk==0:
     while task_status==0:
-      lcd.print('DID YOU COMPLETE ALL TASKS', 0, 100, 0xffffff)
+      lcd.print('DID YOU COMPLETE ALL TASK ?', 0, 100, 0xffffff)
       lcd.print('NO', 30, 160, 0xff0808)
       lcd.print('YES TO ALL', 150, 160, 0x08ff62)
       if (touch.status())==1 and (touch.read()[0]) >150 and (touch.read()[0]) <250  and (touch.read()[1]) >170 and  (touch.read()[1]) <200:
@@ -764,8 +793,9 @@ def data_formatting(Emp_ID,Day,Month,Year,Hour,Min,clk, mac_id_hex):
         wait(3)
         lcd.clear()
         task_value=Task(Emp_ID)
-        id_check_clkout(Emp_ID)
         task_status=1
+         
+       
       
       
       
@@ -971,6 +1001,8 @@ def data_formatting(Emp_ID,Day,Month,Year,Hour,Min,clk, mac_id_hex):
       speaker.playWAV('/sd/success.wav')
       wait(1)
       lcd.clear()
+      sd_data=None
+      qr_sd_data=None
       num1=None
       num2=None
       num3=None
@@ -1374,9 +1406,10 @@ def setgs(new_day,new_month,new_year,new_hour,new_minute):
           
         if (touch.status())==1 and (touch.read()[0]) >200 and (touch.read()[0]) <350  and (touch.read()[1]) >200 and  (touch.read()[1]) <350:# yes
            
+           speaker.playWAV('/sd/button.wav')
            lcd.clear()
            dot=180
-           lcd.print("ERASING..", 100, 100,  0xfffe38)
+           lcd.print("ERASING", 100, 100,  0xfffe38)
            os.remove('/sd/history.text')
            with open('/sd/history.text', 'a') as fs:
              for y in range(0, 5, 1):
@@ -1395,6 +1428,7 @@ def setgs(new_day,new_month,new_year,new_hour,new_minute):
 
 
 def id_check_clkin(Emp_ID):
+  Emp_id_status=0
   loop=1
   lcd.clear()
   data=None
@@ -1403,8 +1437,9 @@ def id_check_clkin(Emp_ID):
   lcd.clear()
   with open('/sd/id.text', 'r') as fs:
     while loop==1:
-       
       
+       
+       lcd.clear()
        data=fs.readline()
        try:
          if data[0]==Emp_ID[0] and data[1]==Emp_ID[1] and data[2]==Emp_ID[2] and data[3]==Emp_ID[3] and data[4]==Emp_ID[4] and data[5]==Emp_ID[5] and  data[6]==Emp_ID[6] and  data[7]==Emp_ID[7]:                                                          
@@ -1422,16 +1457,27 @@ def id_check_clkin(Emp_ID):
             num6=None
             num7=None
             num8=None
+            data=None
             lcd.clear()
             loop=0
             Emp_id_status=0
             Emp_ID=None
             home_screen()
        except:
+         Emp_id_status=0
          lcd.print("CIN VERIFIED", 70, 100,  0x18f830)
          speaker.playWAV('/sd/success.wav')
          wait(1)
          sd_id_write(Emp_ID+"\n")
+         num1=None
+         num2=None
+         num3=None
+         num4=None
+         num5=None
+         num6=None
+         num7=None
+         num8=None
+         data=None
          loop=0
         
 
@@ -1439,54 +1485,63 @@ def id_check_clkin(Emp_ID):
 def id_check_clkout(Emp_ID):
   loop=1
   lcd.clear()
-  data=None
   lcd.print(str("Plz wait.."), 100, 100, 0xffffff)
   wait(1)
   lcd.clear()
-  
-  while loop==1:
-    with open('/sd/id.text', 'r') as fs:
-      clkindata=fs.read()
-      clockin_list = clkindata.split()
-      clockinlist_length=str(len(clockin_list))
-      int_clockinlist_length=int(clockinlist_length)
-      for x in range(0, int_clockinlist_length, 1):
-         if str(Emp_ID)==str(clockin_list[x]):
-           lcd.clear()
-           lcd.print("COUT VERIFIED", 65, 100,  0x18f830)
-           speaker.playWAV('/sd/success.wav')
-           wait(1)
-           clockin_list.remove(clockin_list[x])
-           clockinlist_length=str(len(clockin_list))
-           os.remove('/sd/id.text')
-           int_clockinlist_length=int(clockinlist_length)
-           with open('/sd/id.text', 'a') as fs:
-             for x in range(0, int_clockinlist_length, 1):
-                fs.write(str(clockin_list[(x)])+"\n")
-             
-             
-           x=int_clockinlist_length
-           loop=0
-          
-      if loop!=0:
-        lcd.print("NOT CLOCKED IN !!", 50, 100,  0xff2727)
-        speaker.playWAV('/sd/warning.wav')
-        wait(3)
-        num1=None
-        num2=None
-        num3=None
-        num4=None
-        num5=None
-        num6=None
-        num7=None
-        num8=None
-        lcd.clear()
-        loop=0
-        Emp_id_status=0
-        Emp_ID=None
-        home_screen()
+  clkindata=None
+  clockinlist_length=None
+  int_clockinlist_length=0
+  lcd.clear()
+  with open('/sd/id.text', 'r') as fs:
+     clkindata=fs.read()
+     clockin_list = clkindata.split()
+     clockinlist_length=str(len(clockin_list))
+     int_clockinlist_length=int(clockinlist_length)
+     
+     x=-1
+     z=None
+     while loop==1:
+        x+=1
         
-    
+        try:
+          if str(Emp_ID)==str(clockin_list[x]):
+            z=str(clockin_list[x])
+            lcd.clear()
+            lcd.print(str("COUT VERIFIED"), 100, 100,  0x18f830)
+            speaker.playWAV('/sd/success.wav')
+            wait(1)
+            clockin_list.remove(clockin_list[x])
+            clockinlist_length=str(len(clockin_list))
+            int_clockinlist_length=int(clockinlist_length)
+            os.remove('/sd/id.text')
+            lcd.clear()
+            
+            with open('/sd/id.text', 'a') as fs:
+              for y in range(0, int_clockinlist_length, 1):
+                
+                fs.write(str(clockin_list[(y)])+"\n")
+            x=0
+            loop=0
+            
+                
+              
+           
+           
+            
+        except:
+          
+          lcd.print("NOT CLOCKED IN !!", 50, 100,  0xff2727)
+          speaker.playWAV('/sd/warning.wav')
+         
+          
+          wait(5)
+          loop=0
+          x=0
+          lcd.clear()
+          home_screen()
+          
+          
+  
 
 
 def bat_status():
@@ -1648,70 +1703,92 @@ def Emp(clk):
 
     
     
-    if (touch.status())==1 and (touch.read()[0]) >20 and (touch.read()[0]) <80  and (touch.read()[1]) >80 and  (touch.read()[1]) <100:   # 0
+    if (touch.status())==1 and (touch.read()[0]) >20 and (touch.read()[0]) <80  and (touch.read()[1]) >80 and  (touch.read()[1]) <120:   # 0
          speaker.playWAV('/sd/button.wav')
          var='0'
          i=i+1
-        
-    if (touch.status())==1 and (touch.read()[0]) >115 and (touch.read()[0]) <150  and (touch.read()[1]) >80 and  (touch.read()[1]) <100:   # 1
+         power.setVibrationEnable(True)
+         wait_ms(100)
+         power.setVibrationEnable(False)
+    if (touch.status())==1 and (touch.read()[0]) >115 and (touch.read()[0]) <150  and (touch.read()[1]) >80 and  (touch.read()[1]) <120:   # 1
          speaker.playWAV('/sd/button.wav')
          var='1'
          i=i+1
+         power.setVibrationEnable(True)
+         wait_ms(100)
+         power.setVibrationEnable(False)
          
-         
-    if (touch.status())==1 and (touch.read()[0]) >185 and (touch.read()[0]) <225  and (touch.read()[1]) >80 and  (touch.read()[1]) <100:  # 2
+    if (touch.status())==1 and (touch.read()[0]) >185 and (touch.read()[0]) <225  and (touch.read()[1]) >80 and  (touch.read()[1]) <120:  # 2
          speaker.playWAV('/sd/button.wav')
          var='2'
          i=i+1
-        
+         power.setVibrationEnable(True)
+         wait_ms(100)
+         power.setVibrationEnable(False)
          
-    if (touch.status())==1 and (touch.read()[0]) >260 and (touch.read()[0]) <350  and (touch.read()[1]) >80 and  (touch.read()[1]) <100:  # 3
+    if (touch.status())==1 and (touch.read()[0]) >260 and (touch.read()[0]) <350  and (touch.read()[1]) >80 and  (touch.read()[1]) <120:  # 3
          speaker.playWAV('/sd/button.wav')
          var='3'
          i=i+1
-        
+         power.setVibrationEnable(True)
+         wait_ms(100)
+         power.setVibrationEnable(False)
          
-    if (touch.status())==1 and (touch.read()[0]) >30 and (touch.read()[0]) <90  and (touch.read()[1]) >140 and  (touch.read()[1]) <160:  #4
+    if (touch.status())==1 and (touch.read()[0]) >30 and (touch.read()[0]) <90  and (touch.read()[1]) >140 and  (touch.read()[1]) <180:  #4
          speaker.playWAV('/sd/button.wav')
          var='4'
          i=i+1
+         power.setVibrationEnable(True)
+         wait_ms(100)
+         power.setVibrationEnable(False)
          
-         
-    if (touch.status())==1 and (touch.read()[0]) >110 and (touch.read()[0]) <155  and (touch.read()[1]) >120 and  (touch.read()[1]) <160: # 5
+    if (touch.status())==1 and (touch.read()[0]) >110 and (touch.read()[0]) <155  and (touch.read()[1]) >120 and  (touch.read()[1]) <180: # 5
          speaker.playWAV('/sd/button.wav')
          var='5'
          i=i+1
+         power.setVibrationEnable(True)
+         wait_ms(100)
+         power.setVibrationEnable(False)
         
-        
-    if (touch.status())==1 and (touch.read()[0]) >170 and (touch.read()[0]) <250  and (touch.read()[1]) >120 and  (touch.read()[1]) <160: # 6
+    if (touch.status())==1 and (touch.read()[0]) >170 and (touch.read()[0]) <250  and (touch.read()[1]) >120 and  (touch.read()[1]) <180: # 6
          speaker.playWAV('/sd/button.wav')
          var='6'
          i=i+1
+         power.setVibrationEnable(True)
+         wait_ms(100)
+         power.setVibrationEnable(False)
         
-        
-    if (touch.status())==1 and (touch.read()[0]) >255 and (touch.read()[0]) <350  and (touch.read()[1]) >120 and  (touch.read()[1]) <160:  #7
+    if (touch.status())==1 and (touch.read()[0]) >255 and (touch.read()[0]) <350  and (touch.read()[1]) >120 and  (touch.read()[1]) <180:  #7
          speaker.playWAV('/sd/button.wav')
          var='7'
          i=i+1
-        
+         power.setVibrationEnable(True)
+         wait_ms(100)
+         power.setVibrationEnable(False)
          
     if (touch.status())==1 and (touch.read()[0]) >30 and (touch.read()[0]) <90  and (touch.read()[1]) >180 and  (touch.read()[1]) <250: #8
          speaker.playWAV('/sd/button.wav')
          var='8'
          i=i+1
-         
+         power.setVibrationEnable(True)
+         wait_ms(100)
+         power.setVibrationEnable(False)
         
-    if (touch.status())==1 and (touch.read()[0]) >80 and (touch.read()[0]) <180  and (touch.read()[1]) >180 and  (touch.read()[1]) <230: # 9
+    if (touch.status())==1 and (touch.read()[0]) >80 and (touch.read()[0]) <180  and (touch.read()[1]) >180 and  (touch.read()[1]) <250: # 9
          speaker.playWAV('/sd/button.wav')
          var='9'
          i=i+1
+         power.setVibrationEnable(True)
+         wait_ms(100)
+         power.setVibrationEnable(False)
         
-        
-    if (touch.status())==1 and (touch.read()[0]) >155 and (touch.read()[0]) <250  and (touch.read()[1]) >180 and  (touch.read()[1]) <230: #C
+    if (touch.status())==1 and (touch.read()[0]) >155 and (touch.read()[0]) <250  and (touch.read()[1]) >180 and  (touch.read()[1]) <250: #C
          speaker.playWAV('/sd/button.wav')
          var='C'
          i=0
-        
+         power.setVibrationEnable(True)
+         wait_ms(100)
+         power.setVibrationEnable(False)
          lcd.clear()
          wait_ms(100)
          num1=None
@@ -1723,10 +1800,12 @@ def Emp(clk):
          num7=None
          num8=None
          
-    if (touch.status())==1 and (touch.read()[0]) >230 and (touch.read()[0]) <300  and (touch.read()[1]) >30 and  (touch.read()[1]) <60: #back
+    if (touch.status())==1 and (touch.read()[0]) >230 and (touch.read()[0]) <300  and (touch.read()[1]) >30 and  (touch.read()[1]) <80: #back
         speaker.playWAV('/sd/button.wav')
         Emp_id_status=0
-       
+        power.setVibrationEnable(True)
+        wait_ms(100)
+        power.setVibrationEnable(False)
         lcd.clear()
         home_screen()
          
@@ -1735,7 +1814,7 @@ def Emp(clk):
          
          
          
-    if (touch.status())==1 and (touch.read()[0]) >250 and (touch.read()[0]) <305  and (touch.read()[1]) >205 and  (touch.read()[1]) <230: # E
+    if (touch.status())==1 and (touch.read()[0]) >275 and (touch.read()[0]) <305  and (touch.read()[1]) >205 and  (touch.read()[1]) <235: # E
       
     
     
@@ -1770,18 +1849,21 @@ def Emp(clk):
            
          if str(num5)==str(None) and str(num6)==str(None) and str(num7)==str(None) and str(num8)==str(None): # strings 5 t0 8 empty
            
+            Emp_id_status=0
             Emp_ID=str("0")+str("0")+str("0")+str("0")+str(num1)+str(num2)+str(num3)+str(num4)
             data_formatting(Emp_ID,Day,Month,Year,Hour,Min,clk, mac_id_hex)
            
          if  str(num6)==str(None) and str(num7)==str(None) and str(num8)==str(None): #strings  6 to 8 empty
            
+            Emp_id_status=0
             Emp_ID=str("0")+str("0")+str("0")+str(num1)+str(num2)+str(num3)+str(num4)+str(num5)
             data_formatting(Emp_ID,Day,Month,Year,Hour,Min,clk, mac_id_hex)
             
             
             
          if  str(num7)==str(None) and str(num8)==str(None): #strings  7 to 8 empty
-           
+            
+            Emp_id_status=0
             Emp_ID=str("0")+str("0")+str(num1)+str(num2)+str(num3)+str(num4)+str(num5)+str(num6)
             data_formatting(Emp_ID,Day,Month,Year,Hour,Min,clk, mac_id_hex)
             #Emp_id_status==0
@@ -1789,11 +1871,13 @@ def Emp(clk):
            
          if  str(num8)==str(None): #strings  7 to 8 empty
            
+            Emp_id_status=0
             Emp_ID=str("0")+str(num1)+str(num2)+str(num3)+str(num4)+str(num5)+str(num6)+str(num7)
             data_formatting(Emp_ID,Day,Month,Year,Hour,Min,clk, mac_id_hex)
             
            
          if str(num1)!=str(None) and str(num2)!=str(None) and  str(num3)!=str(None) and str(num4)!=None and str(num5)!=str(None) and str(num6)!=str(None) and str(num7)!=str(None) and str(num8)!=str(None):
+             Emp_id_status=0
              Emp_ID=str(num1)+str(num2)+str(num3)+str(num4)+str(num5)+str(num6)+str(num7)+str(num8)
              data_formatting(Emp_ID,Day,Month,Year,Hour,Min,clk, mac_id_hex)
           
@@ -1945,7 +2029,7 @@ def home_screen(): # home screen
    
     if refresh==1:
       lcd.clear()
-      wait(.700)
+      wait(.600)
       
     
       
@@ -1960,35 +2044,31 @@ def home_screen(): # home screen
        lcd.font(lcd.FONT_Default)
        lcd.print("AM",70,40,0xffffff)
       
-    if (touch.status()) == 1 and (touch.read()[0]) > 80 and (touch.read()[0]) < 130  and (touch.read()[1]) > 140 and  (touch.read()[1])  < 200 : # cin
+    if (touch.status()) == 1 and (touch.read()[0]) > 50 and (touch.read()[0]) < 130  and (touch.read()[1]) > 140 and  (touch.read()[1])  < 250 : # cin
       home_status=0
       clk=1
       speaker.playWAV('/sd/button.wav')
-     
       lcd.clear()
       Emp(clk)
       
-    if (touch.status()) == 1 and (touch.read()[0]) > 200 and (touch.read()[0]) < 250  and (touch.read()[1]) > 140 and  (touch.read()[1])  < 200 : # cout
+    if (touch.status()) == 1 and (touch.read()[0]) > 130 and (touch.read()[0]) < 350  and (touch.read()[1]) > 120 and  (touch.read()[1])  < 250 : # cout
       home_status=0
       clk=0
       speaker.playWAV('/sd/button.wav')
-     
       lcd.clear()
       Emp(clk)
       
-    if (touch.status())==1 and (touch.read()[0]) >150 and (touch.read()[0]) <180  and (touch.read()[1]) >60 and  (touch.read()[1]) <100:   # settings
+    if (touch.status())==1 and (touch.read()[0]) >120 and (touch.read()[0]) <190  and (touch.read()[1]) >60 and  (touch.read()[1]) <150:   # settings
       lcd.clear()
       speaker.playWAV('/sd/button.wav')
-     
       pass_status=1
       pass_window(pass_status)
       lcd.clear()
       setgs(new_day,new_month,new_year,new_hour,new_minute)
    
      
-    if (touch.status())==1 and (touch.read()[0]) > 240 and (touch.read()[0]) <280  and (touch.read()[1]) >60 and  (touch.read()[1]) <100:   # history
+    if (touch.status())==1 and (touch.read()[0]) > 240 and (touch.read()[0]) <290  and (touch.read()[1]) >60 and  (touch.read()[1]) <150:   # history
       speaker.playWAV('/sd/button.wav')
-     
       history_status=1
       history()
     lcd.font(lcd.FONT_Default)
@@ -2191,7 +2271,7 @@ def  dsp(line_count,data_file,list_length,list_limit):
    
 
            
-        
+     
            
             
       
@@ -2229,26 +2309,23 @@ def history():
        if (touch.status())==1 and (touch.read()[0]) >60 and (touch.read()[0]) <80  and (touch.read()[1]) >200 and  (touch.read()[1]) <250: 
          lcd.clear()
          speaker.playWAV('/sd/button.wav')
-         power.setVibrationEnable(True)
-         wait_ms(50)
-         power.setVibrationEnable(False)
+        
          if str(line_count)==str("0"):                                                          
              lcd.clear()
              line_count=0
+             lcd.clear()
              dsp(line_count,data_file,list_length, list_limit)
          else:
            lcd.clear()
-           
            line_count=line_count-1
            dsp(line_count,data_file,list_length,list_limit)
       
        if (touch.status())==1 and (touch.read()[0]) >220 and (touch.read()[0]) <280  and (touch.read()[1]) >200 and  (touch.read()[1]) <250: 
          speaker.playWAV('/sd/button.wav')
-        
+         
          if str(line_count)==str(list_length) or str(line_count)==str(list_limit):
                                                                                  
            line_count=0
-           
            lcd.clear()
            dsp(line_count,data_file,list_length, list_limit)
         
@@ -2258,7 +2335,6 @@ def history():
          else:
             lcd.clear()
             line_count=line_count+1
-            
             dsp(line_count,data_file,list_length, list_limit)
         
         
@@ -2271,7 +2347,6 @@ def history():
            lcd.clear()
            lcd.clear()
            speaker.playWAV('/sd/button.wav')
-          
            history_status=0
            lcd.clear()
            home_screen()
@@ -2364,14 +2439,12 @@ while login_flag !="1":
     speaker.playWAV('/sd/button.wav')
     lcd.print('0', 45, 75, 0xffffff)                     # 0
     num_id1="0"
-   
     lcd.clear()
   if (touch.status())==1 and (touch.read()[0]) >120 and (touch.read()[0]) <135  and (touch.read()[1]) >90 and  (touch.read()[1]) <115:
     lcd.circle(120, 80, 20, fillcolor= 0x33cc00)
     speaker.playWAV('/sd/button.wav')#1
     lcd.print('1', 115, 75, 0xffffff)
     num_id2="1"
-   
     lcd.clear()
     
   if (touch.status())==1 and (touch.read()[0]) >180 and (touch.read()[0]) <200  and (touch.read()[1]) >90 and  (touch.read()[1]) <115:
@@ -2379,7 +2452,6 @@ while login_flag !="1":
     speaker.playWAV('/sd/button.wav')#2
     lcd.print('2', 185, 75, 0xffffff) 
     num_id3="2"
-    
     lcd.clear()
   
   if (touch.status())==1 and (touch.read()[0]) >245 and (touch.read()[0]) <270  and (touch.read()[1]) >90 and  (touch.read()[1]) <115:
@@ -2387,7 +2459,6 @@ while login_flag !="1":
     speaker.playWAV('/sd/button.wav')
     lcd.print('3', 265, 75, 0xffffff) 
     num_id4="3"
-   
     lcd.clear()
  
   if (touch.status())==1 and (touch.read()[0]) >60 and (touch.read()[0]) <90  and (touch.read()[1]) >145 and  (touch.read()[1]) <165:
@@ -2395,17 +2466,14 @@ while login_flag !="1":
     speaker.playWAV('/sd/button.wav')
     lcd.print('4', 45, 140, 0xffffff) 
     num_id5="4"
-    
     lcd.clear()
-    lcd.print((touch.read()[0]), 0, 200,  0xffffff)
-    lcd.print((touch.read()[1]), 70, 200,  0xffffff)
+    
     
   if (touch.status())==1 and (touch.read()[0]) >125 and (touch.read()[0]) <150  and (touch.read()[1]) >145 and  (touch.read()[1]) <165:
     lcd.circle(120, 145, 20, fillcolor= 0x33cc00)
     speaker.playWAV('/sd/button.wav')
     lcd.print('5', 115, 140, 0xffffff) 
     num_id6="5"
-    
     lcd.clear()
   
   if (touch.status())==1 and (touch.read()[0]) >185 and (touch.read()[0]) <200  and (touch.read()[1]) >145 and  (touch.read()[1]) <165:
@@ -2413,7 +2481,6 @@ while login_flag !="1":
     speaker.playWAV('/sd/button.wav')
     lcd.print('6', 185, 140, 0xffffff) 
     num_id7="6"
-    
     lcd.clear()
   
   if (touch.status())==1 and (touch.read()[0]) >240 and (touch.read()[0]) <280  and (touch.read()[1]) >145 and  (touch.read()[1]) <165:
@@ -2421,12 +2488,10 @@ while login_flag !="1":
     speaker.playWAV('/sd/button.wav')
     lcd.print('7', 265, 140, 0xffffff) 
     num_id8="7"
-    
     lcd.clear()
     
   if (touch.status())==1 and (touch.read()[0]) >200 and (touch.read()[0]) <300  and (touch.read()[1]) >200 and  (touch.read()[1]) <300:
     speaker.playWAV('/sd/button.wav')
-    
     lcd.clear()
     login_id=str(num_id1)+str(num_id2)+num_id3+num_id4+num_id5+num_id6+num_id7
     lcd.print(login_id, 150, 200, 0xffffff)
