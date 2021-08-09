@@ -714,35 +714,7 @@ def pass_window(pass_status):
 def data_formatting(Emp_ID,Day,Month,Year,Hour,Min,clk, mac_id_hex):
   task_value=None
   task_status=0
-  read_tc1    =None
-  read_tc2    =None
-  read_tc3    =None
-  read_tc4    =None
-  read_tc5    =None
-  read_tc6    =None
-  read_tc7    =None
-  read_tc8    =None
-  read_tc9    =None
-  read_tc10   =None
-  read_tc11   =None
-  read_tc12   =None
-  read_tc13   =None
-  read_tc14   =None
-  read_tc15   =None
-  read_tc16   =None
-  read_tc17   =None
-  read_tc18   =None
-  read_tc19   =None
-  read_tc20   =None
-  read_tc21   =None
-  read_tc22   =None
-  read_tc23   =None
-  read_tc24   =None
-  read_tc25   =None
-  read_tc26   =None
-  read_tc27   =None
-  read_tc28   =None
-  read_tc29   =None
+  
   if clk==1:
     id_check_clkin(Emp_ID)
     task_value=str("00000000000000000000000000000")
@@ -772,103 +744,129 @@ def data_formatting(Emp_ID,Day,Month,Year,Hour,Min,clk, mac_id_hex):
         task_status=1
         
     
-  read_tc1    =task_value[0]
-  read_tc2    =task_value[1]
-  read_tc3    =task_value[2]
-  read_tc4    =task_value[3]
-  read_tc5    =task_value[4]
-  read_tc6    =task_value[5]
-  read_tc7    =task_value[6]
-  read_tc8    =task_value[7]
-  read_tc9    =task_value[8]
-  read_tc10   =task_value[9]
-  read_tc11   =task_value[10]
-  read_tc12   =task_value[11]
-  read_tc13   =task_value[12]
-  read_tc14   =task_value[13]
-  read_tc15   =task_value[14]
-  read_tc16   =task_value[15]
-  read_tc17   =task_value[16]
-  read_tc18   =task_value[17]
-  read_tc19   =task_value[18]
-  read_tc20   =task_value[19]
-  read_tc21   =task_value[20]
-  read_tc22   =task_value[21]
-  read_tc23   =task_value[22]
-  read_tc24   =task_value[23]
-  read_tc25   =task_value[24]
-  read_tc26   =task_value[25]
-  read_tc27   =task_value[26]
-  read_tc28   =task_value[27]
-  read_tc29   =task_value[28]
+  read_tc1_tsk    =task_value[0]
+  read_tc2_tsk    =task_value[1]
+  read_tc3_tsk    =task_value[2]
+  read_tc4_tsk    =task_value[3]
+  read_tc5_tsk    =task_value[4]
+  read_tc6_tsk    =task_value[5]
+  read_tc7_tsk    =task_value[6]
+  read_tc8_tsk    =task_value[7]
+  read_tc9_tsk    =task_value[8]
+  read_tc10_tsk   =task_value[9]
+  read_tc11_tsk   =task_value[10]
+  read_tc12_tsk   =task_value[11]
+  read_tc13_tsk   =task_value[12]
+  read_tc14_tsk   =task_value[13]
+  read_tc15_tsk   =task_value[14]
+  read_tc16_tsk   =task_value[15]
+  read_tc17_tsk   =task_value[16]
+  read_tc18_tsk   =task_value[17]
+  read_tc19_tsk   =task_value[18]
+  read_tc20_tsk   =task_value[19]
+  read_tc21_tsk   =task_value[20]
+  read_tc22_tsk   =task_value[21]
+  read_tc23_tsk   =task_value[22]
+  read_tc24_tsk   =task_value[23]
+  read_tc25_tsk   =task_value[24]
+  read_tc26_tsk   =task_value[25]
+  read_tc27_tsk   =task_value[26]
+  read_tc28_tsk   =task_value[27]
+  read_tc29_tsk   =task_value[28]
   
   
-  if read_tc1=="*":
-    read_tc1 =" "
-  if read_tc2=="*":
-    read_tc2 =" "
-  if read_tc3=="*":
-    read_tc3 =" "
-  if read_tc4=="*":
-    read_tc4 =" "
-  if read_tc5=="*":
-    read_tc5 =" "
-  if read_tc6=="*":
-    read_tc6 =" "
-  if read_tc7=="*":
-    read_tc7 =" "
-  if read_tc8=="*":
-    read_tc8 =" "
-  if read_tc9=="*":
-    read_tc9 =" "
-  if read_tc10=="*":
-    read_tc10 =" "
-  if read_tc11=="*":
-    read_tc11 =" "
-  if read_tc12=="*":
-    read_tc12 =" "
-  if read_tc13=="*":
-    read_tc13 =" "
-  if read_tc14=="*":
-    read_tc14 =" "
-  if read_tc15=="*":
-    read_tc15 =" "
-  if read_tc16=="*":
-    read_tc16 =" "
+  if read_tc1_tsk=="*":
+    read_tc1_tsk =" "
     
-  if read_tc17=="*":
-    read_tc17 =" "
-  if read_tc18=="*":
-    read_tc18 =" "
-  if read_tc19=="*":
-    read_tc19 =" "
-  if read_tc20=="*":
-    read_tc20 =" "
+  if read_tc2_tsk=="*":
+    read_tc2_tsk =" "
     
-  if read_tc21=="*":
-    read_tc21 =" "
-  if read_tc22=="*":
-    read_tc22 =" "
-  if read_tc23=="*":
-    read_tc23 =" "
-  if read_tc24=="*":
-    read_tc24 =" "
-  if read_tc25=="*":
-    read_tc25 =" "
-  if read_tc26=="*":
-    read_tc26 =" "
-  if read_tc27=="*":
-    read_tc27 =" "
-  if read_tc28=="*":
-    read_tc28 =" "
-  if read_tc29=="*":
-    read_tc29 =" "
+  if read_tc3_tsk=="*":
+    read_tc3_tsk =" "
     
-  task_value=str(read_tc1)+str(read_tc2)+str(read_tc3)+str(read_tc4)+str(read_tc5)+str(read_tc6)+str(read_tc7)+str(read_tc8)+str(read_tc9)+str(read_tc10)+str(read_tc11)+str(read_tc12)+str(read_tc13)+str(read_tc14)+str(read_tc15)+str(read_tc16)+str(read_tc17)+str(read_tc18)+str(read_tc19)+str(read_tc20)+str(read_tc21)+str(read_tc22)+str(read_tc23)+str(read_tc24)+str(read_tc25)+str(read_tc26) +str(read_tc27)+str(read_tc28)+str(read_tc29)  
+  if read_tc4_tsk=="*":
+    read_tc4_tsk =" "
+    
+  if read_tc5_tsk=="*":
+    read_tc5_tsk =" "
+    
+  if read_tc6_tsk=="*":
+    read_tc6_tsk =" "
+    
+  if read_tc7_tsk=="*":
+    read_tc7_tsk =" "
+    
+  if read_tc8_tsk=="*":
+    read_tc8_tsk =" "
+    
+  if read_tc9_tsk=="*":
+    read_tc9_tsk =" "
+    
+  if read_tc10_tsk=="*":
+    read_tc10_tsk =" "
+    
+  if read_tc11_tsk=="*":
+    read_tc11_tsk =" "
+    
+  if read_tc12_tsk=="*":
+    read_tc12_tsk =" "
+    
+  if read_tc13_tsk=="*":
+    read_tc13_tsk =" "
+    
+  if read_tc14_tsk=="*":
+    read_tc14_tsk =" "
+    
+  if read_tc15_tsk=="*":
+    read_tc15_tsk =" "
+    
+  if read_tc16_tsk=="*":
+    read_tc16_tsk =" "
+    
+  if read_tc17_tsk=="*":
+    read_tc17_tsk =" "
+    
+  if read_tc18_tsk=="*":
+    read_tc18_tsk =" "
+    
+  if read_tc19_tsk=="*":
+    read_tc19_tsk =" "
+    
+  if read_tc20_tsk=="*":
+    read_tc20_tsk =" "
+    
+  if read_tc21_tsk=="*":
+    read_tc21_tsk =" "
+    
+  if read_tc22_tsk=="*":
+    read_tc22_tsk =" "
+    
+  if read_tc23_tsk=="*":
+    read_tc23_tsk =" "
+    
+  if read_tc24_tsk=="*":
+    read_tc24_tsk =" "
+    
+  if read_tc25_tsk=="*":
+    read_tc25_tsk =" "
+    
+  if read_tc26_tsk=="*":
+    read_tc26_tsk =" "
+    
+  if read_tc27_tsk=="*":
+    read_tc27_tsk =" "
+    
+  if read_tc28_tsk=="*":
+    read_tc28_tsk =" "
+  if read_tc29_tsk=="*":
+    read_tc29_tsk =" "
+    
+  task_value_dsp=str(read_tc1_tsk)+str(read_tc2_tsk)+str(read_tc3_tsk)+str(read_tc4_tsk)+str(read_tc5_tsk)+str(read_tc6_tsk)+str(read_tc7_tsk)+str(read_tc8_tsk)+str(read_tc9_tsk)+str(read_tc10_tsk)+str(read_tc11_tsk)+str(read_tc12_tsk)+str(read_tc13_tsk)+str(read_tc14_tsk)+str(read_tc15_tsk)+str(read_tc16_tsk)+str(read_tc17_tsk)+str(read_tc18_tsk)+str(read_tc19_tsk)+str(read_tc20_tsk)+str(read_tc21_tsk)+str(read_tc22_tsk)+str(read_tc23_tsk)+str(read_tc24_tsk)+str(read_tc25_tsk)+str(read_tc26_tsk) +str(read_tc27_tsk)+str(read_tc28_tsk)+str(read_tc29_tsk)  
     
   
   if task_value=="00000000000000000000000000000":
-     task_value="YES TO ALL"
+    
+    task_value_dsp="YES TO ALL"
     
    
   task_status=1
@@ -1055,7 +1053,7 @@ def data_formatting(Emp_ID,Day,Month,Year,Hour,Min,clk, mac_id_hex):
   lcd.qrcode(qr_sd_data, 0, 110, 130)
   if clk==0:
     lcd.font(lcd.FONT_Default)
-    lcd.print(str(task_value), 0, 80,0xffffff)
+    lcd.print(str(task_value_dsp), 0, 80,0xffffff)
     
   
   
@@ -1089,6 +1087,7 @@ def data_formatting(Emp_ID,Day,Month,Year,Hour,Min,clk, mac_id_hex):
       exit=0
       Emp_id_status=0
       Emp_ID=None
+      task_value_dsp=None
       home_screen()# exit
     
     
@@ -2256,35 +2255,7 @@ def  dsp(line_count,data_file,list_length,list_limit):
    lcd.print('NEXT', 230, 197, 0x208e8a)
    lcd.print('BACK', 130, 197, 0x208e8a)
    
-   read_tc1    =None
-   read_tc2    =None
-   read_tc3    =None
-   read_tc4    =None
-   read_tc5    =None
-   read_tc6    =None
-   read_tc7    =None
-   read_tc8    =None
-   read_tc9    =None
-   read_tc10   =None
-   read_tc11   =None
-   read_tc12   =None
-   read_tc13   =None
-   read_tc14   =None
-   read_tc15   =None
-   read_tc16   =None
-   read_tc17   =None
-   read_tc18   =None
-   read_tc19   =None
-   read_tc20   =None
-   read_tc21   =None
-   read_tc22   =None
-   read_tc23   =None
-   read_tc24   =None
-   read_tc25   =None
-   read_tc26   =None
-   read_tc27   =None
-   read_tc28   =None
-   read_tc29   =None
+   
    
     
     
