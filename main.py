@@ -162,7 +162,7 @@ def Task(Emp_ID):
       var2='2'
      
    
-    if (touch.status())==1 and (touch.read()[0]) >250 and (touch.read()[0]) <280  and (touch.read()[1]) >80 and  (touch.read()[1]) <100:
+    if (touch.status())==1 and (touch.read()[0]) >250 and (touch.read()[0]) <280  and (touch.read()[1]) >75 and  (touch.read()[1]) <100:
       speaker.playWAV('/sd/button.wav')
       j=j+1#
       var2='3'
@@ -706,15 +706,43 @@ def pass_window(pass_status):
          lcd.font(lcd.FONT_DejaVu24)
          lcd.print('*', 300, 20, 0x66ff99)
     
-      
-       
-      
+
+
 
 
 
 def data_formatting(Emp_ID,Day,Month,Year,Hour,Min,clk, mac_id_hex):
   task_value=None
   task_status=0
+  read_tc1    =None
+  read_tc2    =None
+  read_tc3    =None
+  read_tc4    =None
+  read_tc5    =None
+  read_tc6    =None
+  read_tc7    =None
+  read_tc8    =None
+  read_tc9    =None
+  read_tc10   =None
+  read_tc11   =None
+  read_tc12   =None
+  read_tc13   =None
+  read_tc14   =None
+  read_tc15   =None
+  read_tc16   =None
+  read_tc17   =None
+  read_tc18   =None
+  read_tc19   =None
+  read_tc20   =None
+  read_tc21   =None
+  read_tc22   =None
+  read_tc23   =None
+  read_tc24   =None
+  read_tc25   =None
+  read_tc26   =None
+  read_tc27   =None
+  read_tc28   =None
+  read_tc29   =None
   if clk==1:
     id_check_clkin(Emp_ID)
     task_value=str("00000000000000000000000000000")
@@ -723,7 +751,7 @@ def data_formatting(Emp_ID,Day,Month,Year,Hour,Min,clk, mac_id_hex):
       lcd.print('DID YOU COMPLETE ALL TASKS', 0, 100, 0xffffff)
       lcd.print('NO', 30, 160, 0xff0808)
       lcd.print('YES TO ALL', 150, 160, 0x08ff62)
-      if (touch.status())==1 and (touch.read()[0]) >150 and (touch.read()[0]) <200  and (touch.read()[1]) >170 and  (touch.read()[1]) <200:
+      if (touch.status())==1 and (touch.read()[0]) >150 and (touch.read()[0]) <220  and (touch.read()[1]) >170 and  (touch.read()[1]) <200: # yes
         
         speaker.playWAV('/sd/button.wav')
         task_value=str("00000000000000000000000000000")
@@ -734,7 +762,7 @@ def data_formatting(Emp_ID,Day,Month,Year,Hour,Min,clk, mac_id_hex):
       
       
       
-      if (touch.status())==1 and (touch.read()[0]) >0 and (touch.read()[0]) <50  and (touch.read()[1]) >165 and  (touch.read()[1]) <200:
+      if (touch.status())==1 and (touch.read()[0]) >0 and (touch.read()[0]) <60  and (touch.read()[1]) >170 and  (touch.read()[1]) <200: # no
         
         lcd.clear()
         speaker.playWAV('/sd/button.wav')
@@ -742,15 +770,107 @@ def data_formatting(Emp_ID,Day,Month,Year,Hour,Min,clk, mac_id_hex):
         wait(3)
         task_value=Task(Emp_ID)
         task_status=1
-         
-       
-      
-      
-      
-      
+        
+    
+  read_tc1    =task_value[0]
+  read_tc2    =task_value[1]
+  read_tc3    =task_value[2]
+  read_tc4    =task_value[3]
+  read_tc5    =task_value[4]
+  read_tc6    =task_value[5]
+  read_tc7    =task_value[6]
+  read_tc8    =task_value[7]
+  read_tc9    =task_value[8]
+  read_tc10   =task_value[9]
+  read_tc11   =task_value[10]
+  read_tc12   =task_value[11]
+  read_tc13   =task_value[12]
+  read_tc14   =task_value[13]
+  read_tc15   =task_value[14]
+  read_tc16   =task_value[15]
+  read_tc17   =task_value[16]
+  read_tc18   =task_value[17]
+  read_tc19   =task_value[18]
+  read_tc20   =task_value[19]
+  read_tc21   =task_value[20]
+  read_tc22   =task_value[21]
+  read_tc23   =task_value[22]
+  read_tc24   =task_value[23]
+  read_tc25   =task_value[24]
+  read_tc26   =task_value[25]
+  read_tc27   =task_value[26]
+  read_tc28   =task_value[27]
+  read_tc29   =task_value[28]
+  
+  
+  if read_tc1=="*":
+    read_tc1 =" "
+  if read_tc2=="*":
+    read_tc2 =" "
+  if read_tc3=="*":
+    read_tc3 =" "
+  if read_tc4=="*":
+    read_tc4 =" "
+  if read_tc5=="*":
+    read_tc5 =" "
+  if read_tc6=="*":
+    read_tc6 =" "
+  if read_tc7=="*":
+    read_tc7 =" "
+  if read_tc8=="*":
+    read_tc8 =" "
+  if read_tc9=="*":
+    read_tc9 =" "
+  if read_tc10=="*":
+    read_tc10 =" "
+  if read_tc11=="*":
+    read_tc11 =" "
+  if read_tc12=="*":
+    read_tc12 =" "
+  if read_tc13=="*":
+    read_tc13 =" "
+  if read_tc14=="*":
+    read_tc14 =" "
+  if read_tc15=="*":
+    read_tc15 =" "
+  if read_tc16=="*":
+    read_tc16 =" "
+    
+  if read_tc17=="*":
+    read_tc17 =" "
+  if read_tc18=="*":
+    read_tc18 =" "
+  if read_tc19=="*":
+    read_tc19 =" "
+  if read_tc20=="*":
+    read_tc20 =" "
+    
+  if read_tc21=="*":
+    read_tc21 =" "
+  if read_tc22=="*":
+    read_tc22 =" "
+  if read_tc23=="*":
+    read_tc23 =" "
+  if read_tc24=="*":
+    read_tc24 =" "
+  if read_tc25=="*":
+    read_tc25 =" "
+  if read_tc26=="*":
+    read_tc26 =" "
+  if read_tc27=="*":
+    read_tc27 =" "
+  if read_tc28=="*":
+    read_tc28 =" "
+  if read_tc29=="*":
+    read_tc29 =" "
+    
+  task_value=str(read_tc1)+str(read_tc2)+str(read_tc3)+str(read_tc4)+str(read_tc5)+str(read_tc6)+str(read_tc7)+str(read_tc8)+str(read_tc9)+str(read_tc10)+str(read_tc11)+str(read_tc12)+str(read_tc13)+str(read_tc14)+str(read_tc15)+str(read_tc16)+str(read_tc17)+str(read_tc18)+str(read_tc19)+str(read_tc20)+str(read_tc21)+str(read_tc22)+str(read_tc23)+str(read_tc24)+str(read_tc25)+str(read_tc26) +str(read_tc27)+str(read_tc28)+str(read_tc29)  
     
   
- 
+  if task_value=="00000000000000000000000000000":
+     task_value="YES TO ALL"
+    
+   
   task_status=1
   int_Emp=int(Emp_ID,10)
   hex_emp=hex(int_Emp)[2:]
@@ -933,6 +1053,14 @@ def data_formatting(Emp_ID,Day,Month,Year,Hour,Min,clk, mac_id_hex):
   lcd.font(lcd.FONT_DejaVu24)
   lcd.print("OK", 140, 170,0xFFFFFF)
   lcd.qrcode(qr_sd_data, 0, 110, 130)
+  if clk==0:
+    lcd.font(lcd.FONT_Default)
+    lcd.print(str(task_value), 0, 80,0xffffff)
+    
+  
+  
+  
+  
   exit=1
   while exit==1:
     if (touch.status())==1 and (touch.read()[0]) >120 and (touch.read()[0]) <200  and (touch.read()[1]) >150 and  (touch.read()[1]) <230:
@@ -948,7 +1076,6 @@ def data_formatting(Emp_ID,Day,Month,Year,Hour,Min,clk, mac_id_hex):
       #speaker.playWAV("/sd/success.wav", rate=44100, dataf=speaker.F16B)
       speaker.playWAV('/sd/success.wav')
       wait(1)
-      lcd.clear()
       sd_data=None
       qr_sd_data=None
       num1=None
@@ -1345,25 +1472,25 @@ def setgs(new_day,new_month,new_year,new_hour,new_minute):
 def id_check_clkin(Emp_ID):
   Emp_id_status=0
   loop=1
-  lcd.clear()
   data=None
   lcd.print(str("Plz wait.."), 100, 100, 0xffffff)
   wait(1)
-  lcd.clear()
   with open('/sd/id.text', 'r') as fs:
     while loop==1:
       
        
-       lcd.clear()
+      
        data=fs.readline()
        try:
          if data[0]==Emp_ID[0] and data[1]==Emp_ID[1] and data[2]==Emp_ID[2] and data[3]==Emp_ID[3] and data[4]==Emp_ID[4] and data[5]==Emp_ID[5] and  data[6]==Emp_ID[6] and  data[7]==Emp_ID[7]:                                                          
+            
+            lcd.clear()
             lcd.print("ALREADY CLOCKED IN !!", 40, 100,  0xff2727)
             #speaker.playWAV("/sd/warning.wav", rate=44100, dataf=speaker.F16B)
             speaker.playWAV('/sd/warning.wav')
             
            
-            wait(2)
+            wait(5)
             num1=None
             num2=None
             num3=None
@@ -1373,13 +1500,12 @@ def id_check_clkin(Emp_ID):
             num7=None
             num8=None
             data=None
-            lcd.clear()
             loop=0
             Emp_id_status=0
             Emp_ID=None
             home_screen()
        except:
-         Emp_id_status=0
+         lcd.clear()
          lcd.print("CIN VERIFIED", 70, 100,  0x18f830)
          speaker.playWAV('/sd/success.wav')
          wait(1)
@@ -1393,6 +1519,7 @@ def id_check_clkin(Emp_ID):
          num7=None
          num8=None
          data=None
+         Emp_id_status=0
          loop=0
         
 
@@ -1402,11 +1529,9 @@ def id_check_clkout(Emp_ID):
   lcd.clear()
   lcd.print(str("Plz wait.."), 100, 100, 0xffffff)
   wait(1)
-  lcd.clear()
   clkindata=None
   clockinlist_length=None
   int_clockinlist_length=0
-  lcd.clear()
   with open('/sd/id.text', 'r') as fs:
      clkindata=fs.read()
      clockin_list = clkindata.split()
@@ -1429,7 +1554,7 @@ def id_check_clkout(Emp_ID):
             clockinlist_length=str(len(clockin_list))
             int_clockinlist_length=int(clockinlist_length)
             os.remove('/sd/id.text')
-            lcd.clear()
+            
             
             with open('/sd/id.text', 'a') as fs:
               for y in range(0, int_clockinlist_length, 1):
@@ -1444,7 +1569,7 @@ def id_check_clkout(Emp_ID):
            
             
         except:
-          
+          lcd.clear()
           lcd.print("NOT CLOCKED IN !!", 50, 100,  0xff2727)
           speaker.playWAV('/sd/warning.wav')
          
@@ -1452,7 +1577,6 @@ def id_check_clkout(Emp_ID):
           wait(5)
           loop=0
           x=0
-          lcd.clear()
           home_screen()
           
           
@@ -1809,11 +1933,10 @@ def Emp(clk):
          num9=var
          lcd.font(lcd.FONT_DejaVu24)
          lcd.print(" ", 220, 20, 0x66ff99)
-          
-   
-          
-    
-          
+
+
+
+
 
 
 
@@ -1913,11 +2036,12 @@ def home_screen(): # home screen
       wait(.900)
       
     
-      
-    
-      
-      
-    
+
+
+
+
+
+
     if rtc.datetime()[4]>=12:
       lcd.font(lcd.FONT_Default)
       lcd.print("PM",70,40,0xffffff)
@@ -2060,20 +2184,15 @@ def  dsp(line_count,data_file,list_length,list_limit):
      read_tc29 =" "
      
      
-     
-     
-     
-     
-     
-     
-          
-          
-   
-   
-  
-   
-   
-   
+
+
+
+
+
+
+
+
+
    int_read_emp_id=int(read_emp_id,16)
    int_read_day=int(read_day,16)
    int_read_month=int(read_month,16)
@@ -2137,26 +2256,42 @@ def  dsp(line_count,data_file,list_length,list_limit):
    lcd.print('NEXT', 230, 197, 0x208e8a)
    lcd.print('BACK', 130, 197, 0x208e8a)
    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+   read_tc1    =None
+   read_tc2    =None
+   read_tc3    =None
+   read_tc4    =None
+   read_tc5    =None
+   read_tc6    =None
+   read_tc7    =None
+   read_tc8    =None
+   read_tc9    =None
+   read_tc10   =None
+   read_tc11   =None
+   read_tc12   =None
+   read_tc13   =None
+   read_tc14   =None
+   read_tc15   =None
+   read_tc16   =None
+   read_tc17   =None
+   read_tc18   =None
+   read_tc19   =None
+   read_tc20   =None
+   read_tc21   =None
+   read_tc22   =None
+   read_tc23   =None
+   read_tc24   =None
+   read_tc25   =None
+   read_tc26   =None
+   read_tc27   =None
+   read_tc28   =None
+   read_tc29   =None
    
-   
+    
+    
 
-           
-     
-           
-            
-      
-     
+
+
+
 def history():
   line_count=0
  
@@ -2174,8 +2309,6 @@ def history():
        speaker.playWAV('/sd/warning.wav')
        wait(3)
        history_status=0
-       lcd.clear()
-    
        home_screen()
        
       
@@ -2188,13 +2321,11 @@ def history():
        sd_check()
         
        if (touch.status())==1 and (touch.read()[0]) >60 and (touch.read()[0]) <80  and (touch.read()[1]) >200 and  (touch.read()[1]) <250: 
-         lcd.clear()
          speaker.playWAV('/sd/button.wav')
         
          if str(line_count)==str("0"):                                                          
              lcd.clear()
              line_count=0
-             lcd.clear()
              dsp(line_count,data_file,list_length, list_limit)
          else:
            lcd.clear()
