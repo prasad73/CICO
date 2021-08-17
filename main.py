@@ -4,6 +4,7 @@ from uiflow import *
 import espnow
 import wifiCfg
 import nvs
+from machine import WDT
 
 
 screen = M5Screen()
@@ -70,7 +71,7 @@ Final_code_len=0
 
 
 
-
+idcheckvalue=0
 
 
 
@@ -82,6 +83,7 @@ Final_code_len=0
 
 def Task(Emp_ID):
   lcd.clear()
+  wdt = WDT(timeout=5000)
   code1=None
   code2=None
   code3=None
@@ -118,6 +120,7 @@ def Task(Emp_ID):
   var2=None
   
   while answer_code==0:
+    wdt.feed()
    
     lcd.font(lcd.FONT_DejaVu18)
     lcd.circle(30, 60, 20, color=0xffffff)
@@ -271,6 +274,10 @@ def Task(Emp_ID):
       code28=None
       code29=None
       j=0
+      line0 = M5Line(x1=2, y1=0, x2=322, y2=0, color=0xaa8f15, width=1, parent=None)
+      line1 = M5Line(x1=0, y1=239, x2=0, y2=0, color=0xaa8f15, width=1, parent=None)
+      line2 = M5Line(x1=-1, y1=238, x2=320, y2=238, color=0xaa8f15, width=1, parent=None)
+      line3 = M5Line(x1=317, y1=250, x2=318, y2=-1, color=0xaa8f15, width=1, parent=None)
       #id_check_clkout(Emp_ID)
       #return Final_code
       #answer_code=1
@@ -508,6 +515,7 @@ def Task(Emp_ID):
 
 
 def pass_window(pass_status):
+  wdt = WDT(timeout=5000)
   login_id=None
   num_id1=""
   num_id2=""
@@ -519,11 +527,15 @@ def pass_window(pass_status):
   num_id8=""
   var=None
   i=0
+  
+ 
+
+ 
   while pass_status==1:
     
-    
+    wdt.feed()
     lcd.font(lcd.FONT_DejaVu18)
-    lcd.print('ENTER ID', 0, 20,  0xffffff)
+    lcd.print('ENTER ID', 5, 20,  0xffffff)
     lcd.circle(50, 80, 20, color= 0xffffff)
     lcd.print("0", 45, 75, 0xffffff)
     lcd.circle(120, 80, 20, color= 0xffffff)
@@ -714,17 +726,35 @@ def pass_window(pass_status):
 def data_formatting(Emp_ID,Day,Month,Year,Hour,Min,clk, mac_id_hex):
   task_value=None
   task_status=0
-  
+  idcheckvalue=0
+  wdt = WDT(timeout=5000)
   if clk==1:
-    id_check_clkin(Emp_ID)
-    task_value=str("00000000000000000000000000000")
+    idcheckvalue=id_check_clkin(Emp_ID)
+    if idcheckvalue==1:
+      task_value=str("00000000000000000000000000000")
+    if idcheckvalue==2:
+      task_value=None
+      home_screen()
+      
+       
+      
+      
+      
+      
+    
   if clk==0:
+    
+    wdt = WDT(timeout=5000)
+    wdt.feed() 
     while task_status==0:
+      
+      wdt = WDT(timeout=5000)
+      wdt.feed() 
       lcd.print('DID YOU COMPLETE ALL TASKS', 0, 100, 0xffffff)
       lcd.print('NO', 30, 160, 0xff0808)
       lcd.print('YES TO ALL', 150, 160, 0x08ff62)
+     
       if (touch.status())==1 and (touch.read()[0]) >150 and (touch.read()[0]) <220  and (touch.read()[1]) >170 and  (touch.read()[1]) <200: # yes
-        
         speaker.playWAV('/sd/button.wav')
         task_value=str("00000000000000000000000000000")
         id_check_clkout(Emp_ID)
@@ -736,14 +766,15 @@ def data_formatting(Emp_ID,Day,Month,Year,Hour,Min,clk, mac_id_hex):
       
       if (touch.status())==1 and (touch.read()[0]) >0 and (touch.read()[0]) <60  and (touch.read()[1]) >170 and  (touch.read()[1]) <200: # no
         
+       
         lcd.clear()
         speaker.playWAV('/sd/button.wav')
         lcd.print("ENTER TASK CODES", 65, 100,  0xffffff)
-        wait(3)
+        wait(2)
         task_value=Task(Emp_ID)
         task_status=1
         
-    
+  wdt.feed() 
   read_tc1_tsk    =task_value[0]
   read_tc2_tsk    =task_value[1]
   read_tc3_tsk    =task_value[2]
@@ -868,7 +899,7 @@ def data_formatting(Emp_ID,Day,Month,Year,Hour,Min,clk, mac_id_hex):
     
     task_value_dsp="YES TO ALL"
     
-   
+ 
   task_status=1
   int_Emp=int(Emp_ID,10)
   hex_emp=hex(int_Emp)[2:]
@@ -1040,16 +1071,18 @@ def data_formatting(Emp_ID,Day,Month,Year,Hour,Min,clk, mac_id_hex):
   if length_hour==7:
     hex_hour="0"+hex_hour #1+6
     
-    
+   
   sd_data=hex_emp+hex_day+hex_month+hex_year+hex_hour+hex_min+hex_clk+mac_id_hex+str(task_value)
   qr_sd_data=qr_emp+"."+qr_day+"."+qr_month+"."+qr_year+"."+qr_hour+"."+qr_min+"."+qr_clk+"."+qr_mac_id_hex
   lcd.clear()
+  
   lcd.font(lcd.FONT_DejaVu18)
   lcd.print("Please write down or scan QR ", 0, 20,0x00cccc)
   lcd.font(lcd.FONT_Default)
   lcd.print(str(qr_sd_data), 0, 60,0xffffff)
   lcd.font(lcd.FONT_DejaVu24)
   lcd.print("OK", 140, 170,0xFFFFFF)
+  
   lcd.qrcode(qr_sd_data, 0, 110, 130)
   if clk==0:
     lcd.font(lcd.FONT_Default)
@@ -1059,13 +1092,14 @@ def data_formatting(Emp_ID,Day,Month,Year,Hour,Min,clk, mac_id_hex):
   
   
   
+  
   exit=1
   while exit==1:
+    wdt.feed()
     if (touch.status())==1 and (touch.read()[0]) >120 and (touch.read()[0]) <200  and (touch.read()[1]) >150 and  (touch.read()[1]) <230:
+      
+      lcd.clear()
       speaker.playWAV('/sd/button.wav')
-      power.setVibrationEnable(True)
-      wait_ms(100)
-      power.setVibrationEnable(False)
       sd_write(sd_data+"\n")
       lcd.clear()
       lcd.font(lcd.FONT_DejaVu18)
@@ -1137,10 +1171,13 @@ def time(new_day,new_month,new_year):
   ch_status=0
   hour_data=0
   minute_data=0
+  wdt = WDT(timeout=5000)
   while time_status==1:
+    
+    wdt.feed()
     lcd.font(lcd.FONT_DejaVu18)
-    lcd.print("Hour", 20, 0, 0xffffff)
-    lcd.print("Minute", 100, 0, 0xffffff)
+    lcd.print("Hour", 20, 10, 0xffffff)
+    lcd.print("Minute", 100, 10, 0xffffff)
     lcd.print('SAVE', 10, 200, 0xffffff)
     lcd.print('BACK', 190, 200,  0xffffff)
    
@@ -1272,11 +1309,14 @@ def date(new_hour,new_minute):
   day_data=0
   month_data=0
   year_data=0
+  wdt = WDT(timeout=5000)
   while date_status==1:
+    
+    wdt.feed()
     lcd.font(lcd.FONT_DejaVu18)
-    lcd.print("Day", 20, 0, 0xffffff)
-    lcd.print("Month", 100, 0, 0xffffff)
-    lcd.print("Year", 200, 0, 0xffffff)
+    lcd.print("Day", 20, 10, 0xffffff)
+    lcd.print("Month", 100, 10, 0xffffff)
+    lcd.print("Year", 200, 10, 0xffffff)
     lcd.print('SAVE', 10, 200, 0xffffff)
     lcd.print('BACK', 190, 200,  0xffffff)
     lcd.font(lcd.FONT_DejaVu40)
@@ -1402,9 +1442,15 @@ def date(new_hour,new_minute):
 
 def setgs(new_day,new_month,new_year,new_hour,new_minute):
   settings=1
+  line0 = M5Line(x1=2, y1=0, x2=322, y2=0, color=0xaa8f15, width=1, parent=None)
+  line1 = M5Line(x1=0, y1=239, x2=0, y2=0, color=0xaa8f15, width=1, parent=None)
+  line2 = M5Line(x1=-1, y1=238, x2=320, y2=238, color=0xaa8f15, width=1, parent=None)
+  line3 = M5Line(x1=317, y1=250, x2=318, y2=-1, color=0xaa8f15, width=1, parent=None)
+  wdt = WDT(timeout=5000)
   while settings==1:
     
-   
+    
+    wdt.feed()
     lcd.font(lcd.FONT_DejaVu18)
     lcd.print('DATE', 50, 80, 0xffffff)
     lcd.print('TIME', 200, 80, 0xffffff)
@@ -1434,15 +1480,27 @@ def setgs(new_day,new_month,new_year,new_hour,new_minute):
       speaker.playWAV('/sd/button.wav')
       erase=0
       lcd.clear()
+      line0 = M5Line(x1=2, y1=0, x2=322, y2=0, color=0xaa8f15, width=1, parent=None)
+      line1 = M5Line(x1=0, y1=239, x2=0, y2=0, color=0xaa8f15, width=1, parent=None)
+      line2 = M5Line(x1=-1, y1=238, x2=320, y2=238, color=0xaa8f15, width=1, parent=None)
+      line3 = M5Line(x1=317, y1=250, x2=318, y2=-1, color=0xaa8f15, width=1, parent=None)
+      wdt = WDT(timeout=10000)
       while erase==0:
+        
+        wdt.feed()
         lcd.print("ERASE HISTORY IN SD ?", 40, 100,  0xff2727)
         lcd.print('NO', 10, 200, 0xffffff)
         lcd.print('YES', 190, 200,  0xffffff)
         if (touch.status())==1 and (touch.read()[0]) >30 and (touch.read()[0]) <100  and (touch.read()[1]) >200 and  (touch.read()[1]) <250:  # no
+          
+          speaker.playWAV('/sd/button.wav')
           lcd.clear()
           erase=1
           settings=0
-          wait_ms(500)
+          line0 = M5Line(x1=2, y1=0, x2=322, y2=0, color=0xaa8f15, width=1, parent=None)
+          line1 = M5Line(x1=0, y1=239, x2=0, y2=0, color=0xaa8f15, width=1, parent=None)
+          line2 = M5Line(x1=-1, y1=238, x2=320, y2=238, color=0xaa8f15, width=1, parent=None)
+          line3 = M5Line(x1=317, y1=250, x2=318, y2=-1, color=0xaa8f15, width=1, parent=None)
           setgs(new_day,new_month,new_year,new_hour,new_minute)
           
         if (touch.status())==1 and (touch.read()[0]) >200 and (touch.read()[0]) <350  and (touch.read()[1]) >200 and  (touch.read()[1]) <350:# yes
@@ -1456,11 +1514,11 @@ def setgs(new_day,new_month,new_year,new_hour,new_minute):
              for y in range(0, 5, 1):
                dot+=10
                lcd.print(".", dot,100,0xfffe38)
-               wait(1)
+               wait_ms(500)
            lcd.clear()
            lcd.print("DONE", 100, 100,0x18f830)
            speaker.playWAV('/sd/success.wav')
-           wait(2)
+           wait(1)
            lcd.clear()
            setgs(new_day,new_month,new_year,new_hour,new_minute)
            
@@ -1469,62 +1527,59 @@ def setgs(new_day,new_month,new_year,new_hour,new_minute):
 
 
 def id_check_clkin(Emp_ID):
-  Emp_id_status=0
   loop=1
-  data=None
+  lcd.clear()
   lcd.print(str("Plz wait.."), 100, 100, 0xffffff)
   wait(1)
+  clkoutdata=None
+  clockoutlist_length=None
+  int_clockoutlist_length=0
   with open('/sd/id.text', 'r') as fs:
+    clkoutdata=fs.read()
+    clockout_list = clkoutdata.split()
+    clockoutlist_length=str(len(clockout_list))
+    int_clockoutlist_length=int(clockoutlist_length)
+    x=-1
+    z=None
     while loop==1:
-      
-       
-      
-       data=fs.readline()
-       try:
-         if data[0]==Emp_ID[0] and data[1]==Emp_ID[1] and data[2]==Emp_ID[2] and data[3]==Emp_ID[3] and data[4]==Emp_ID[4] and data[5]==Emp_ID[5] and  data[6]==Emp_ID[6] and  data[7]==Emp_ID[7]:                                                          
-            
-            lcd.clear()
-            lcd.print("ALREADY CLOCKED IN !!", 40, 100,  0xff2727)
-            #speaker.playWAV("/sd/warning.wav", rate=44100, dataf=speaker.F16B)
-            speaker.playWAV('/sd/warning.wav')
-            
-           
-            wait(5)
-            num1=None
-            num2=None
-            num3=None
-            num4=None
-            num5=None
-            num6=None
-            num7=None
-            num8=None
-            data=None
-            loop=0
-            Emp_id_status=0
-            Emp_ID=None
-            home_screen()
-       except:
-         lcd.clear()
-         lcd.print("CIN VERIFIED", 70, 100,  0x18f830)
-         speaker.playWAV('/sd/success.wav')
-         wait(1)
-         sd_id_write(Emp_ID+"\n")
-         num1=None
-         num2=None
-         num3=None
-         num4=None
-         num5=None
-         num6=None
-         num7=None
-         num8=None
-         data=None
-         Emp_id_status=0
-         loop=0
+      wdt = WDT(timeout=10000)
+      wdt.feed()
+      x+=1
+      try:
         
+        if str(Emp_ID)==str(clockout_list[x]):
+          
+          z=str(clockout_list[x])
+          lcd.clear()
+          lcd.print(str("ALREADY CLOCKED IN"), 40, 100,  0xff2727)
+          speaker.playWAV('/sd/warning.wav')
+          wait(1)
+          loop=0
+          idcheckvalue=2
+          return idcheckvalue
+          
+      except:
+        wdt.feed()
+        lcd.clear()
+        lcd.print("CIN VERIFIED", 80, 100,  0x18f830)
+        speaker.playWAV('/sd/success.wav')
+        wait(1)
+        sd_id_write(Emp_ID+"\n")
+        loop=0
+        idcheckvalue=1
+        return idcheckvalue
+        
+
+
+
+
+
+
 
 
 def id_check_clkout(Emp_ID):
   loop=1
+  wdt = WDT(timeout=10000)
   lcd.clear()
   lcd.print(str("Plz wait.."), 100, 100, 0xffffff)
   wait(1)
@@ -1540,15 +1595,17 @@ def id_check_clkout(Emp_ID):
      x=-1
      z=None
      while loop==1:
+        wdt.feed()
         x+=1
         
         try:
+          wdt.feed()
           if str(Emp_ID)==str(clockin_list[x]):
             z=str(clockin_list[x])
             lcd.clear()
-            lcd.print(str("COUT VERIFIED"), 100, 100,  0x18f830)
+            lcd.print(str("COUT VERIFIED"), 90, 100,  0x18f830)
             speaker.playWAV('/sd/success.wav')
-            wait(1)
+            wait_ms(100)
             clockin_list.remove(clockin_list[x])
             clockinlist_length=str(len(clockin_list))
             int_clockinlist_length=int(clockinlist_length)
@@ -1568,12 +1625,13 @@ def id_check_clkout(Emp_ID):
            
             
         except:
+          wdt.feed()
           lcd.clear()
           lcd.print("NOT CLOCKED IN !!", 50, 100,  0xff2727)
           speaker.playWAV('/sd/warning.wav')
          
           
-          wait(5)
+          wait(3)
           loop=0
           x=0
           home_screen()
@@ -1588,34 +1646,30 @@ def bat_status():
   charge_voltage=power.getBatVoltage()
   charge_current=power.getBatCurrent()
   lcd.font(lcd.FONT_Default)
-  lcd.print(str("BAT :"), 120, 0, 0xff99ff)
-  lcd.print(str(round(charge_voltage,1)), 170, 0, 0xff99ff)
-  lcd.print(str("v"), 195, 0, 0xff99ff)
+  lcd.print(str("BAT :"), 125, 10, 0xff99ff)
+  lcd.print(str(round(charge_voltage,1)), 170, 10, 0xff99ff)
+  lcd.print(str("v"), 195, 10, 0xff99ff)
   if charge_state == False and  charge_current < -1.0: 
      lcd.print(str("                                                       "),220, 0, 0x000000)    ## plugged out discharge
-     wait_ms(20)
-     lcd.print(str("Plugged"),220, 0, 0xff0050)
-     lcd.print(str("OUT"),290, 0, 0xff0050)
+     lcd.print(str("Plugged"),220, 10, 0xff0050)
+     lcd.print(str("OUT"),285, 10, 0xff0050)
     
     
   if charge_state == True and charge_current > 0: 
-     lcd.print(str("OUT"),290, 0, 0x000000)    ## plugged in charging
-     wait_ms(20)
-     lcd.print(str("Plugged"),220, 0, 0x00ff63)
+     lcd.print(str("OUT"),285, 10, 0x000000)    ## plugged in charging
+     lcd.print(str("Plugged"),220, 10, 0x00ff63)
     
   
   
   
   if charge_state == False and charge_current == -1.0: 
-     lcd.print(str("OUT"),290, 0, 0x000000)      ## plugged in full charge
-     wait_ms(20)
-     lcd.print(str("Plugged"),220, 0, 0x00ff63)
+     lcd.print(str("OUT"),285, 10, 0x000000)      ## plugged in full charge
+     lcd.print(str("Plugged"),220, 10, 0x00ff63)
    
     
   if charge_state == False and charge_current == 0.0: 
-     lcd.print(str("OUT"),290, 0, 0x000000)    ## plugged in but cureent 0.0
-     wait_ms(20)
-     lcd.print(str("Plugged"),220, 0, 0x00ff63)
+     lcd.print(str("OUT"),285, 10, 0x000000)    ## plugged in but cureent 0.0
+     lcd.print(str("Plugged"),220, 10, 0x00ff63)
     
     
 
@@ -1625,8 +1679,9 @@ def bat_status():
 def sd_id_write(emp_id):   
     with open('/sd/id.text', 'a') as fs:## normal id writing
       fs.write(emp_id)
-  
-    
+      emp_id=None
+
+
 
 
 def sd_write(sd_data):
@@ -1669,6 +1724,7 @@ def sd_check():
   
     
 def Emp(clk):
+ 
   num1=None
   num2=None
   num3=None
@@ -1695,9 +1751,11 @@ def Emp(clk):
   
   while Emp_id_status==1:
     sd_check()
+    wdt = WDT(timeout=10000)
+    wdt.feed()
     power.setVibrationEnable(False)
     lcd.font(lcd.FONT_DejaVu18)
-    lcd.print('ID :', 0, 20, 0xffffff)
+    lcd.print('ID :', 5, 20, 0xffffff)
     lcd.print('Back', 250, 10, 0xffffff)
 
     lcd.circle(40, 75, 20, color=0xff0000)
@@ -1783,7 +1841,7 @@ def Emp(clk):
          i=i+1
         
          
-    if (touch.status())==1 and (touch.read()[0]) >30 and (touch.read()[0]) <70  and (touch.read()[1]) >200 and  (touch.read()[1]) <210: #8
+    if (touch.status())==1 and (touch.read()[0]) >30 and (touch.read()[0]) <90  and (touch.read()[1]) >200 and  (touch.read()[1]) <210: #8
          speaker.playWAV('/sd/button.wav')
          var='8'
          i=i+1
@@ -1795,7 +1853,7 @@ def Emp(clk):
          i=i+1
          
         
-    if (touch.status())==1 and (touch.read()[0]) >200 and (touch.read()[0]) <230  and (touch.read()[1]) >200 and  (touch.read()[1]) <230: #C
+    if (touch.status())==1 and (touch.read()[0]) >195 and (touch.read()[0]) <230  and (touch.read()[1]) >200 and  (touch.read()[1]) <230: #C
          speaker.playWAV('/sd/button.wav')
          var='C'
          i=0
@@ -1809,6 +1867,7 @@ def Emp(clk):
          num6=None
          num7=None
          num8=None
+         
          
     if (touch.status())==1 and (touch.read()[0]) >230 and (touch.read()[0]) <280  and (touch.read()[1]) >40 and  (touch.read()[1]) <70: #back
         speaker.playWAV('/sd/button.wav')
@@ -1827,7 +1886,8 @@ def Emp(clk):
     
         
     
-    
+         wdt = WDT(timeout=10000)
+         wdt.feed()
          speaker.playWAV('/sd/button.wav')
          lcd.clear()
          
@@ -1945,11 +2005,14 @@ def home_screen(): # home screen
   lcd.clear()
   home_status=1
   bat_status()
-  
-  
  
+  
+  
+  
+
+  wdt = WDT(timeout=10000)
   while home_status==1:
-    
+    wdt.feed()
     M=rtc.datetime()[5]
     H=rtc.datetime()[4]
     Mnth=rtc.datetime()[1]
@@ -1961,34 +2024,26 @@ def home_screen(): # home screen
     lcd.font(lcd.FONT_DejaVu24)
     lcd.print('CIN', 65, 130, 0x009900)
     lcd.print('COUT', 190, 130, 0xcc0000)
+   
     
     
     
    
     lcd.font(lcd.FONT_DejaVu18)
-    lcd.print('----------------------------------------', 0, 180, 0x64e6e7)
+    lcd.print(' --------------------------------------', 0, 180, 0x64e6e7)
     lcd.print("HISTORY", 220, 40,  0xffffff)
     lcd.print("SETTINGS", 110, 40,  0xffffff)
-
-    #lcd.print((rtc.datetime()[2]), 0, 10, 0xffffff) # day
     lcd.print('-', 25, 10, 0xffffff)
-    #lcd.print((rtc.datetime()[1]), 35, 10, 0xffffff) # month
     lcd.print('-', 63, 10, 0xffffff)
-    lcd.print((rtc.datetime()[0]), 70, 10, 0xffffff) # year
-    #lcd.print((rtc.datetime()[4]), 15, 40, 0xffffff)
+    lcd.print((rtc.datetime()[0]), 72, 10, 0xffffff) # year
     lcd.print(':', 30, 40, 0xffffff)
-    #lcd.print((rtc.datetime()[5]), 55, 40, 0xffffff) #40
     lcd.print("MAC ID : ", 20, 200,  0xffffff)
     lcd.print((espnow.get_mac_addr()), 120, 200, 0xffffff)
-   
-    #lcd.print((touch.read()[0]), 0, 80, 0xffffff)
-    #lcd.print((touch.read()[1]), 50, 80, 0xffffff)
-    #wait(1)
-    #lcd.clear()
+
     
     if Mnth>=3 and Mnth<=11:
       H=H-1
-      lcd.print("[ DST ]", 5, 70, 0xc9af0a) # year
+      lcd.print("[ DST ]", 5, 70, 0X3c588b) # year
     
     if Mnth1==1 or Mnth1==2 or Mnth1==3 or Mnth1==4 or Mnth1==5 or Mnth1==6 or Mnth1==7 or Mnth1==8 or Mnth1==9:
       lcd.print("0", 35, 10, 0xffffff) # month
@@ -2002,13 +2057,7 @@ def home_screen(): # home screen
     else:
       lcd.print((rtc.datetime()[2]), 0, 10, 0xffffff) # day
       
-      
-      
-      
-      
-    
-    
-    
+
     if M==0 or M==1 or M==2 or M==3 or M==4 or M==5 or M==6 or M==7 or M==8 or M==9:
       lcd.print(str(M), 55, 40, 0xffffff) #40
       lcd.print("0", 40, 40, 0xffffff) #40
@@ -2032,14 +2081,7 @@ def home_screen(): # home screen
    
     if refresh==1:
       lcd.clear()
-      wait(.900)
-      
-    
-
-
-
-
-
+     
 
     if rtc.datetime()[4]>=12:
       lcd.font(lcd.FONT_Default)
@@ -2049,6 +2091,7 @@ def home_screen(): # home screen
        lcd.print("AM",70,40,0xffffff)
       
     if (touch.status()) == 1 and (touch.read()[0]) > 90 and (touch.read()[0]) < 115  and (touch.read()[1]) > 140 and  (touch.read()[1])  < 170 : # cin
+      
       home_status=0
       clk=1
       speaker.playWAV('/sd/button.wav')
@@ -2056,6 +2099,7 @@ def home_screen(): # home screen
       Emp(clk)
       
     if (touch.status()) == 1 and (touch.read()[0]) > 190 and (touch.read()[0]) < 230  and (touch.read()[1]) > 140 and  (touch.read()[1])  < 170 : # cout
+     
       home_status=0
       clk=0
       speaker.playWAV('/sd/button.wav')
@@ -2063,6 +2107,7 @@ def home_screen(): # home screen
       Emp(clk)
       
     if (touch.status())==1 and (touch.read()[0]) >130 and (touch.read()[0]) <175  and (touch.read()[1]) >70 and  (touch.read()[1]) <100:   # settings
+      
       lcd.clear()
       speaker.playWAV('/sd/button.wav')
       pass_status=1
@@ -2072,6 +2117,7 @@ def home_screen(): # home screen
    
      
     if (touch.status())==1 and (touch.read()[0]) > 240 and (touch.read()[0]) <280  and (touch.read()[1]) >70 and  (touch.read()[1]) <100:   # history
+      
       speaker.playWAV('/sd/button.wav')
       history_status=1
       history()
@@ -2079,6 +2125,8 @@ def home_screen(): # home screen
     lcd.print("VER : 1.1", 220, 70,  0xffffff)
     
 def  dsp(line_count,data_file,list_length,list_limit):
+   
+   
   
    string=data_file[line_count]
    list_length=int(list_length)
@@ -2184,14 +2232,6 @@ def  dsp(line_count,data_file,list_length,list_limit):
      
      
 
-
-
-
-
-
-
-
-
    int_read_emp_id=int(read_emp_id,16)
    int_read_day=int(read_day,16)
    int_read_month=int(read_month,16)
@@ -2201,9 +2241,7 @@ def  dsp(line_count,data_file,list_length,list_limit):
    int_read_clk=int(read_clk,16)
    
    
-   
-  
-   
+
    
    task_code=str(read_tc1)+str(read_tc2)+str(read_tc3)+str(read_tc4)+str(read_tc5)+str(read_tc6)+str(read_tc7)+str(read_tc8)+str(read_tc9)+str(read_tc10)+str(read_tc11)+str(read_tc12)+str(read_tc13)+str(read_tc14)+str(read_tc15)+str(read_tc16)+str(read_tc17)+str(read_tc18)+str(read_tc19)+str(read_tc20)+str(read_tc21)+str(read_tc22)+str(read_tc23)+str(read_tc24)+str(read_tc25)+str(read_tc26) +str(read_tc27)+str(read_tc28)+str(read_tc29)                                                                                                                                                                                                                         
    
@@ -2265,7 +2303,7 @@ def  dsp(line_count,data_file,list_length,list_limit):
 
 def history():
   line_count=0
- 
+  wdt = WDT(timeout=10000)
   with open('/sd/history.text', 'r') as fs:
      sd = fs.read()
      data_file = sd.split()
@@ -2276,13 +2314,13 @@ def history():
      if list_length==str(-1):
        lcd.clear()
        lcd.font(lcd.FONT_DejaVu24)
-       lcd.print(str("NO DATA"), 100, 107, 0xFFFFFF)
+       lcd.print(str("NO DATA"), 100, 107, 0xff2727)
        speaker.playWAV('/sd/warning.wav')
        wait(3)
        history_status=0
        home_screen()
        
-      
+    
      lcd.clear()
      dsp(line_count,data_file,list_length, list_limit)
      history_status=1
@@ -2290,17 +2328,19 @@ def history():
      
      while history_status==1:
        sd_check()
-        
+       wdt.feed()
        if (touch.status())==1 and (touch.read()[0]) >60 and (touch.read()[0]) <80  and (touch.read()[1]) >200 and  (touch.read()[1]) <250: 
          speaker.playWAV('/sd/button.wav')
         
          if str(line_count)==str("0"):                                                          
              lcd.clear()
              line_count=0
+             
              dsp(line_count,data_file,list_length, list_limit)
          else:
            lcd.clear()
            line_count=line_count-1
+          
            dsp(line_count,data_file,list_length,list_limit)
       
        if (touch.status())==1 and (touch.read()[0]) >220 and (touch.read()[0]) <280  and (touch.read()[1]) >200 and  (touch.read()[1]) <250: 
@@ -2310,6 +2350,7 @@ def history():
                                                                                  
            line_count=0
            lcd.clear()
+           
            dsp(line_count,data_file,list_length, list_limit)
         
          
