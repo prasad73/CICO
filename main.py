@@ -76,14 +76,85 @@ idcheckvalue=0
 
 
 
-  
-  
+
+def Dst_setting():
+  year=0
+  current_year=None
+  wdt = WDT(timeout=5000)
+  wdt.feed()
+  speaker.playWAV('/sd/button.wav')
+  Dst=0
+  lcd.clear()
+  dst_value=None
+  dst_value = nvs.read_str('5')
+  if (dst_value==str('0')):
+    
+    lcd.print('NOT AVAILABLE', 190, 170, 0xff0808)
+    
+  if (dst_value==str('1')):
+    
+    lcd.print('NOT AVAILABLE', 35, 170, 0xff0808)
+    
+     
+  while Dst==0:
+    year=str(rtc.datetime()[0])
+    current_year=str(year[2])+str(year[3])
+    current_month=rtc.datetime()[1]
+    current_day=rtc.datetime()[2]
+    new_hour=rtc.datetime()[4]
+    current_minute=rtc.datetime()[5]
+    wdt = WDT(timeout=5000)
+    wdt.feed()
+    lcd.font(lcd.FONT_DejaVu18)
+    lcd.print('DST SELECTION', 80, 70, 0xffffff)
+    lcd.print('BACKWARD',  20, 130, 0xff0808)
+    lcd.print('[-1 HR]',  35, 150, 0xffffff)
+    lcd.print('FORWARD', 190, 130, 0x08ff62)
+    lcd.print('[+1 HR]',  210, 150, 0xffffff)
+    lcd.print('BACK', 10, 200, 0xffffff)
+    
+    if (touch.status())==1 and (touch.read()[0]) >50 and (touch.read()[0]) <100  and (touch.read()[1]) >150 and  (touch.read()[1]) <170 and dst_value!=str('1'): #F
+      speaker.playWAV('/sd/button.wav')
+      Dst=1
+      new_hour-=1
+      lcd.clear()
+      lcd.print('DST UPDATED', 100, 100, 0xffffff)
+      rtc.datetime((int(current_year), int(current_month), int(current_day), 0, int(new_hour), int(current_minute), 0, 0))
+      nvs.write(str('5'), '1')
+      home_screen()
+      lcd.clear()
+      
+      
+      
+    if (touch.status())==1 and (touch.read()[0]) >200 and (touch.read()[0]) <250  and (touch.read()[1]) >150 and  (touch.read()[1]) <170 and dst_value!=str('0'): #B
+      speaker.playWAV('/sd/button.wav')
+      Dst=1
+      new_hour+=1
+      lcd.clear()
+      lcd.print('DST UPDATED', 100, 100, 0xffffff)
+      nvs.write(str('5'), '0')
+      rtc.datetime((int(current_year), int(current_month), int(current_day), 0, int(new_hour), int(current_minute), 0, 0))
+      home_screen()
+      
+    if (touch.status())==1 and (touch.read()[0]) >30 and (touch.read()[0]) <100  and (touch.read()[1]) >200 and  (touch.read()[1]) <250:
+      speaker.playWAV('/sd/button.wav')
+      rtc.datetime((int(current_year), int(current_month), int(current_day), 0, int(new_hour), int(current_minute), 0, 0))
+      Dst=1
+      home_screen()
+      
+      
+     
+
+
+
+
+
+
 
 
 
 def Task(Emp_ID):
   lcd.clear()
-  wdt = WDT(timeout=5000)
   code1=None
   code2=None
   code3=None
@@ -120,6 +191,7 @@ def Task(Emp_ID):
   var2=None
   
   while answer_code==0:
+    wdt = WDT(timeout=5000)
     wdt.feed()
    
     lcd.font(lcd.FONT_DejaVu18)
@@ -364,7 +436,7 @@ def Task(Emp_ID):
       #wait(3)
       
       j=0
-      id_check_clkout(Emp_ID)
+      #id_check_clkout(Emp_ID)
       answer_code=1
       return Final_code
      
@@ -645,7 +717,7 @@ def pass_window(pass_status):
         lcd.print("WRONG!!", 100, 100, 0xffffff)                                # wrong password
         speaker.playWAV('/sd/warning.wav')
         
-        wait(4)
+        wait(1)
         lcd.clear()
         pass_status=0
         home_status=1
@@ -745,7 +817,9 @@ def data_formatting(Emp_ID,Day,Month,Year,Hour,Min,clk, mac_id_hex):
   if clk==0:
     
     wdt = WDT(timeout=5000)
-    wdt.feed() 
+    wdt.feed()
+    id_check_clkout(Emp_ID)
+    lcd.clear()
     while task_status==0:
       
       wdt = WDT(timeout=5000)
@@ -757,7 +831,6 @@ def data_formatting(Emp_ID,Day,Month,Year,Hour,Min,clk, mac_id_hex):
       if (touch.status())==1 and (touch.read()[0]) >150 and (touch.read()[0]) <220  and (touch.read()[1]) >170 and  (touch.read()[1]) <200: # yes
         speaker.playWAV('/sd/button.wav')
         task_value=str("00000000000000000000000000000")
-        id_check_clkout(Emp_ID)
         task_status=1
       
       
@@ -771,7 +844,6 @@ def data_formatting(Emp_ID,Day,Month,Year,Hour,Min,clk, mac_id_hex):
         speaker.playWAV('/sd/button.wav')
         lcd.print("ENTER TASK CODES", 65, 100,  0xffffff)
         wait(2)
-        task_value=Task(Emp_ID)
         task_status=1
         
   wdt.feed() 
@@ -1209,7 +1281,7 @@ def time(new_day,new_month,new_year):
     lcd.print(':', 90, 40, 0xffffff)
     lcd.print(minute_data, 120, 40, 0xffffff)
     
-    prev_month=rtc.datetime()[1]
+   
     
     
     if hour_data>=12 and hour_data!=23:
@@ -1221,8 +1293,7 @@ def time(new_day,new_month,new_year):
     if hour_data==0:
       lcd.print(str("AM"), 180, 40, 0x199f44)
       
-    if prev_month>=3 and prev_month<=11:
-       lcd.print(str("DST"), 180, 80, 0xc9af0a)
+    
       
       
    
@@ -1250,10 +1321,10 @@ def time(new_day,new_month,new_year):
       speaker.playWAV('/sd/button.wav')
       
       lcd.clear()
-      if prev_month>=3 and prev_month<=11:
-        new_hour=hour_data+1
-      else:
-        new_hour=hour_data
+      new_hour=hour_data
+     
+     
+       
       
       
       
@@ -1333,9 +1404,7 @@ def date(new_hour,new_minute):
           count=1
       day_data=count
     if ch_status==1:
-      if count>=3 and count<=11:
-          
-          lcd.print('DST', 80, 180,  0xc9af0a)## DAY LIGHT ADJUSTMENT
+     
       if count>12:
           count=12
          
@@ -1605,7 +1674,7 @@ def id_check_clkout(Emp_ID):
             lcd.clear()
             lcd.print(str("COUT VERIFIED"), 90, 100,  0x18f830)
             speaker.playWAV('/sd/success.wav')
-            wait_ms(100)
+            wait_ms(50)
             clockin_list.remove(clockin_list[x])
             clockinlist_length=str(len(clockin_list))
             int_clockinlist_length=int(clockinlist_length)
@@ -1631,7 +1700,7 @@ def id_check_clkout(Emp_ID):
           speaker.playWAV('/sd/warning.wav')
          
           
-          wait(3)
+          wait(1)
           loop=0
           x=0
           home_screen()
@@ -2005,6 +2074,8 @@ def home_screen(): # home screen
   lcd.clear()
   home_status=1
   bat_status()
+  clear_clocks() 
+  
  
   
   
@@ -2018,7 +2089,8 @@ def home_screen(): # home screen
     Mnth=rtc.datetime()[1]
     Mnth1=rtc.datetime()[1]
     D=rtc.datetime()[2]
-    clear_clocks() 
+   
+   
     sd_check()
    
     lcd.font(lcd.FONT_DejaVu24)
@@ -2039,11 +2111,12 @@ def home_screen(): # home screen
     lcd.print(':', 30, 40, 0xffffff)
     lcd.print("MAC ID : ", 20, 200,  0xffffff)
     lcd.print((espnow.get_mac_addr()), 120, 200, 0xffffff)
+    lcd.print("[ DST ]", 5, 70, 0xffe700) # year
 
     
-    if Mnth>=3 and Mnth<=11:
-      H=H-1
-      lcd.print("[ DST ]", 5, 70, 0X3c588b) # year
+    
+    
+      
     
     if Mnth1==1 or Mnth1==2 or Mnth1==3 or Mnth1==4 or Mnth1==5 or Mnth1==6 or Mnth1==7 or Mnth1==8 or Mnth1==9:
       lcd.print("0", 35, 10, 0xffffff) # month
@@ -2110,17 +2183,27 @@ def home_screen(): # home screen
       
       lcd.clear()
       speaker.playWAV('/sd/button.wav')
+      home_status=0
       pass_status=1
       pass_window(pass_status)
       lcd.clear()
       setgs(new_day,new_month,new_year,new_hour,new_minute)
+     
    
      
     if (touch.status())==1 and (touch.read()[0]) > 240 and (touch.read()[0]) <280  and (touch.read()[1]) >70 and  (touch.read()[1]) <100:   # history
-      
+       
+      home_status=0
       speaker.playWAV('/sd/button.wav')
       history_status=1
       history()
+    if (touch.status()) == 1 and (touch.read()[0]) > 20 and (touch.read()[0]) < 70  and (touch.read()[1]) > 100 and  (touch.read()[1])  < 110 : #DST
+       home_status=0
+       lcd.clear()
+       Dst_setting()
+      
+      
+    
     lcd.font(lcd.FONT_Default)
     lcd.print("VER : 1.2", 220, 70,  0xffffff)
     
