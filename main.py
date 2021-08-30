@@ -141,15 +141,6 @@ def Dst_setting():
       rtc.datetime((int(current_year), int(current_month), int(current_day), 0, int(new_hour), int(current_minute), 0, 0))
       Dst=1
       home_screen()
-      
-      
-     
-
-
-
-
-
-
 
 
 
@@ -2091,7 +2082,7 @@ def home_screen(): # home screen
     D=rtc.datetime()[2]
    
    
-    sd_check()
+    
    
     lcd.font(lcd.FONT_DejaVu24)
     lcd.print('CIN', 65, 130, 0x009900)
@@ -2150,10 +2141,12 @@ def home_screen(): # home screen
   
     refresh=rtc.datetime()[6]
     
-    bat_status()
+   
    
     if refresh==1:
       lcd.clear()
+      bat_status()
+      sd_check()
      
 
     if rtc.datetime()[4]>=12:
@@ -2622,7 +2615,7 @@ while login_flag !="1":
       lcd.clear()
       lcd.print("CREATING FILES...", 0, 100, 0xffffff)
       wait(3)
-      lcd.clear()
+      rtc.datetime((21, 01, 02, 0, 14, 15, 0, 0))
       sd_id_write_s()
       sd_write_s()
       sd_date_write_s()
