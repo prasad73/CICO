@@ -2627,6 +2627,7 @@ while login_flag !="1":
       num_id5=""
       num_id6=""
       num_id7=""
+      lcd.clear()
       lcd.print("Files created", 0, 80, 0xffffff)
       lcd.print("Don't replace sd for this device", 0, 100, 0xffffff)
       wait(5)
