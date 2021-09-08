@@ -337,6 +337,7 @@ def Task(Emp_ID):
       code28=None
       code29=None
       j=0
+     
       line0 = M5Line(x1=2, y1=0, x2=322, y2=0, color=0xaa8f15, width=1, parent=None)
       line1 = M5Line(x1=0, y1=239, x2=0, y2=0, color=0xaa8f15, width=1, parent=None)
       line2 = M5Line(x1=-1, y1=238, x2=320, y2=238, color=0xaa8f15, width=1, parent=None)
@@ -429,6 +430,35 @@ def Task(Emp_ID):
       j=0
       #id_check_clkout(Emp_ID)
       answer_code=1
+      del code1
+      del code2
+      del code3
+      del code4
+      del code5
+      del code6
+      del code7
+      del code8
+      del code9
+      del code10
+      del code11
+      del code12
+      del code13
+      del code14
+      del code15
+      del code16
+      del code17
+      del code18
+      del code19
+      del code20
+      del code21
+      del code22
+      del code23
+      del code24
+      del code25
+      del code26
+      del code27
+      del code28
+      del code29
       return Final_code
      
       
@@ -809,33 +839,55 @@ def data_formatting(Emp_ID,Day,Month,Year,Hour,Min,clk, mac_id_hex):
     
     wdt = WDT(timeout=5000)
     wdt.feed()
-    id_check_clkout(Emp_ID)
-    lcd.clear()
-    while task_status==0:
+    idcheckvalue=id_check_clkout(Emp_ID)
+    if idcheckvalue==1:
+      lcd.clear()
+      while task_status==0:
+        
+        wdt = WDT(timeout=5000)
+        wdt.feed() 
+        lcd.print('DID YOU COMPLETE ALL TASKS', 0, 100, 0xffffff)
+        lcd.print('NO', 30, 160, 0xff0808)
+        lcd.print('YES TO ALL', 150, 160, 0x08ff62)
+        if (touch.status())==1 and (touch.read()[0]) >150 and (touch.read()[0]) <220  and (touch.read()[1]) >170 and  (touch.read()[1]) <200: 
+          
+          speaker.playWAV('/sd/button.wav')
+          task_value=str("00000000000000000000000000000")
+          task_status=1# yes
+        if (touch.status())==1 and (touch.read()[0]) >0 and (touch.read()[0]) <60  and (touch.read()[1]) >170 and  (touch.read()[1]) <200:
+          
+          lcd.clear()# no
+          speaker.playWAV('/sd/button.wav')
+          lcd.print("ENTER TASK CODES", 65, 100,  0xffffff)
+          wait(1)
+          task_value=Task(Emp_ID)
+          if task_value!=None:
+            task_status=1
+        
+    if idcheckvalue==2:
       
-      wdt = WDT(timeout=5000)
-      wdt.feed() 
-      lcd.print('DID YOU COMPLETE ALL TASKS', 0, 100, 0xffffff)
-      lcd.print('NO', 30, 160, 0xff0808)
-      lcd.print('YES TO ALL', 150, 160, 0x08ff62)
+      task_status=None
+      home_screen()
+      
+      
+      
+    
+    
+      
      
-      if (touch.status())==1 and (touch.read()[0]) >150 and (touch.read()[0]) <220  and (touch.read()[1]) >170 and  (touch.read()[1]) <200: # yes
-        speaker.playWAV('/sd/button.wav')
-        task_value=str("00000000000000000000000000000")
-        task_status=1
+     
+      
+       
       
       
       
       
       
-      if (touch.status())==1 and (touch.read()[0]) >0 and (touch.read()[0]) <60  and (touch.read()[1]) >170 and  (touch.read()[1]) <200: # no
+      
         
        
-        lcd.clear()
-        speaker.playWAV('/sd/button.wav')
-        lcd.print("ENTER TASK CODES", 65, 100,  0xffffff)
-        wait(2)
-        task_status=1
+       
+       
         
   wdt.feed() 
   read_tc1_tsk    =task_value[0]
@@ -1173,18 +1225,19 @@ def data_formatting(Emp_ID,Day,Month,Year,Hour,Min,clk, mac_id_hex):
       wait(1)
       sd_data=None
       qr_sd_data=None
-      num1=None
-      num2=None
-      num3=None
-      num4=None
-      num5=None
-      num6=None
-      num7=None
-      num8=None
       exit=0
+      ##del Final_code
+      ##del task_value
+      
       Emp_id_status=0
       Emp_ID=None
       task_value_dsp=None
+      del Final_code
+      del task_value
+      del task_value_dsp
+      del Final_code_len
+      del sd_data
+      del qr_sd_data
       home_screen()# exit
     
     
@@ -1614,9 +1667,12 @@ def id_check_clkin(Emp_ID):
           lcd.print(str("ALREADY CLOCKED IN"), 40, 100,  0xff2727)
           speaker.playWAV('/sd/warning.wav')
           wait(1)
+          del clockout_list
+          del clkoutdata
+          del clockoutlist_length
+          del int_clockoutlist_length
           loop=0
-          idcheckvalue=2
-          return idcheckvalue
+          return 2
           
       except:
         wdt.feed()
@@ -1626,8 +1682,11 @@ def id_check_clkin(Emp_ID):
         wait(1)
         sd_id_write(Emp_ID+"\n")
         loop=0
-        idcheckvalue=1
-        return idcheckvalue
+        del clockout_list
+        del clkoutdata
+        del clockoutlist_length
+        del int_clockoutlist_length
+        return 1
         
 
 
@@ -1654,11 +1713,13 @@ def id_check_clkout(Emp_ID):
      
      x=-1
      z=None
-     while loop==1:
+     while loop==1:  
+        wdt = WDT(timeout=10000)
         wdt.feed()
         x+=1
         
         try:
+         
           wdt.feed()
           if str(Emp_ID)==str(clockin_list[x]):
             z=str(clockin_list[x])
@@ -1678,6 +1739,14 @@ def id_check_clkout(Emp_ID):
                 fs.write(str(clockin_list[(y)])+"\n")
             x=0
             loop=0
+            del clkindata
+            del clockin_list
+            del clockinlist_length
+            del int_clockinlist_length
+            del x
+            del z
+            return 1
+            
             
                 
               
@@ -1690,11 +1759,18 @@ def id_check_clkout(Emp_ID):
           lcd.print("NOT CLOCKED IN !!", 50, 100,  0xff2727)
           speaker.playWAV('/sd/warning.wav')
          
+         
           
           wait(1)
           loop=0
           x=0
-          home_screen()
+          del clkindata
+          del clockin_list
+          del clockinlist_length
+          del int_clockinlist_length
+          del x
+          del z
+          return 2
           
           
   
@@ -1975,12 +2051,28 @@ def Emp(clk):
            
             Emp_id_status=0
             Emp_ID=str("0")+str("0")+str("0")+str("0")+str(num1)+str(num2)+str(num3)+str(num4)
+            del num1
+            del num2
+            del num3
+            del num4
+            del num5
+            del num6
+            del num7
+            del num8
             data_formatting(Emp_ID,Day,Month,Year,Hour,Min,clk, mac_id_hex)
            
          if  str(num6)==str(None) and str(num7)==str(None) and str(num8)==str(None): #strings  6 to 8 empty
            
             Emp_id_status=0
             Emp_ID=str("0")+str("0")+str("0")+str(num1)+str(num2)+str(num3)+str(num4)+str(num5)
+            del num1
+            del num2
+            del num3
+            del num4
+            del num5
+            del num6
+            del num7
+            del num8
             data_formatting(Emp_ID,Day,Month,Year,Hour,Min,clk, mac_id_hex)
             
             
@@ -1989,6 +2081,14 @@ def Emp(clk):
             
             Emp_id_status=0
             Emp_ID=str("0")+str("0")+str(num1)+str(num2)+str(num3)+str(num4)+str(num5)+str(num6)
+            del num1
+            del num2
+            del num3
+            del num4
+            del num5
+            del num6
+            del num7
+            del num8
             data_formatting(Emp_ID,Day,Month,Year,Hour,Min,clk, mac_id_hex)
             #Emp_id_status==0
             #home_screen()
@@ -1997,12 +2097,28 @@ def Emp(clk):
            
             Emp_id_status=0
             Emp_ID=str("0")+str(num1)+str(num2)+str(num3)+str(num4)+str(num5)+str(num6)+str(num7)
+            del num1
+            del num2
+            del num3
+            del num4
+            del num5
+            del num6
+            del num7
+            del num8
             data_formatting(Emp_ID,Day,Month,Year,Hour,Min,clk, mac_id_hex)
             
            
          if str(num1)!=str(None) and str(num2)!=str(None) and  str(num3)!=str(None) and str(num4)!=None and str(num5)!=str(None) and str(num6)!=str(None) and str(num7)!=str(None) and str(num8)!=str(None):
              Emp_id_status=0
              Emp_ID=str(num1)+str(num2)+str(num3)+str(num4)+str(num5)+str(num6)+str(num7)+str(num8)
+             del num1
+             del num2
+             del num3
+             del num4
+             del num5
+             del num6
+             del num7
+             del num8
              data_formatting(Emp_ID,Day,Month,Year,Hour,Min,clk, mac_id_hex)
           
            
@@ -2627,7 +2743,6 @@ while login_flag !="1":
       num_id5=""
       num_id6=""
       num_id7=""
-      lcd.clear()
       lcd.print("Files created", 0, 80, 0xffffff)
       lcd.print("Don't replace sd for this device", 0, 100, 0xffffff)
       wait(5)
