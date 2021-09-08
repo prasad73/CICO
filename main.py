@@ -1218,6 +1218,11 @@ def data_formatting(Emp_ID,Day,Month,Year,Hour,Min,clk, mac_id_hex):
       sd_write(sd_data+"\n")
       lcd.clear()
       lcd.font(lcd.FONT_DejaVu18)
+      Final_code=None
+      del task_value
+      del task_value_dsp
+      del sd_data
+      del qr_sd_data
       
       lcd.print("DATA SAVED", 100, 100,0xffffff)
       #speaker.playWAV("/sd/success.wav", rate=44100, dataf=speaker.F16B)
@@ -1231,13 +1236,6 @@ def data_formatting(Emp_ID,Day,Month,Year,Hour,Min,clk, mac_id_hex):
       
       Emp_id_status=0
       Emp_ID=None
-      task_value_dsp=None
-      del Final_code
-      del task_value
-      del task_value_dsp
-      del Final_code_len
-      del sd_data
-      del qr_sd_data
       home_screen()# exit
     
     
@@ -1746,6 +1744,7 @@ def id_check_clkout(Emp_ID):
             del x
             del z
             return 1
+            frozenset
             
             
                 
