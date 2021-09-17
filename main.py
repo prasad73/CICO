@@ -1646,12 +1646,13 @@ lcd.clear()
 if DEVICE_CHECK=="1":
   main()
 else:
+  lcd.clear()
   while True:
-    lcd.clear()
-    lcd.font(lcd.FONT_DefaultSmall)
+    lcd.font(lcd.FONT_DejaVu18)
     lcd.print('NEW DEVICE', 100, 100, 0xffffff)
+    lcd.font(lcd.FONT_DefaultSmall)
     lcd.print('KINDLY UPLOAD FIRMWARE IN OLD DEVICE', 0, 150, 0xffffff)
-    lcd.print('THIS IS TESTING MODE', 0, 150, 0xffffff)
+    lcd.print('THIS IS TESTING MODE', 0, 170, 0xffffff)
     
     
   
