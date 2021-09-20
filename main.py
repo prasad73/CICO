@@ -42,6 +42,7 @@ QR_CURRENT_YEAR=None
 QR_CURRENT_MONTH=None
 QR_CURRENT_DAY=None
 QR_CLOCK=None
+PASSWORD="01"
 
 
 
@@ -97,6 +98,7 @@ def PATTERN_CIN_SAVE():
   
   while True:
     if (touch.status())==1 and (touch.read()[0]) >120 and (touch.read()[0]) <200  and (touch.read()[1]) >150 and  (touch.read()[1]) <230:
+      speaker.playWAV('/sd/button.wav')
       
       try:
         with open('/sd/history.text', 'a') as fs:
@@ -204,20 +206,7 @@ def UPDATE_ID():
   return 1
       
   
-    
- 
-    
-    
   
-  
-  
-  
-  
-  
-  
-        
-        
-        
 def TASK_WINDOW():
   lcd.clear()
   global TASK_NUMBERS
@@ -1278,10 +1267,6 @@ def EMP_KEYPAD():  ## EMPLOYEE ID KEYPAD FUNCTION
           return 1
         
         
-        
-      
-    
-        
 def SD():
   check=None
   try:
@@ -1307,16 +1292,584 @@ def TASK_QN():
   lcd.print('YES TO ALL', 150, 160, 0x08ff62)
   while True:
      if (touch.status())==1 and (touch.read()[0]) >150 and (touch.read()[0]) <220  and (touch.read()[1]) >170 and  (touch.read()[1]) <200:
+       speaker.playWAV('/sd/button.wav')
        return 1
      if (touch.status())==1 and (touch.read()[0]) >0 and (touch.read()[0]) <60  and (touch.read()[1]) >170 and  (touch.read()[1]) <200:
+       speaker.playWAV('/sd/button.wav')
        return 2
        
+
+
+def HISTORY():
+
+  SD_DATA=None
+  LIST_LENGTH=None
+  LIST=None
+  x=0
+  with open('/sd/history.text', 'r') as fs:
+    SD_DATA=fs.read()
+  LIST=SD_DATA.split()
+  LIST_LENGTH=len(LIST)
+  LIST_LENGTH=LIST_LENGTH-1
+  if LIST_LENGTH>=0:
+    SHOW(x,LIST_LENGTH,LIST)
+  else:
+    return 0
+    
+   
+
+  while True:
+    
+    lcd.print('HISTORY', 0, 0, 0xffff33)
+    lcd.print('PREV', 10, 197, 0x208e8a)
+    lcd.print('NEXT', 230, 197, 0x208e8a)
+    lcd.print('BACK', 130, 197, 0x208e8a)
+    if (touch.status())==1 and (touch.read()[0]) >150 and (touch.read()[0]) <170  and (touch.read()[1]) >200 and  (touch.read()[1]) <280:
+      speaker.playWAV('/sd/button.wav')
+      del SD_DATA
+      del LIST_LENGTH
+      del LIST
+      del x
+      return -1
+    if (touch.status())==1 and (touch.read()[0]) >220 and (touch.read()[0]) <280  and (touch.read()[1]) >200 and  (touch.read()[1]) <250:
+      if x<LIST_LENGTH:
+        x=x+1
+        lcd.clear()
+        SHOW(x,LIST_LENGTH,LIST)
+      else:
+        x=LIST_LENGTH
+  
+    if (touch.status())==1 and (touch.read()[0]) >60 and (touch.read()[0]) <80  and (touch.read()[1]) >200 and  (touch.read()[1]) <250:
+      if x>0:
+        x=x-1
+        lcd.clear()
+        SHOW(x,LIST_LENGTH,LIST)
+      else:
+        x=0
+        
+        
+       
+def SHOW(x,LIST_LENGTH,LIST):
+  FILE_DATA=LIST[x]
+  employee_id= FILE_DATA[0]+ FILE_DATA[1]+FILE_DATA[2]+FILE_DATA[3]+ FILE_DATA[4]+FILE_DATA[5]+FILE_DATA[6]+FILE_DATA[7]
+  employee_id=int(employee_id,16)
+  day= FILE_DATA[8]+ FILE_DATA[9]+FILE_DATA[10]+FILE_DATA[11]+ FILE_DATA[12]+FILE_DATA[13]+FILE_DATA[14]+FILE_DATA[15]
+  day=int(day,16)
+  month=FILE_DATA[16]+FILE_DATA[17]+FILE_DATA[18]+FILE_DATA[19]+ FILE_DATA[20]+FILE_DATA[21]+FILE_DATA[22]+FILE_DATA[23]
+  month=int(month,16)
+  year=FILE_DATA[24]+FILE_DATA[25]+FILE_DATA[26]+FILE_DATA[27]+ FILE_DATA[28]+FILE_DATA[29]+FILE_DATA[30]+FILE_DATA[31]
+  year=int(year,16)
+  hour=FILE_DATA[32]+FILE_DATA[33]+FILE_DATA[34]+FILE_DATA[35]+ FILE_DATA[36]+FILE_DATA[37]+FILE_DATA[38]+FILE_DATA[39]
+  hour=int(hour,16)
+  minute=FILE_DATA[40]+FILE_DATA[41]+FILE_DATA[42]+FILE_DATA[43]+ FILE_DATA[44]+FILE_DATA[45]+FILE_DATA[46]+FILE_DATA[47]
+  minute=int(minute,16)
+  clock= FILE_DATA[48]+FILE_DATA[49]+FILE_DATA[50]+FILE_DATA[51]+ FILE_DATA[52]+FILE_DATA[53]+FILE_DATA[54]+FILE_DATA[55]
+  clock=int(clock,16)
+  device_id=FILE_DATA[56]+FILE_DATA[57]+FILE_DATA[58]+FILE_DATA[59]
+  task=FILE_DATA[60]+ FILE_DATA[61]+FILE_DATA[62]+FILE_DATA[63]+ FILE_DATA[64]+FILE_DATA[65]+FILE_DATA[66]+FILE_DATA[67]+ FILE_DATA[68]+ FILE_DATA[69]+FILE_DATA[70]+FILE_DATA[71]+ FILE_DATA[72]+FILE_DATA[73]+FILE_DATA[74]+FILE_DATA[75]+ FILE_DATA[76]+ FILE_DATA[77]+FILE_DATA[78]+FILE_DATA[79]+ FILE_DATA[80]+FILE_DATA[81]+FILE_DATA[82]+FILE_DATA[83]+FILE_DATA[84]+FILE_DATA[85]+FILE_DATA[86]+FILE_DATA[87]+FILE_DATA[88]
+  lcd.font(lcd.FONT_DejaVu18)
+  lcd.print(str(x), 200, 0, 0xffff33)
+  lcd.print(str("/"), 230, 0, 0xffff33)
+  lcd.print(str(LIST_LENGTH), 250, 0, 0xffff33)
+  lcd.print(str(employee_id), 0, 30, 0xffffff)
+  lcd.print(str(day), 0, 50, 0xffffff)
+  lcd.print(str(month), 30, 50, 0xffffff)
+  lcd.print(str(year), 50, 50, 0xffffff)
+  lcd.print(str(hour), 0, 70, 0xffffff)
+  lcd.print(str(minute), 30, 70, 0xffffff)
+  if clock==1:
+    lcd.print(str("CIN"), 0, 90, 0xffffff)
+  else:
+    lcd.print(str("COUT"), 0, 90, 0xffffff)
+  lcd.print(str(device_id), 0, 110, 0xffffff)
+  employee_id=hex(employee_id)[2:]
+  day=hex(day)[2:]
+  month=hex(month)[2:]
+  year=hex(year)[2:]
+  hour=hex(hour)[2:]
+  minute=hex(minute)[2:]
+  clock=hex(clock)[2:]
+  lcd.print(employee_id+"."+day+"."+month+"."+year+"."+hour+"."+minute+"."+clock+"."+device_id, 0, 130, 0xffffff)
+  lcd.print(str(task), 0, 150, 0xffffff)
+  del employee_id
+  del day
+  del month
+  del year
+  del hour
+  del minute
+  del clock
+  del device_id
+  del task
+  del FILE_DATA
+ 
+  
+def PASSWORD_WINDOW():
+  global PASSWORD
+  i=0
+  num1=""
+  num2=""
+  num3=""
+  num4=""
+  num5=""
+  num6=""
+  num7=""
+  login_id=None
+  while True:
+    lcd.font(lcd.FONT_DejaVu18)
+    lcd.print('ENTER ID', 5, 20,  0xffffff)
+    lcd.circle(50, 80, 20, color= 0xffffff)
+    lcd.print("0", 45, 75, 0xffffff)
+    lcd.circle(120, 80, 20, color= 0xffffff)
+    lcd.print("1", 115, 75, 0xffffff)
+    lcd.circle(190, 80, 20, color= 0xffffff)
+    lcd.print("2", 185, 75, 0xffffff)
+    lcd.circle(270, 80, 20, color= 0xffffff)
+    lcd.print("3", 265, 75, 0xffffff)
+    lcd.circle(50, 145, 20, color= 0xffffff)
+    lcd.print("4", 45, 140, 0xffffff)
+    lcd.circle(120, 145, 20, color= 0xffffff)
+    lcd.print("5", 115, 140, 0xffffff)
+    lcd.circle(190, 145, 20, color =0xffffff)
+    lcd.print("6", 185, 140, 0xffffff)
+    lcd.circle(270, 145, 20, color= 0xffffff)
+    lcd.print("7", 265, 140, 0xffffff)
+    lcd.print('NEXT', 190, 200,  0xffffff)
+    lcd.print('BACK', 10, 200, 0xffffff)
+    if (touch.status())==1 and (touch.read()[0]) >50 and (touch.read()[0]) <80  and (touch.read()[1]) >90 and  (touch.read()[1]) <115:
+      speaker.playWAV('/sd/button.wav')
+      lcd.print('0', 45, 75, 0xffffff)                     # 0
+      var='0'
+      i=i+1
+    if (touch.status())==1 and (touch.read()[0]) >100 and (touch.read()[0]) <150  and (touch.read()[1]) >90 and  (touch.read()[1]) <115:
+      speaker.playWAV('/sd/button.wav')                                   #1
+      lcd.print('1', 115, 75, 0xffffff)
+      var='1'
+      i=i+1
+    if (touch.status())==1 and (touch.read()[0]) >160 and (touch.read()[0]) <250  and (touch.read()[1]) >90 and  (touch.read()[1]) <115:
+      speaker.playWAV('/sd/button.wav')                                              #2
+      lcd.print('2', 185, 75, 0xffffff) 
+      var='2'
+      i=i+1
+    if (touch.status())==1 and (touch.read()[0]) >220 and (touch.read()[0]) <300  and (touch.read()[1]) >90 and  (touch.read()[1]) <115:
+      speaker.playWAV('/sd/button.wav')                                          
+      lcd.print('3', 265, 75, 0xffffff) 
+      var='3'
+      i=i+1
+    if (touch.status())==1 and (touch.read()[0]) >50 and (touch.read()[0]) <90  and (touch.read()[1]) >125 and  (touch.read()[1]) <170:
+      speaker.playWAV('/sd/button.wav')
+      lcd.print('4', 45, 140, 0xffffff) 
+      var='4'
+      i=i+1
+    if (touch.status())==1 and (touch.read()[0]) >100 and (touch.read()[0]) <180  and (touch.read()[1]) >125 and  (touch.read()[1]) <180:
+      speaker.playWAV('/sd/button.wav')
+      lcd.print('5', 115, 140, 0xffffff) 
+      var='5'
+      i=i+1
+    if (touch.status())==1 and (touch.read()[0]) >155 and (touch.read()[0]) <230  and (touch.read()[1]) >125 and  (touch.read()[1]) <185:
+      speaker.playWAV('/sd/button.wav')
+      lcd.print('6', 185, 140, 0xffffff) 
+      var='6'
+      i=i+1
+    if (touch.status())==1 and (touch.read()[0]) >200 and (touch.read()[0]) <290  and (touch.read()[1]) >125 and  (touch.read()[1]) <185:
+      speaker.playWAV('/sd/button.wav')
+      lcd.print('7', 265, 140, 0xffffff) 
+      var='7'
+      i=i+1
+    if (touch.status())==1 and (touch.read()[0]) >200 and (touch.read()[0]) <300  and (touch.read()[1]) >200 and  (touch.read()[1]) <300: ## verified
+      login_id=str(num1)+str(num2)+str(num3)+str(num4)+str(num5)+str(num6)+str(num7)
       
+      if login_id==PASSWORD:
+        del num1
+        del num2
+        del num3
+        del num4
+        del num5
+        del num6
+        del num7
+        del login_id
+        del i
+        del var
+        return 1
+      else:
+        del num1
+        del num2
+        del num3
+        del num4
+        del num5
+        del num6
+        del num7
+        del login_id
+        del i
+        return -1
+    if (touch.status())==1 and (touch.read()[0]) >30 and (touch.read()[0]) <100  and (touch.read()[1]) >200 and  (touch.read()[1]) <250: #back
+        del num1
+        del num2
+        del num3
+        del num4
+        del num5
+        del num6
+        del num7
+        del login_id
+        del i
+        return 0
+         
+    if i==1:
+      num1=var
+      lcd.font(lcd.FONT_DejaVu24)
+      lcd.print('*', 150, 20,  0x66ff99)
+    if i==2:
+      num2=var
+      lcd.font(lcd.FONT_DejaVu24)
+      lcd.print('*', 170, 20, 0x66ff99)
+    if i==3:
+      num3=var
+      lcd.font(lcd.FONT_DejaVu24)
+      lcd.print('*', 190, 20, 0x66ff99)
+    if i==4:
+      num4=var
+      lcd.font(lcd.FONT_DejaVu24)
+      lcd.print('*', 210, 20, 0x66ff99)
+    if i==5:
+      num5=var
+      lcd.font(lcd.FONT_DejaVu24)
+      lcd.print('*', 230, 20, 0x66ff99)
+    if i==6:
+      num6=var
+      lcd.font(lcd.FONT_DejaVu24)
+      lcd.print('*', 250, 20, 0x66ff99)
+    if i==7:
+      num7=var
+      lcd.font(lcd.FONT_DejaVu24)
+      lcd.print('*', 270, 20, 0x66ff99)
+    if i==8:
+      num8=var
+      lcd.font(lcd.FONT_DejaVu24)
+      lcd.print('*', 290, 20, 0x66ff99)
           
+    if i==9:
+      num9=var
+      lcd.font(lcd.FONT_DejaVu24)
+      lcd.print('*', 300, 20, 0x66ff99)
+        
+    
+    
+def Date_set():
+  global CURRENT_HOUR
+  global CURRENT_MINUTE
+  CURRENT_HOUR=(rtc.datetime()[4])
+  CURRENT_MINUTE=(rtc.datetime()[5])
+  set_new_day=1
+  set_new_month=2
+  set_new_year=21
+  mode=0
+  x=0
+  while True:
+    lcd.font(lcd.FONT_DejaVu18)
+    lcd.print("Day", 20, 10, 0xffffff)
+    lcd.print("Month", 100, 10, 0xffffff)
+    lcd.print("Year", 200, 10, 0xffffff)
+    lcd.print('SAVE', 10, 200, 0xffffff)
+    lcd.print('BACK', 190, 200,  0xffffff)
+    lcd.font(lcd.FONT_DejaVu40)
+    lcd.print('|', 90, 40, 0xffffff)
+    lcd.print('|', 180, 40, 0xffffff)
+    lcd.print('<-', 30, 130, 0xffffff)
+    lcd.print('M', 130, 130, 0xffffff)
+    lcd.print('->', 250, 130, 0xffffff)
+    if (touch.status())==1 and (touch.read()[0]) >200 and (touch.read()[0]) <300  and (touch.read()[1]) >200 and  (touch.read()[1]) <300:  # back
+      speaker.playWAV('/sd/button.wav')
+      lcd.clear()
+      return 0
+      
+    if mode==0:
+      lcd.print("__", 30, 70, 0x00ff55)
+      if x>31:
+        x=31
+      if x<1:
+        x=1
+      set_new_day=x
+    if mode==1:
+      lcd.print("__", 130, 70, 0x00ff55)
+      lcd.print("__", 30, 70, 0x000000)
+      if x>12:
+        x=12
+      if x<1:
+        x=1
+      set_new_month=x
+      
+    if mode==2:
+      lcd.print("__", 220, 70, 0x00ff55)
+      lcd.print("__", 30, 70, 0x000000)
+      lcd.print("__", 30, 70, 0x000000)
+      if x<21:
+        x=21
+      if x>99:
+        x=21
+      if x==0:
+        x=0
+      set_new_year=x
+      
+    if mode>2:
+      mode=0
+      
+    lcd.print(set_new_day, 30, 40, 0xffffff)
+    lcd.print(set_new_month, 120, 40, 0xffffff)
+    lcd.print(set_new_year, 200, 40, 0xffffff)
+      
+    if (touch.status())==1 and (touch.read()[0]) >40 and (touch.read()[0]) <90  and (touch.read()[1]) >150 and  (touch.read()[1]) <180: 
+       speaker.playWAV('/sd/button.wav')
+       x=x-1
+       lcd.clear()
+    if (touch.status())==1 and (touch.read()[0]) >200 and (touch.read()[0]) <300  and (touch.read()[1]) >150 and  (touch.read()[1]) <180:
+       speaker.playWAV('/sd/button.wav')
+       x=x+1
+       lcd.clear()
+    if (touch.status())==1 and (touch.read()[0]) >120 and (touch.read()[0]) <180  and (touch.read()[1]) >150 and  (touch.read()[1]) <180:
+       speaker.playWAV('/sd/button.wav')
+       mode=mode+1
+       lcd.clear()
+    if (touch.status())==1 and (touch.read()[0]) >30 and (touch.read()[0]) <100  and (touch.read()[1]) >200 and  (touch.read()[1]) <250: 
+       speaker.playWAV('/sd/button.wav')
+       rtc.datetime((set_new_year, set_new_month, set_new_day, 0, CURRENT_HOUR, CURRENT_MINUTE, 0, 0))
+       del x
+       del set_new_day
+       del set_new_month
+       del set_new_year
+       del mode
+       gc.collect()
+       return 1
+       
+def Time_set():
+  current_year=str(rtc.datetime()[0])
+  current_year=str(current_year[2])+str(current_year[3])
+  CURRENT_DAY=rtc.datetime()[2]
+  CURRENT_MONTH=rtc.datetime()[1]
+ 
+  set_new_hour=1
+  set_new_minute=1
+  mode=0
+  x=0
+  while True:
+    lcd.font(lcd.FONT_DejaVu18)
+    lcd.print("Hour", 20, 10, 0xffffff)
+    lcd.print("Minute", 100, 10, 0xffffff)
+    lcd.print('SAVE', 10, 200, 0xffffff)
+    lcd.print('BACK', 190, 200,  0xffffff)
+    lcd.font(lcd.FONT_DejaVu40)
+    lcd.print('<-', 30, 130, 0xffffff)
+    lcd.print('M', 130, 130, 0xffffff)
+    lcd.print('->', 250, 130, 0xffffff)
+    if (touch.status())==1 and (touch.read()[0]) >200 and (touch.read()[0]) <300  and (touch.read()[1]) >200 and  (touch.read()[1]) <300: 
+      speaker.playWAV('/sd/button.wav')
+      lcd.clear()
+      return 0
+    if mode==0:
+      lcd.print("__", 30, 70, 0x00ff55)
+      if x>23:
+        x=23
+      if x<0:
+        x=0
+      set_new_hour=x
+    if mode==1:
+      if x>59:
+        x=0
+      if x<1:
+        x=1
+      set_new_minute=x
+      lcd.print("__", 130, 70, 0x00ff55)
+      lcd.print("__", 30, 70, 0x000000)
+    if mode>1:
+      lcd.clear()
+      mode=0
+      
+    lcd.print(set_new_hour, 30, 40, 0xffffff)
+    lcd.print(':', 90, 40, 0xffffff)
+    lcd.print(set_new_minute, 120, 40, 0xffffff)
+    
+    if set_new_hour>=12 and set_new_hour!=23 or set_new_hour==23:
+      lcd.print(str("PM"), 180, 40, 0x199f44)
+    if set_new_hour <12 and set_new_hour!=23 or set_new_hour==0:
+      lcd.print(str("AM"), 180, 40, 0x199f44)
+      
+    if (touch.status())==1 and (touch.read()[0]) >40 and (touch.read()[0]) <90  and (touch.read()[1]) >150 and  (touch.read()[1]) <180:
+      speaker.playWAV('/sd/button.wav')
+      x=x-1
+      lcd.clear()
+    if (touch.status())==1 and (touch.read()[0]) >200 and (touch.read()[0]) <300  and (touch.read()[1]) >150 and  (touch.read()[1]) <180:
+      speaker.playWAV('/sd/button.wav')
+      x=x+1
+      lcd.clear()
+    if (touch.status())==1 and (touch.read()[0]) >120 and (touch.read()[0]) <180  and (touch.read()[1]) >150 and  (touch.read()[1]) <180: 
+      speaker.playWAV('/sd/button.wav')
+      lcd.clear()
+      mode=mode+1
+    if (touch.status())==1 and (touch.read()[0]) >30 and (touch.read()[0]) <100  and (touch.read()[1]) >200 and  (touch.read()[1]) <250:
+       speaker.playWAV('/sd/button.wav')
+       rtc.datetime((int(current_year), CURRENT_MONTH, CURRENT_DAY, 0, set_new_hour, set_new_minute, 0, 0))
+       del x
+       del set_new_hour
+       del set_new_minute
+       del mode
+       del current_year
+       gc.collect()
+       return 1
+
+  
+  
+
+def MENU():
+  time_status=0
+  date_status=0
+  erase_status=0
+  while True:
+    lcd.font(lcd.FONT_DejaVu18)
+    lcd.print('DATE', 50, 80, 0xffffff)
+    lcd.print('TIME', 200, 80, 0xffffff)
+    lcd.print('BACK', 10, 200, 0xffffff)
+    lcd.print('ERASE',200, 140, 0xffffff)
+    if (touch.status())==1 and (touch.read()[0]) >30 and (touch.read()[0]) <100  and (touch.read()[1]) >200 and  (touch.read()[1]) <250:
+      speaker.playWAV('/sd/button.wav')
+      del time_status
+      del date_status
+      gc.collect()
+      return 0
+    if (touch.status())==1 and (touch.read()[0]) >40 and (touch.read()[0]) <150  and (touch.read()[1]) >100 and  (touch.read()[1]) <150: 
+       speaker.playWAV('/sd/button.wav')
+       lcd.clear()
+       date_status=Date_set()
+       if date_status==1:
+         lcd.clear()
+         lcd.font(lcd.FONT_DejaVu18)
+         lcd.print(str("DATE UPDATED"), 100, 100, 0xffffff)
+         speaker.playWAV('/sd/success.wav')
+         wait(1)
+         lcd.clear()
+      
+         
           
-          
-          
-          
+         
+    if (touch.status())==1 and (touch.read()[0]) >190 and (touch.read()[0]) <300  and (touch.read()[1]) >90 and  (touch.read()[1]) <150:
+      speaker.playWAV('/sd/button.wav')
+      lcd.clear()
+      time_status=Time_set()
+      if time_status==1:
+        lcd.clear()
+        lcd.font(lcd.FONT_DejaVu18)
+        lcd.print(str("TIME UPDATED"), 100, 100, 0xffffff)
+        speaker.playWAV('/sd/success.wav')
+        wait(1)
+        lcd.clear()
+     
+         
+    if (touch.status())==1 and (touch.read()[0]) >180 and (touch.read()[0]) <260  and (touch.read()[1]) >140 and  (touch.read()[1]) <200:
+      speaker.playWAV('/sd/button.wav')
+      lcd.clear()
+      while True:
+        lcd.print("ERASE HISTORY IN SD ?", 40, 100,  0xff2727)
+        lcd.print('NO', 10, 200, 0xffffff)
+        lcd.print('YES', 190, 200,  0xffffff)
+        if (touch.status())==1 and (touch.read()[0]) >30 and (touch.read()[0]) <100  and (touch.read()[1]) >200 and  (touch.read()[1]) <250:
+          speaker.playWAV('/sd/button.wav')
+          lcd.clear()
+          break
+        if (touch.status())==1 and (touch.read()[0]) >200 and (touch.read()[0]) <350  and (touch.read()[1]) >200 and  (touch.read()[1]) <350:
+          speaker.playWAV('/sd/button.wav')
+          lcd.clear()
+          lcd.print("ERASING...", 100, 100,  0xfffe38)
+          wait(1)
+          try:
+            os.remove('/sd/history.text')
+            with open('/sd/history.text', 'a') as fs:
+              lcd.clear()
+              lcd.print("DONE", 100, 100,0x18f830)
+              wait(1)
+              lcd.clear()
+              break
+          except:
+            lcd.clear()
+            while True:
+              lcd.print('INSERT SD CARD & RESTART!!', 10, 100, 0xcc0000)
+              
+              
+              
+              
+              
+def POWER():
+  charge_state=power.getChargeState()
+  charge_voltage=power.getBatVoltage()
+  charge_current=power.getBatCurrent()
+  if charge_state == False and  charge_current < -1.0:    # plugged out discharge
+    gc.collect()
+    return -1
+  if charge_state == True and charge_current > 0:  # plugged in charging
+    gc.collect()
+    return -2
+  
+  if charge_state == False and charge_current == -1.0:  # plugged in full charge
+    gc.collect()
+    return -3
+    
+  if charge_state == False and charge_current == 0.0: ## plugged in but cureent 0.0
+    gc.collect()
+    return -4
+     
+     
+def DST_SETTING():
+  speaker.playWAV('/sd/button.wav')
+  dst_value=None
+  dst_value= nvs.read_str('5')
+  if (dst_value==str('0')):
+    lcd.font(lcd.FONT_DefaultSmall)
+    lcd.print('NOT AVAILABLE', 190, 170, 0xff0808)
+  else:
+    lcd.font(lcd.FONT_DefaultSmall)
+    lcd.print('NOT AVAILABLE', 35, 170, 0xff0808)
+    
+    
+  while True:
+    set_new_hour=rtc.datetime()[4]
+    set_new_minute=rtc.datetime()[5]
+    set_new_day=rtc.datetime()[2]
+    set_new_month=rtc.datetime()[1]
+    set_new_year=str(rtc.datetime()[0])
+    set_new_year=str(set_new_year[2])+str(set_new_year[3])
+    lcd.font(lcd.FONT_DejaVu18)
+    lcd.print('DST SELECTION', 80, 70, 0xffffff)
+    lcd.print('BACKWARD',  20, 130, 0xff0808)
+    lcd.print('[-1 HR]',  35, 150, 0xffffff)
+    lcd.print('FORWARD', 190, 130, 0x08ff62)
+    lcd.print('[+1 HR]',  210, 150, 0xffffff)
+    lcd.print('BACK', 10, 200, 0xffffff)
+    if (touch.status())==1 and (touch.read()[0]) >50 and (touch.read()[0]) <100  and (touch.read()[1]) >150 and  (touch.read()[1]) <170 and dst_value!=str('1'):
+      speaker.playWAV('/sd/button.wav')
+      set_new_hour-=1
+      rtc.datetime((int(set_new_year), int(set_new_month), int(set_new_day), 0, int(set_new_hour), int(set_new_minute), 0, 0))
+      nvs.write(str('5'), '1')
+      return 1
+    if (touch.status())==1 and (touch.read()[0]) >200 and (touch.read()[0]) <250  and (touch.read()[1]) >150 and  (touch.read()[1]) <170 and dst_value!=str('0'):
+      speaker.playWAV('/sd/button.wav')
+      set_new_hour+=1
+      rtc.datetime((int(set_new_year), int(set_new_month), int(set_new_day), 0, int(set_new_hour), int(set_new_minute), 0, 0))
+      nvs.write(str('5'), '0')
+      return 1
+    if (touch.status())==1 and (touch.read()[0]) >30 and (touch.read()[0]) <100  and (touch.read()[1]) >200 and  (touch.read()[1]) <250:
+      rtc.datetime((int(set_new_year), int(set_new_month), int(set_new_day), 0, int(set_new_hour), int(set_new_minute), 0, 0))
+      del set_new_hour
+      del set_new_minute
+      del set_new_day
+      del set_new_month
+      del set_new_year
+      del dst_value
+      gc.collect()
+      return 0
+    
+  
+  
+     
+     
+     
+  
+  
 
 def main():
   lcd.clear()
@@ -1341,7 +1894,27 @@ def main():
   SD_CHECK=0   ## 1 -> VALID , -1 -> NOT FOUND
   TASK_CHECK=0 # CHECKING YES OR NO
   TASK_FINISH=0 # CHECKING TASK FINISH OR NOT OR EXIT
+  HISTORY_STATUS=0 #  CHECKING HISTORY STATUS 
+  MENU_STATUS=0
+  LOCK=0
+  POWER_STATUS=0
+  DST_STATUS=0
+  
+  
+     
+    
   while True:
+    
+    POWER_STATUS=POWER()
+    if POWER_STATUS==-2 or  POWER_STATUS==-3 or  POWER_STATUS==-4:
+      lcd.font(lcd.FONT_Default)
+      lcd.print(str("Plugged"),220, 10, 0x00ff63)
+      lcd.print(str("OUT"),285, 10, 0x000000) 
+    else:
+      lcd.font(lcd.FONT_Default)
+      lcd.print(str("Plugged"),220, 10, 0xff0050)
+      lcd.print(str("OUT"),285, 10, 0xff0050)
+      
     CURRENT_MINUTE=rtc.datetime()[5]
     CURRENT_HOUR=rtc.datetime()[4]
     CURRENT_YEAR=rtc.datetime()[0]
@@ -1361,7 +1934,8 @@ def main():
     lcd.print("MAC ID : ", 20, 200,  0xffffff)
     lcd.print((espnow.get_mac_addr()), 120, 200, 0xffffff)
     lcd.print("[ DST ]", 5, 70, 0xffe700) # year
-    lcd.print(str(RAM), 100, 70, 0xffe700) # year
+    #lcd.print(str(RAM), 100, 70, 0xffe700) # year
+    lcd.print("VER : 1.5", 220, 70,  0xffffff)
     
     if CURRENT_MONTH==1 or CURRENT_MONTH==2 or  CURRENT_MONTH ==3 or CURRENT_MONTH==4 or CURRENT_MONTH==5 or  CURRENT_MONTH ==6 or  CURRENT_MONTH ==7 or  CURRENT_MONTH ==8 or  CURRENT_MONTH==9:
       lcd.print("0", 35, 10, 0xffffff) # month
@@ -1587,27 +2161,65 @@ def main():
           lcd.font(lcd.FONT_DejaVu18)
           lcd.print('INSERT SD CARD & RESTART!!', 10, 100, 0xcc0000)
         
+    if (touch.status())==1 and (touch.read()[0]) > 240 and (touch.read()[0]) <280  and (touch.read()[1]) >70 and  (touch.read()[1]) <100:
+       speaker.playWAV('/sd/button.wav')
+       SD_CHECK=SD()
+       if SD_CHECK==1:
+         lcd.clear()
+         HISTORY_STATUS=HISTORY()
+         if HISTORY_STATUS==-1:
+           lcd.clear()
+         elif HISTORY_STATUS==0:
+           lcd.clear()
+           lcd.print('NO RECORD', 100, 100, 0xcc0000)
+           speaker.playWAV('/sd/warning.wav')
+           wait(1)
+           lcd.clear()
+       else:
+         while True:
+           lcd.font(lcd.FONT_DejaVu18)
+           lcd.print('INSERT SD CARD & RESTART!!', 10, 100, 0xcc0000)
+           
+    if (touch.status())==1 and (touch.read()[0]) >130 and (touch.read()[0]) <175  and (touch.read()[1]) >70 and  (touch.read()[1]) <100:
+      speaker.playWAV('/sd/button.wav')
+      lcd.clear()
+      LOCK=PASSWORD_WINDOW()
+      if LOCK==1:
+        lcd.clear()
+        lcd.print(str("success"), 100, 100, 0xffffff)
+        speaker.playWAV('/sd/success.wav')
+        wait(1)
+        lcd.clear()
+        MENU_STATUS=MENU()
+        if MENU_STATUS==0:
+          lcd.clear();
       
 
+      elif LOCK==-1:
+        lcd.clear()
+        lcd.print("WRONG!!", 100, 100,0xff2727)                                # wrong password
+        speaker.playWAV('/sd/warning.wav')
+        wait(1)
+        lcd.clear()
+      elif LOCK==0:
+        lcd.clear()
+        
+    if (touch.status()) == 1 and (touch.read()[0]) > 20 and (touch.read()[0]) < 70  and (touch.read()[1]) > 100 and  (touch.read()[1])  < 110:
+      lcd.clear()
+      DST_STATUS=DST_SETTING()
+      if DST_STATUS==1:
+        lcd.clear()
+        lcd.print('DST UPDATED', 100, 100, 0xffffff)
+        wait(1)
+        lcd.clear()
+      elif DST_STATUS==0:
+        lcd.clear()
+        
         
       
       
       
       
-      
-      
-      
-      
-      
-      
-      
-      
-    
-    
-    
-
-
-
 
 
 power.setVibrationIntensity(5)
@@ -1640,19 +2252,105 @@ lcd.font(lcd.FONT_DejaVu18)
 lcd.print('SD FOUND', 100, 100, 0xffffff)
 speaker.playWAV('/sd/sd_ok.wav')
 wait_ms(200)
-
+login_id=None
 DEVICE_CHECK= str(nvs.read_str('2'))  ## CHECKING NEW DEVICE OR NOT
 lcd.clear()
 if DEVICE_CHECK=="1":
   main()
 else:
   lcd.clear()
-  while True:
-    lcd.font(lcd.FONT_DejaVu18)
-    lcd.print('NEW DEVICE', 100, 100, 0xffffff)
-    lcd.font(lcd.FONT_DefaultSmall)
-    lcd.print('KINDLY UPLOAD FIRMWARE IN OLD DEVICE', 0, 150, 0xffffff)
-    lcd.print('THIS IS TESTING MODE', 0, 170, 0xffffff)
+  login_id=PASSWORD_WINDOW()
+  if login_id==1:
+    lcd.print("DEVICE ACTIVATED", 65, 100, 0xaaff82)
+    speaker.playWAV('/sd/welcome.wav')
+    wait(2)
+    lcd.clear()
+    lcd.print("| WELCOME |", 90, 100, 0xffffff)
+    wait(2)
+    lcd.clear()
+    lcd.print("CREATING FILES...", 0, 100, 0xffffff)
+    wait(3)
+    rtc.datetime((21, 01, 02, 0, 14, 15, 0, 0))
+    with open('/sd/id.text', 'a') as fs:
+      lcd.clear()
+      lcd.print("ID FILE CREATED", 0, 100, 0xffffff)
+      wait_ms(100)
+      lcd.clear()
+    with open('/sd/date.text','a')as fs:
+      lcd.clear()
+      lcd.print("DATE FILE CREATED", 0, 100, 0xffffff)
+      wait_ms(100)
+      lcd.clear()
+    with open('/sd/history.text', 'a') as fs:
+      lcd.clear()
+      lcd.print("HISTORY FILE CREATED", 0, 100, 0xffffff)
+      wait_ms(100)
+      lcd.clear()
+    lcd.print("Files created", 0, 80, 0xffffff)
+    lcd.print("Don't replace sd for this device", 0, 100, 0xffffff)
+    wait(5)
+    nvs.write_str(str('2'), '1')
+  else:
+    lcd.clear()
+    while True:
+      lcd.print("WRONG !!", 100, 100, 0xffffff)
+      lcd.print("RESTART AGAIN", 100, 150, 0xff2727)
+      speaker.playWAV('/sd/warning.wav')
+      wait(3)
+      lcd.clear()
+  main()   
+    
+      
+    
+      
+     
+       
+   
+    
+  
+    
+      
+ 
+ 
+    
+   
+    
+     
+   
+      
+      
+    
+     
+    
+      
+   
+      
+  
+      
+      
+    
+      
+    
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+ 
+ 
+  
+    
+ 
+  
+  
+ 
     
     
   
@@ -1666,6 +2364,8 @@ else:
   
 
  
- 
+
+
+
 
 
