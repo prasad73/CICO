@@ -1374,7 +1374,7 @@ def SHOW(x,LIST_LENGTH,LIST):
   lcd.print(str(employee_id), 0, 30, 0xffffff)
   lcd.print(str(day), 0, 50, 0xffffff)
   lcd.print(str(month), 30, 50, 0xffffff)
-  lcd.print(str(year), 50, 50, 0xffffff)
+  lcd.print(str(year), 60, 50, 0xffffff)
   lcd.print(str(hour), 0, 70, 0xffffff)
   lcd.print(str(minute), 30, 70, 0xffffff)
   if clock==1:
@@ -2204,7 +2204,7 @@ def main():
       elif LOCK==0:
         lcd.clear()
         
-    if (touch.status()) == 1 and (touch.read()[0]) > 20 and (touch.read()[0]) < 70  and (touch.read()[1]) > 100 and  (touch.read()[1])  < 110:
+    if (touch.status()) == 1 and (touch.read()[0]) > 20 and (touch.read()[0]) < 70  and (touch.read()[1]) > 100 and  (touch.read()[1])  < 125:
       lcd.clear()
       DST_STATUS=DST_SETTING()
       if DST_STATUS==1:
@@ -2216,8 +2216,6 @@ def main():
         lcd.clear()
         
         
-      
-      
       
       
 
