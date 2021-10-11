@@ -2,7 +2,7 @@
 
 
 
-## This code is Updated on 11-10-2021 3:15PM
+## This code is Updated on 11-10-2021 4:26PM
 
 
 
@@ -364,7 +364,7 @@ def TASK_WINDOW():
       
       
       
-    if (touch.status())==1 and (touch.read()[0]) >50 and (touch.read()[0]) <70  and (touch.read()[1]) >200 and  (touch.read()[1]) <250: # back
+    if (touch.status())==1 and (touch.read()[0]) >30 and (touch.read()[0]) <100  and (touch.read()[1]) >200 and  (touch.read()[1]) <250: # back
        speaker.playWAV('/sd/button.wav')
        del i
        del var
@@ -1292,7 +1292,7 @@ def TASK_QN():
      if (touch.status())==1 and (touch.read()[0]) >150 and (touch.read()[0]) <220  and (touch.read()[1]) >170 and  (touch.read()[1]) <200:
        speaker.playWAV('/sd/button.wav')
        return 1
-     if (touch.status())==1 and (touch.read()[0]) >0 and (touch.read()[0]) <60  and (touch.read()[1]) >170 and  (touch.read()[1]) <200:
+     if (touch.status())==1 and (touch.read()[0]) >0 and (touch.read()[0]) <60  and (touch.read()[1]) >160 and  (touch.read()[1]) <200:
        speaker.playWAV('/sd/button.wav')
        return 2
        
@@ -1934,7 +1934,7 @@ def main():
     lcd.print((espnow.get_mac_addr()), 120, 200, 0xffffff)
     lcd.print("[ DST ]", 5, 70, 0xffe700) # year
     #lcd.print(str(RAM), 100, 70, 0xffe700) # year
-    lcd.print("VER : 1.6", 220, 70,  0xffffff)
+    lcd.print("VER : 1.5", 220, 70,  0xffffff)
     
     if CURRENT_MONTH==1 or CURRENT_MONTH==2 or  CURRENT_MONTH ==3 or CURRENT_MONTH==4 or CURRENT_MONTH==5 or  CURRENT_MONTH ==6 or  CURRENT_MONTH ==7 or  CURRENT_MONTH ==8 or  CURRENT_MONTH==9:
       lcd.print("0", 35, 10, 0xffffff) # month
