@@ -2,7 +2,7 @@
 
 
 
-## This code is Updated on 11-10-2021 5:15PM
+## This code is Updated on 11-10-2021 5:20PM
 
 
 
@@ -1935,7 +1935,7 @@ def main():
     lcd.print((espnow.get_mac_addr()), 120, 200, 0xffffff)
     lcd.print("[ DST ]", 5, 70, 0xffe700) # year
     #lcd.print(str(RAM), 100, 70, 0xffe700) # year
-    lcd.print("VER : 1.5", 220, 70,  0xffffff)
+    lcd.print("VER : 1.6", 220, 70,  0xffffff)
     
     if CURRENT_MONTH==1 or CURRENT_MONTH==2 or  CURRENT_MONTH ==3 or CURRENT_MONTH==4 or CURRENT_MONTH==5 or  CURRENT_MONTH ==6 or  CURRENT_MONTH ==7 or  CURRENT_MONTH ==8 or  CURRENT_MONTH==9:
       lcd.print("0", 35, 10, 0xffffff) # month
