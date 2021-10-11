@@ -2,7 +2,7 @@
 
 
 
-## This code is Updated on 11-10-2021 5:20PM
+## This code is Updated on 11-10-2021 5:41PM
 
 
 
@@ -1292,7 +1292,7 @@ def TASK_QN():
      if (touch.status())==1 and (touch.read()[0]) >150 and (touch.read()[0]) <220  and (touch.read()[1]) >170 and  (touch.read()[1]) <200:
        speaker.playWAV('/sd/button.wav')
        return 1
-     if (touch.status())==1 and (touch.read()[0]) >0 and (touch.read()[0]) <60  and (touch.read()[1]) >160 and  (touch.read()[1]) <200:
+     if (touch.status())==1 and (touch.read()[0]) >0 and (touch.read()[0]) <80  and (touch.read()[1]) >160 and  (touch.read()[1]) <210:
        speaker.playWAV('/sd/button.wav')
        return 2
        
