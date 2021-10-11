@@ -2,7 +2,7 @@
 
 
 
-## This code is Updated on 11-10-2021 3:11PM
+## This code is Updated on 11-10-2021 3:15PM
 
 
 
@@ -1500,6 +1500,7 @@ def PASSWORD_WINDOW():
         del i
         return -1
     if (touch.status())==1 and (touch.read()[0]) >30 and (touch.read()[0]) <100  and (touch.read()[1]) >200 and  (touch.read()[1]) <250: #back
+        speaker.playWAV('/sd/button.wav')
         del num1
         del num2
         del num3
@@ -1933,7 +1934,7 @@ def main():
     lcd.print((espnow.get_mac_addr()), 120, 200, 0xffffff)
     lcd.print("[ DST ]", 5, 70, 0xffe700) # year
     #lcd.print(str(RAM), 100, 70, 0xffe700) # year
-    lcd.print("VER : 1.6", 220, 70,  0xffffff)
+    lcd.print("VER : 1.5", 220, 70,  0xffffff)
     
     if CURRENT_MONTH==1 or CURRENT_MONTH==2 or  CURRENT_MONTH ==3 or CURRENT_MONTH==4 or CURRENT_MONTH==5 or  CURRENT_MONTH ==6 or  CURRENT_MONTH ==7 or  CURRENT_MONTH ==8 or  CURRENT_MONTH==9:
       lcd.print("0", 35, 10, 0xffffff) # month
