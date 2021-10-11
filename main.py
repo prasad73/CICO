@@ -2,7 +2,7 @@
 
 
 
-## This code is Updated on 11-10-2021 4:26PM
+## This code is Updated on 11-10-2021 5:15PM
 
 
 
@@ -1330,12 +1330,13 @@ def HISTORY():
       del x
       return -1
     if (touch.status())==1 and (touch.read()[0]) >220 and (touch.read()[0]) <280  and (touch.read()[1]) >200 and  (touch.read()[1]) <250:
-      if x<LIST_LENGTH:
+      if x<LIST_LENGTH and x <=5:
         x=x+1
         lcd.clear()
         SHOW(x,LIST_LENGTH,LIST)
       else:
         x=LIST_LENGTH
+        x=5
   
     if (touch.status())==1 and (touch.read()[0]) >20 and (touch.read()[0]) <80  and (touch.read()[1]) >200 and  (touch.read()[1]) <250:
       if x>0:
