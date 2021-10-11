@@ -2,7 +2,7 @@
 
 
 
-## This code is Updated on 11-10-2021 11:45AM
+## This code is Updated on 11-10-2021 12:11PM
 
 
 
@@ -1908,7 +1908,7 @@ def main():
       lcd.font(lcd.FONT_Default)
       lcd.print(str("Plugged"),220, 10, 0x00ff63)
       lcd.print(str("OUT"),285, 10, 0x000000) 
-    else:
+    elif  POWER_STATUS==-1:
       lcd.font(lcd.FONT_Default)
       lcd.print(str("Plugged"),220, 10, 0xff0050)
       lcd.print(str("OUT"),285, 10, 0xff0050)
@@ -2212,6 +2212,7 @@ def main():
         lcd.clear()
       elif DST_STATUS==0:
         speaker.playWAV('/sd/button.wav')
+        lcd.clear()
         
         
         
