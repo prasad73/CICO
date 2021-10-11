@@ -1,3 +1,13 @@
+
+
+
+
+## This code is Updated on 11-10-2021 11:45AM
+
+
+
+
+
 from m5stack import *
 from m5stack_ui import *
 from uiflow import *
@@ -572,18 +582,6 @@ def TASK_WINDOW():
       lcd.print(" ", 290, 10,  0x66ff99)
   
      
-    
-  
- 
-
-    
-  
-   
-
-  
-
-
-
 
 def  GET_TIME_DATE():
   global CURRENT_HOUR
@@ -1339,7 +1337,7 @@ def HISTORY():
       else:
         x=LIST_LENGTH
   
-    if (touch.status())==1 and (touch.read()[0]) >60 and (touch.read()[0]) <80  and (touch.read()[1]) >200 and  (touch.read()[1]) <250:
+    if (touch.status())==1 and (touch.read()[0]) >20 and (touch.read()[0]) <80  and (touch.read()[1]) >200 and  (touch.read()[1]) <250:
       if x>0:
         x=x-1
         lcd.clear()
@@ -2213,7 +2211,9 @@ def main():
         wait(1)
         lcd.clear()
       elif DST_STATUS==0:
-        lcd.clear()
+        speaker.playWAV('/sd/button.wav')
+        
+        
         
         
       
