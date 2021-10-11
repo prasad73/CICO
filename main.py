@@ -2,7 +2,7 @@
 
 
 
-## This code is Updated on 11-10-2021 12:11PM
+## This code is Updated on 11-10-2021 3:11PM
 
 
 
@@ -1838,19 +1838,19 @@ def DST_SETTING():
     lcd.print('FORWARD', 190, 130, 0x08ff62)
     lcd.print('[+1 HR]',  210, 150, 0xffffff)
     lcd.print('BACK', 10, 200, 0xffffff)
-    if (touch.status())==1 and (touch.read()[0]) >50 and (touch.read()[0]) <100  and (touch.read()[1]) >150 and  (touch.read()[1]) <170 and dst_value!=str('1'):
+    if (touch.status())==1 and (touch.read()[0]) >50 and (touch.read()[0]) <100  and (touch.read()[1]) >140 and  (touch.read()[1]) <170 and dst_value!=str('1'):
       speaker.playWAV('/sd/button.wav')
       set_new_hour-=1
       rtc.datetime((int(set_new_year), int(set_new_month), int(set_new_day), 0, int(set_new_hour), int(set_new_minute), 0, 0))
       nvs.write(str('5'), '1')
       return 1
-    if (touch.status())==1 and (touch.read()[0]) >200 and (touch.read()[0]) <250  and (touch.read()[1]) >150 and  (touch.read()[1]) <170 and dst_value!=str('0'):
+    if (touch.status())==1 and (touch.read()[0]) >200 and (touch.read()[0]) <250  and (touch.read()[1]) >140 and  (touch.read()[1]) <170 and dst_value!=str('0'):
       speaker.playWAV('/sd/button.wav')
       set_new_hour+=1
       rtc.datetime((int(set_new_year), int(set_new_month), int(set_new_day), 0, int(set_new_hour), int(set_new_minute), 0, 0))
       nvs.write(str('5'), '0')
       return 1
-    if (touch.status())==1 and (touch.read()[0]) >30 and (touch.read()[0]) <100  and (touch.read()[1]) >200 and  (touch.read()[1]) <250:
+    if (touch.status())==1 and (touch.read()[0]) >5 and (touch.read()[0]) <100  and (touch.read()[1]) >190 and  (touch.read()[1]) <250:
       rtc.datetime((int(set_new_year), int(set_new_month), int(set_new_day), 0, int(set_new_hour), int(set_new_minute), 0, 0))
       del set_new_hour
       del set_new_minute
@@ -1933,7 +1933,7 @@ def main():
     lcd.print((espnow.get_mac_addr()), 120, 200, 0xffffff)
     lcd.print("[ DST ]", 5, 70, 0xffe700) # year
     #lcd.print(str(RAM), 100, 70, 0xffe700) # year
-    lcd.print("VER : 1.5", 220, 70,  0xffffff)
+    lcd.print("VER : 1.6", 220, 70,  0xffffff)
     
     if CURRENT_MONTH==1 or CURRENT_MONTH==2 or  CURRENT_MONTH ==3 or CURRENT_MONTH==4 or CURRENT_MONTH==5 or  CURRENT_MONTH ==6 or  CURRENT_MONTH ==7 or  CURRENT_MONTH ==8 or  CURRENT_MONTH==9:
       lcd.print("0", 35, 10, 0xffffff) # month
@@ -2159,7 +2159,7 @@ def main():
           lcd.font(lcd.FONT_DejaVu18)
           lcd.print('INSERT SD CARD & RESTART!!', 10, 100, 0xcc0000)
         
-    if (touch.status())==1 and (touch.read()[0]) > 240 and (touch.read()[0]) <280  and (touch.read()[1]) >70 and  (touch.read()[1]) <100:
+    if (touch.status())==1 and (touch.read()[0]) > 240 and (touch.read()[0]) <300  and (touch.read()[1]) >60 and  (touch.read()[1]) <100:
        speaker.playWAV('/sd/button.wav')
        SD_CHECK=SD()
        if SD_CHECK==1:
@@ -2178,7 +2178,7 @@ def main():
            lcd.font(lcd.FONT_DejaVu18)
            lcd.print('INSERT SD CARD & RESTART!!', 10, 100, 0xcc0000)
            
-    if (touch.status())==1 and (touch.read()[0]) >130 and (touch.read()[0]) <175  and (touch.read()[1]) >70 and  (touch.read()[1]) <100:
+    if (touch.status())==1 and (touch.read()[0]) >130 and (touch.read()[0]) <190  and (touch.read()[1]) >70 and  (touch.read()[1]) <110:
       speaker.playWAV('/sd/button.wav')
       lcd.clear()
       LOCK=PASSWORD_WINDOW()
@@ -2202,7 +2202,7 @@ def main():
       elif LOCK==0:
         lcd.clear()
         
-    if (touch.status()) == 1 and (touch.read()[0]) > 20 and (touch.read()[0]) < 70  and (touch.read()[1]) > 100 and  (touch.read()[1])  < 125:
+    if (touch.status()) == 1 and (touch.read()[0]) > 20 and (touch.read()[0]) < 90  and (touch.read()[1]) > 90 and  (touch.read()[1])  < 115:
       lcd.clear()
       DST_STATUS=DST_SETTING()
       if DST_STATUS==1:
