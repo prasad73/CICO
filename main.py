@@ -2,7 +2,7 @@
 
 
 
-## This code is Updated on 11-10-2021 5:41PM
+## This code is Updated on 12-10-2021 6:31PM
 
 
 
@@ -1818,41 +1818,29 @@ def DST_SETTING():
   speaker.playWAV('/sd/button.wav')
   dst_value=None
   dst_value= nvs.read_str('5')
-  if (dst_value==str('0')):
+  set_new_hour=rtc.datetime()[4]
+  set_new_minute=rtc.datetime()[5]
+  set_new_day=rtc.datetime()[2]
+  set_new_month=rtc.datetime()[1]
+  set_new_year=str(rtc.datetime()[0])
+  set_new_year=str(set_new_year[2])+str(set_new_year[3])
+  lcd.font(lcd.FONT_DejaVu18)
+  lcd.print('DST SELECTION', 80, 70, 0xffffff)
+  lcd.print('BACKWARD',  20, 130, 0xff0808)
+  lcd.print('[-1 HR]',  35, 150, 0xffffff)
+  lcd.print('FORWARD', 190, 130, 0x08ff62)
+  lcd.print('[+1 HR]',  210, 150, 0xffffff)
+  lcd.print('BACK', 10, 200, 0xffffff)
+  while (dst_value==str('9')):
     lcd.font(lcd.FONT_DefaultSmall)
     lcd.print('NOT AVAILABLE', 190, 170, 0xff0808)
-  else:
-    lcd.font(lcd.FONT_DefaultSmall)
-    lcd.print('NOT AVAILABLE', 35, 170, 0xff0808)
-    
-    
-  while True:
-    set_new_hour=rtc.datetime()[4]
-    set_new_minute=rtc.datetime()[5]
-    set_new_day=rtc.datetime()[2]
-    set_new_month=rtc.datetime()[1]
-    set_new_year=str(rtc.datetime()[0])
-    set_new_year=str(set_new_year[2])+str(set_new_year[3])
-    lcd.font(lcd.FONT_DejaVu18)
-    lcd.print('DST SELECTION', 80, 70, 0xffffff)
-    lcd.print('BACKWARD',  20, 130, 0xff0808)
-    lcd.print('[-1 HR]',  35, 150, 0xffffff)
-    lcd.print('FORWARD', 190, 130, 0x08ff62)
-    lcd.print('[+1 HR]',  210, 150, 0xffffff)
-    lcd.print('BACK', 10, 200, 0xffffff)
-    if (touch.status())==1 and (touch.read()[0]) >50 and (touch.read()[0]) <100  and (touch.read()[1]) >140 and  (touch.read()[1]) <170 and dst_value!=str('1'):
+    if (touch.status())==1 and (touch.read()[0]) >50 and (touch.read()[0]) <100  and (touch.read()[1]) >140 and  (touch.read()[1]) <170:
       speaker.playWAV('/sd/button.wav')
       set_new_hour-=1
       rtc.datetime((int(set_new_year), int(set_new_month), int(set_new_day), 0, int(set_new_hour), int(set_new_minute), 0, 0))
-      nvs.write(str('5'), '1')
+      nvs.write(str('5'), '8')
       return 1
-    if (touch.status())==1 and (touch.read()[0]) >200 and (touch.read()[0]) <250  and (touch.read()[1]) >140 and  (touch.read()[1]) <170 and dst_value!=str('0'):
-      speaker.playWAV('/sd/button.wav')
-      set_new_hour+=1
-      rtc.datetime((int(set_new_year), int(set_new_month), int(set_new_day), 0, int(set_new_hour), int(set_new_minute), 0, 0))
-      nvs.write(str('5'), '0')
-      return 1
-    if (touch.status())==1 and (touch.read()[0]) >5 and (touch.read()[0]) <100  and (touch.read()[1]) >190 and  (touch.read()[1]) <250:
+    if (touch.status())==1 and (touch.read()[0]) >5 and (touch.read()[0]) <100  and (touch.read()[1]) >190 and  (touch.read()[1]) <250:  #back
       rtc.datetime((int(set_new_year), int(set_new_month), int(set_new_day), 0, int(set_new_hour), int(set_new_minute), 0, 0))
       del set_new_hour
       del set_new_minute
@@ -1862,6 +1850,76 @@ def DST_SETTING():
       del dst_value
       gc.collect()
       return 0
+        
+   
+  while (dst_value==str('8')):
+    lcd.font(lcd.FONT_DefaultSmall)
+    lcd.print('NOT AVAILABLE', 35, 170, 0xff0808)
+    if (touch.status())==1 and (touch.read()[0]) >200 and (touch.read()[0]) <250  and (touch.read()[1]) >140 and  (touch.read()[1]) <170 :
+      speaker.playWAV('/sd/button.wav')
+      set_new_hour+=1
+      if(set_new_hour==23):
+        set_new_hour=0
+      rtc.datetime((int(set_new_year), int(set_new_month), int(set_new_day), 0, int(set_new_hour), int(set_new_minute), 0, 0))
+      nvs.write(str('5'), '9')
+      return 1
+    if (touch.status())==1 and (touch.read()[0]) >5 and (touch.read()[0]) <100  and (touch.read()[1]) >190 and  (touch.read()[1]) <250:  #back
+      rtc.datetime((int(set_new_year), int(set_new_month), int(set_new_day), 0, int(set_new_hour), int(set_new_minute), 0, 0))
+      del set_new_hour
+      del set_new_minute
+      del set_new_day
+      del set_new_month
+      del set_new_year
+      del dst_value
+      gc.collect()
+      return 0
+      
+  while (dst_value!=str('8') or dst_value!=str('9')):
+    lcd.print('INTIAL SELECTION', 90, 10, 0x14e357)
+    if (touch.status())==1 and (touch.read()[0]) >50 and (touch.read()[0]) <100  and (touch.read()[1]) >140 and  (touch.read()[1]) <170:
+      speaker.playWAV('/sd/button.wav')
+      set_new_hour-=1
+      rtc.datetime((int(set_new_year), int(set_new_month), int(set_new_day), 0, int(set_new_hour), int(set_new_minute), 0, 0))
+      nvs.write(str('5'), '8')
+      return 1
+    if (touch.status())==1 and (touch.read()[0]) >200 and (touch.read()[0]) <250  and (touch.read()[1]) >140 and  (touch.read()[1]) <170 :
+      speaker.playWAV('/sd/button.wav')
+      set_new_hour+=1
+      if(set_new_hour==23):
+        set_new_hour=0
+      rtc.datetime((int(set_new_year), int(set_new_month), int(set_new_day), 0, int(set_new_hour), int(set_new_minute), 0, 0))
+      nvs.write(str('5'), '9')
+      return 1
+      
+      
+      
+    if (touch.status())==1 and (touch.read()[0]) >5 and (touch.read()[0]) <100  and (touch.read()[1]) >190 and  (touch.read()[1]) <250:  # back
+      rtc.datetime((int(set_new_year), int(set_new_month), int(set_new_day), 0, int(set_new_hour), int(set_new_minute), 0, 0))
+      del set_new_hour
+      del set_new_minute
+      del set_new_day
+      del set_new_month
+      del set_new_year
+      del dst_value
+      gc.collect()
+      return 0
+        
+    
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+ 
+    
+    
+    
+    
     
   
   
@@ -2209,6 +2267,7 @@ def main():
       DST_STATUS=DST_SETTING()
       if DST_STATUS==1:
         lcd.clear()
+        lcd.font(lcd.FONT_DejaVu18)
         lcd.print('DST UPDATED', 100, 100, 0xffffff)
         wait(1)
         lcd.clear()
