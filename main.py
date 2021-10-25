@@ -2,7 +2,7 @@
 
 
 
-## This code is Updated on 12-10-2021 6:31PM
+## This code is Updated on 25-10-2021 10:17PM
 
 
 
@@ -1962,6 +1962,13 @@ def main():
      
     
   while True:
+    
+    if rtc.datetime()[4]>=12:
+      lcd.font(lcd.FONT_Default)
+      lcd.print("PM",70,40,0xffffff)
+    else:
+       lcd.font(lcd.FONT_Default)
+       lcd.print("AM",70,40,0xffffff)
     
     POWER_STATUS=POWER()
     if POWER_STATUS==-2 or  POWER_STATUS==-3 or  POWER_STATUS==-4:
