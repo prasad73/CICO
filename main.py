@@ -2,7 +2,7 @@
 
 
 
-## This code is Updated on 25-10-2021 10:17PM
+## This code is Updated on 06-11-2021 10:45PM
 
 
 
@@ -77,7 +77,7 @@ def PATTERN_CIN_SAVE():
   global QR_CURRENT_DAY
   global QR_CLOCK
  
-  
+  screen.set_screen_brightness(50)
   QR_CODE=None
   MAC_ID=espnow.get_mac_addr() ## maci id of m5
   MAC_ID=MAC_ID[12]+MAC_ID[13]+MAC_ID[15]+MAC_ID[16] ## we need only last 4 digits
@@ -1930,6 +1930,7 @@ def DST_SETTING():
   
 
 def main():
+  
   lcd.clear()
   gc.collect()
   RAM = gc.mem_free()
@@ -1962,7 +1963,7 @@ def main():
      
     
   while True:
-    
+    screen.set_screen_brightness(100)
     if rtc.datetime()[4]>=12:
       lcd.font(lcd.FONT_Default)
       lcd.print("PM",70,40,0xffffff)
@@ -2431,7 +2432,6 @@ else:
   
 
  
-
 
 
 
