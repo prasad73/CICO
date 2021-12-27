@@ -1330,13 +1330,13 @@ def HISTORY():
       del x
       return -1
     if (touch.status())==1 and (touch.read()[0]) >220 and (touch.read()[0]) <280  and (touch.read()[1]) >200 and  (touch.read()[1]) <250:
-      if x<LIST_LENGTH and x <=5:
+      if x<LIST_LENGTH and x <=31:
         x=x+1
         lcd.clear()
         SHOW(x,LIST_LENGTH,LIST)
       else:
         x=LIST_LENGTH
-        x=5
+        x=31
   
     if (touch.status())==1 and (touch.read()[0]) >20 and (touch.read()[0]) <80  and (touch.read()[1]) >200 and  (touch.read()[1]) <250:
       if x>0:
@@ -2001,7 +2001,7 @@ def main():
     lcd.print((espnow.get_mac_addr()), 120, 200, 0xffffff)
     lcd.print("[ DST ]", 5, 70, 0xffe700) # year
     #lcd.print(str(RAM), 100, 70, 0xffe700) # year
-    lcd.print("VER : 1.6.1", 210, 70,  0xffffff)
+    lcd.print("VER : 1.6.2", 210, 70,  0xffffff)
     
     if CURRENT_MONTH==1 or CURRENT_MONTH==2 or  CURRENT_MONTH ==3 or CURRENT_MONTH==4 or CURRENT_MONTH==5 or  CURRENT_MONTH ==6 or  CURRENT_MONTH ==7 or  CURRENT_MONTH ==8 or  CURRENT_MONTH==9:
       lcd.print("0", 35, 10, 0xffffff) # month
