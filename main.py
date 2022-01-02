@@ -2,7 +2,7 @@
 
 
 
-## This code is Updated on 25-10-2021 10:17PM
+## This code is Updated on 02-01-2022 3:25PM
 
 
 
@@ -1304,13 +1304,15 @@ def HISTORY():
   LIST_LENGTH=None
   LIST=None
   x=0
+  t=1
   with open('/sd/history.text', 'r') as fs:
     SD_DATA=fs.read()
   LIST=SD_DATA.split()
+  LIST=LIST[::-1] # reversing list
   LIST_LENGTH=len(LIST)
   LIST_LENGTH=LIST_LENGTH-1
   if LIST_LENGTH>=0:
-    SHOW(x,LIST_LENGTH,LIST)
+    SHOW(t,x,LIST_LENGTH,LIST)
   else:
     return 0
     
@@ -1330,25 +1332,33 @@ def HISTORY():
       del x
       return -1
     if (touch.status())==1 and (touch.read()[0]) >220 and (touch.read()[0]) <280  and (touch.read()[1]) >200 and  (touch.read()[1]) <250:
-      if x<LIST_LENGTH and x <=31:
+      
+      if x>=LIST_LENGTH:
+        X=LIST_LENGTH
+
+      if x<LIST_LENGTH and x <29:
         x=x+1
+        t=t+1
         lcd.clear()
-        SHOW(x,LIST_LENGTH,LIST)
-      else:
-        x=LIST_LENGTH
-        x=31
-  
+        SHOW(t,x,LIST_LENGTH,LIST)
+       
+      elif x>=29:
+        x=29
+        t=30
+        SHOW(t,x,LIST_LENGTH,LIST)
     if (touch.status())==1 and (touch.read()[0]) >20 and (touch.read()[0]) <80  and (touch.read()[1]) >200 and  (touch.read()[1]) <250:
       if x>0:
         x=x-1
+        t=t-1
         lcd.clear()
-        SHOW(x,LIST_LENGTH,LIST)
+        SHOW(t,x,LIST_LENGTH,LIST)
       else:
         x=0
+        t=1
         
         
        
-def SHOW(x,LIST_LENGTH,LIST):
+def SHOW(t,x,LIST_LENGTH,LIST):
   FILE_DATA=LIST[x]
   employee_id= FILE_DATA[0]+ FILE_DATA[1]+FILE_DATA[2]+FILE_DATA[3]+ FILE_DATA[4]+FILE_DATA[5]+FILE_DATA[6]+FILE_DATA[7]
   employee_id=int(employee_id,16)
@@ -1367,9 +1377,10 @@ def SHOW(x,LIST_LENGTH,LIST):
   device_id=FILE_DATA[56]+FILE_DATA[57]+FILE_DATA[58]+FILE_DATA[59]
   task=FILE_DATA[60]+ FILE_DATA[61]+FILE_DATA[62]+FILE_DATA[63]+ FILE_DATA[64]+FILE_DATA[65]+FILE_DATA[66]+FILE_DATA[67]+ FILE_DATA[68]+ FILE_DATA[69]+FILE_DATA[70]+FILE_DATA[71]+ FILE_DATA[72]+FILE_DATA[73]+FILE_DATA[74]+FILE_DATA[75]+ FILE_DATA[76]+ FILE_DATA[77]+FILE_DATA[78]+FILE_DATA[79]+ FILE_DATA[80]+FILE_DATA[81]+FILE_DATA[82]+FILE_DATA[83]+FILE_DATA[84]+FILE_DATA[85]+FILE_DATA[86]+FILE_DATA[87]+FILE_DATA[88]
   lcd.font(lcd.FONT_DejaVu18)
-  lcd.print(str(x), 200, 0, 0xffff33)
-  lcd.print(str("/"), 230, 0, 0xffff33)
-  lcd.print(str(LIST_LENGTH), 250, 0, 0xffff33)
+  lcd.print(str(t), 230, 40, 0xffff33)
+  #lcd.print(str("/"), 230, 0, 0xffff33)
+  #lcd.print(str(LIST_LENGTH), 250, 0, 0xffff33)
+  lcd.print(str("LIMIT:30"), 220, 0, 0xffff33)
   lcd.print(str(employee_id), 0, 30, 0xffffff)
   lcd.print(str(day), 0, 50, 0xffffff)
   lcd.print(str(month), 30, 50, 0xffffff)
@@ -2001,7 +2012,7 @@ def main():
     lcd.print((espnow.get_mac_addr()), 120, 200, 0xffffff)
     lcd.print("[ DST ]", 5, 70, 0xffe700) # year
     #lcd.print(str(RAM), 100, 70, 0xffe700) # year
-    lcd.print("VER : 1.6.2", 210, 70,  0xffffff)
+    lcd.print("VER : 1.6.3", 210, 70,  0xffffff)
     
     if CURRENT_MONTH==1 or CURRENT_MONTH==2 or  CURRENT_MONTH ==3 or CURRENT_MONTH==4 or CURRENT_MONTH==5 or  CURRENT_MONTH ==6 or  CURRENT_MONTH ==7 or  CURRENT_MONTH ==8 or  CURRENT_MONTH==9:
       lcd.print("0", 35, 10, 0xffffff) # month
