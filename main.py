@@ -2,7 +2,7 @@
 
 
 
-## This code is Updated on 02-01-2022 3:25PM
+## This code is Updated on 08-02-2022 9:15AM
 
 
 
@@ -83,7 +83,7 @@ def PATTERN_CIN_SAVE():
   MAC_ID=MAC_ID[12]+MAC_ID[13]+MAC_ID[15]+MAC_ID[16] ## we need only last 4 digits
   FINAL_PATTERN=None
   FINAL_PATTERN = str(EMPLOYEE_ID)+str(CURRENT_DAY)+str(CURRENT_MONTH)+str(CURRENT_YEAR)+str(CURRENT_HOUR)+str(CURRENT_MINUTE)+str(CLOCK)+str(MAC_ID)+str(TASK_NUMBERS)
-  lcd.font(lcd.FONT_DejaVu18)
+  lcd.font(lcd.FONT_Default)
   lcd.print("Please write down or scan QR ", 0, 20,0x00cccc)
   lcd.font(lcd.FONT_DejaVu24)
   lcd.print("OK", 140, 170,0xFFFFFF)
@@ -135,7 +135,7 @@ def CLOCK_IN_WRITE():  # ID WRITING
 
 
 def CLOCK_IN_CHECK():  # CHECKING CLOCKINS
-  lcd.font(lcd.FONT_DejaVu18)
+  lcd.font(lcd.FONT_Default)
   lcd.print(str("Plz wait.."), 100, 100, 0xffffff)
   wait(1)
   SD_DATA=None
@@ -255,7 +255,7 @@ def TASK_WINDOW():
   length=0
   
   while True:
-    lcd.font(lcd.FONT_DejaVu18)
+    lcd.font(lcd.FONT_Default)
     lcd.circle(30, 60, 20, color=0xffffff)
     lcd.circle(110, 60, 20, color=0xffffff)
     lcd.circle(190, 60, 20, color=0xffffff)
@@ -290,11 +290,11 @@ def TASK_WINDOW():
       speaker.playWAV('/sd/button.wav')
       i=i+1#
       var='1'
-    if (touch.status())==1 and (touch.read()[0]) >170 and (touch.read()[0]) <200  and (touch.read()[1]) >75 and  (touch.read()[1]) <100:
+    if (touch.status())==1 and (touch.read()[0]) >170 and (touch.read()[0]) <200  and (touch.read()[1]) >70 and  (touch.read()[1]) <100:
       speaker.playWAV('/sd/button.wav')
       i=i+1#
       var='2'
-    if (touch.status())==1 and (touch.read()[0]) >250 and (touch.read()[0]) <280  and (touch.read()[1]) >75 and  (touch.read()[1]) <100:
+    if (touch.status())==1 and (touch.read()[0]) >250 and (touch.read()[0]) <280  and (touch.read()[1]) >68 and  (touch.read()[1]) <100:
       speaker.playWAV('/sd/button.wav')
       i=i+1#
       var='3'
@@ -454,7 +454,7 @@ def TASK_WINDOW():
         
     if i==1:
       num1=var
-      lcd.font(lcd.FONT_DejaVu18)
+      lcd.font(lcd.FONT_Default)
       lcd.print(num1, 0, 10,  0x66ff99)
     if i==2:
       num2=var
@@ -462,121 +462,121 @@ def TASK_WINDOW():
      
     if i==3:
       num3=var
-      lcd.font(lcd.FONT_DejaVu18)
+      lcd.font(lcd.FONT_Default)
       lcd.print(num3, 20, 10,  0x66ff99)
       
     if i==4:
       num4=var
-      lcd.font(lcd.FONT_DejaVu18)
+      lcd.font(lcd.FONT_Default)
       lcd.print(num4, 30, 10,  0x66ff99)
     if i==5:
       num5=var
-      lcd.font(lcd.FONT_DejaVu18)
+      lcd.font(lcd.FONT_Default)
       lcd.print(num5, 40, 10,  0x66ff99)
       
     if i==6:
       num6=var
-      lcd.font(lcd.FONT_DejaVu18)
+      lcd.font(lcd.FONT_Default)
       lcd.print(num6, 50, 10,  0x66ff99)
     if i==7:
       num7=var
-      lcd.font(lcd.FONT_DejaVu18)
+      lcd.font(lcd.FONT_Default)
       lcd.print(num7, 60, 10,  0x66ff99)
       
     if i==8:
       num8=var
-      lcd.font(lcd.FONT_DejaVu18)
+      lcd.font(lcd.FONT_Default)
       lcd.print(num8, 70, 10,  0x66ff99)
      
     if i==9:
       num9=var
-      lcd.font(lcd.FONT_DejaVu18)
+      lcd.font(lcd.FONT_Default)
       lcd.print(num9, 80, 10,  0x66ff99)
     if i==10:
       num10=var
-      lcd.font(lcd.FONT_DejaVu18)
+      lcd.font(lcd.FONT_Default)
       lcd.print(num10, 90, 10,  0x66ff99)
     if i==11:
       num11=var
-      lcd.font(lcd.FONT_DejaVu18)
+      lcd.font(lcd.FONT_Default)
       lcd.print(num11, 100, 10,  0x66ff99)
       
     if i==12:
       num12=var
-      lcd.font(lcd.FONT_DejaVu18)
+      lcd.font(lcd.FONT_Default)
       lcd.print(num12, 110, 10,  0x66ff99)
     if i==13:
       num13=var
-      lcd.font(lcd.FONT_DejaVu18)
+      lcd.font(lcd.FONT_Default)
       lcd.print(num13, 120, 10,  0x66ff99)
     if i==14:
       num14=var
-      lcd.font(lcd.FONT_DejaVu18)
+      lcd.font(lcd.FONT_Default)
       lcd.print(num14, 130, 10,  0x66ff99)
       
     if i==15:
-       num15=var
-       lcd.font(lcd.FONT_DejaVu18)
-       lcd.print(num15, 140, 10,  0x66ff99)
+      num15=var
+      lcd.font(lcd.FONT_Default)
+      lcd.print(num15, 140, 10,  0x66ff99)
     if i==16:
-       num16=var
-       lcd.font(lcd.FONT_DejaVu18)
-       lcd.print(num16, 150, 10,  0x66ff99)
+      num16=var
+      lcd.font(lcd.FONT_Default)
+      lcd.print(num16, 150, 10,  0x66ff99)
     if i==17:
       num17=var
-      lcd.font(lcd.FONT_DejaVu18)
+      lcd.font(lcd.FONT_Default)
       lcd.print(num17, 160, 10,  0x66ff99)
      
     if i==18:
       num18=var
-      lcd.font(lcd.FONT_DejaVu18)
+      lcd.font(lcd.FONT_Default)
       lcd.print(num18, 170, 10,  0x66ff99)
     if i==19:
       num19=var
-      lcd.font(lcd.FONT_DejaVu18)
+      lcd.font(lcd.FONT_Default)
       lcd.print(num19, 180, 10,  0x66ff99)
     if i==20:
       num20=var
-      lcd.font(lcd.FONT_DejaVu18)
+      lcd.font(lcd.FONT_Default)
       lcd.print(num20, 190, 10,  0x66ff99)
      
     if i==21:
       num21=var
-      lcd.font(lcd.FONT_DejaVu18)
+      lcd.font(lcd.FONT_Default)
       lcd.print(num21, 200, 10,  0x66ff99)
     if i==22:
       num22=var
-      lcd.font(lcd.FONT_DejaVu18)
+      lcd.font(lcd.FONT_Default)
       lcd.print(num22, 210, 10,  0x66ff99)
     if i==23:
       num23=var
-      lcd.font(lcd.FONT_DejaVu18)
+      lcd.font(lcd.FONT_Default)
       lcd.print(num23, 220, 10,  0x66ff99)
       
     if i==24:
       num24=var
-      lcd.font(lcd.FONT_DejaVu18)
+      lcd.font(lcd.FONT_Default)
       lcd.print(num24, 230, 10,  0x66ff99)
     if i==25:
       num25=var
-      lcd.font(lcd.FONT_DejaVu18)
+      lcd.font(lcd.FONT_Default)
       lcd.print(num25, 240, 10,  0x66ff99)
     if i==26:
       num26=var
-      lcd.font(lcd.FONT_DejaVu18)
+      lcd.font(lcd.FONT_Default)
       lcd.print(num26, 250, 10,  0x66ff99)
       
     if i==27:
       num27=var
-      lcd.font(lcd.FONT_DejaVu18)
+      lcd.font(lcd.FONT_Default)
       lcd.print(num27, 260, 10,  0x66ff99)
     if i==28:
       num28=var
-      lcd.font(lcd.FONT_DejaVu18)
+      lcd.font(lcd.FONT_Default)
       lcd.print(num28, 270, 10,  0x66ff99)
     if i==29:
       num29=var
-      lcd.font(lcd.FONT_DejaVu18)
+      lcd.font(lcd.FONT_Default)
       lcd.print(num29, 280, 10,  0x66ff99)
     if i==30:
       lcd.print(" ", 290, 10,  0x66ff99)
@@ -687,7 +687,7 @@ def EMP_KEYPAD():  ## EMPLOYEE ID KEYPAD FUNCTION
   var=None
   gc.collect()
   while True:
-    lcd.font(lcd.FONT_DejaVu18)
+    lcd.font(lcd.FONT_Default)
     lcd.print('ID :', 5, 20, 0xffffff)
     lcd.print('Back', 250, 10, 0xffffff)
     lcd.circle(40, 75, 20, color=0xff0000)
@@ -779,7 +779,7 @@ def EMP_KEYPAD():  ## EMPLOYEE ID KEYPAD FUNCTION
       num7=None
       num8=None
       
-    if (touch.status())==1 and (touch.read()[0]) >230 and (touch.read()[0]) <280  and (touch.read()[1]) >40 and  (touch.read()[1]) <70: # back
+    if (touch.status())==1 and (touch.read()[0]) >230 and (touch.read()[0]) <280  and (touch.read()[1]) >25 and  (touch.read()[1]) <70: # back
       speaker.playWAV('/sd/button.wav')
 
       del num1
@@ -1283,7 +1283,7 @@ def SD():
   
 def TASK_QN():
   lcd.clear()
-  lcd.font(lcd.FONT_DejaVu18)
+  lcd.font(lcd.FONT_Default)
   lcd.print('DID YOU COMPLETE ALL TASKS', 0, 100, 0xffffff)
   lcd.print('DID YOU COMPLETE ALL TASKS', 0, 100, 0xffffff)
   lcd.print('NO', 30, 160, 0xff0808)
@@ -1376,7 +1376,7 @@ def SHOW(t,x,LIST_LENGTH,LIST):
   clock=int(clock,16)
   device_id=FILE_DATA[56]+FILE_DATA[57]+FILE_DATA[58]+FILE_DATA[59]
   task=FILE_DATA[60]+ FILE_DATA[61]+FILE_DATA[62]+FILE_DATA[63]+ FILE_DATA[64]+FILE_DATA[65]+FILE_DATA[66]+FILE_DATA[67]+ FILE_DATA[68]+ FILE_DATA[69]+FILE_DATA[70]+FILE_DATA[71]+ FILE_DATA[72]+FILE_DATA[73]+FILE_DATA[74]+FILE_DATA[75]+ FILE_DATA[76]+ FILE_DATA[77]+FILE_DATA[78]+FILE_DATA[79]+ FILE_DATA[80]+FILE_DATA[81]+FILE_DATA[82]+FILE_DATA[83]+FILE_DATA[84]+FILE_DATA[85]+FILE_DATA[86]+FILE_DATA[87]+FILE_DATA[88]
-  lcd.font(lcd.FONT_DejaVu18)
+  lcd.font(lcd.FONT_Default)
   lcd.print(str(t), 230, 40, 0xffff33)
   #lcd.print(str("/"), 230, 0, 0xffff33)
   #lcd.print(str(LIST_LENGTH), 250, 0, 0xffff33)
@@ -1425,7 +1425,7 @@ def PASSWORD_WINDOW():
   num7=""
   login_id=None
   while True:
-    lcd.font(lcd.FONT_DejaVu18)
+    lcd.font(lcd.FONT_Default)
     lcd.print('ENTER ID', 5, 20,  0xffffff)
     lcd.circle(50, 80, 20, color= 0xffffff)
     lcd.print("0", 45, 75, 0xffffff)
@@ -1575,13 +1575,13 @@ def Date_set():
   mode=0
   x=0
   while True:
-    lcd.font(lcd.FONT_DejaVu18)
+    lcd.font(lcd.FONT_Default)
     lcd.print("Day", 20, 10, 0xffffff)
     lcd.print("Month", 100, 10, 0xffffff)
     lcd.print("Year", 200, 10, 0xffffff)
     lcd.print('SAVE', 10, 200, 0xffffff)
     lcd.print('BACK', 190, 200,  0xffffff)
-    lcd.font(lcd.FONT_DejaVu40)
+    lcd.font(lcd.FONT_Default)
     lcd.print('|', 90, 40, 0xffffff)
     lcd.print('|', 180, 40, 0xffffff)
     lcd.print('<-', 30, 130, 0xffffff)
@@ -1661,12 +1661,12 @@ def Time_set():
   mode=0
   x=0
   while True:
-    lcd.font(lcd.FONT_DejaVu18)
+    lcd.font(lcd.FONT_Default)
     lcd.print("Hour", 20, 10, 0xffffff)
     lcd.print("Minute", 100, 10, 0xffffff)
     lcd.print('SAVE', 10, 200, 0xffffff)
     lcd.print('BACK', 190, 200,  0xffffff)
-    lcd.font(lcd.FONT_DejaVu40)
+    lcd.font(lcd.FONT_Default)
     lcd.print('<-', 30, 130, 0xffffff)
     lcd.print('M', 130, 130, 0xffffff)
     lcd.print('->', 250, 130, 0xffffff)
@@ -1733,7 +1733,7 @@ def MENU():
   date_status=0
   erase_status=0
   while True:
-    lcd.font(lcd.FONT_DejaVu18)
+    lcd.font(lcd.FONT_Default)
     lcd.print('DATE', 50, 80, 0xffffff)
     lcd.print('TIME', 200, 80, 0xffffff)
     lcd.print('BACK', 10, 200, 0xffffff)
@@ -1750,7 +1750,7 @@ def MENU():
        date_status=Date_set()
        if date_status==1:
          lcd.clear()
-         lcd.font(lcd.FONT_DejaVu18)
+         lcd.font(lcd.FONT_Default)
          lcd.print(str("DATE UPDATED"), 100, 100, 0xffffff)
          speaker.playWAV('/sd/success.wav')
          wait(1)
@@ -1765,7 +1765,7 @@ def MENU():
       time_status=Time_set()
       if time_status==1:
         lcd.clear()
-        lcd.font(lcd.FONT_DejaVu18)
+        lcd.font(lcd.FONT_Default)
         lcd.print(str("TIME UPDATED"), 100, 100, 0xffffff)
         speaker.playWAV('/sd/success.wav')
         wait(1)
@@ -1776,6 +1776,7 @@ def MENU():
       speaker.playWAV('/sd/button.wav')
       lcd.clear()
       while True:
+        lcd.font(lcd.FONT_Default)
         lcd.print("ERASE HISTORY IN SD ?", 40, 100,  0xff2727)
         lcd.print('NO', 10, 200, 0xffffff)
         lcd.print('YES', 190, 200,  0xffffff)
@@ -1786,6 +1787,7 @@ def MENU():
         if (touch.status())==1 and (touch.read()[0]) >200 and (touch.read()[0]) <350  and (touch.read()[1]) >200 and  (touch.read()[1]) <350:
           speaker.playWAV('/sd/button.wav')
           lcd.clear()
+          lcd.font(lcd.FONT_Default)
           lcd.print("ERASING...", 100, 100,  0xfffe38)
           wait(1)
           try:
@@ -1835,7 +1837,7 @@ def DST_SETTING():
   set_new_month=rtc.datetime()[1]
   set_new_year=str(rtc.datetime()[0])
   set_new_year=str(set_new_year[2])+str(set_new_year[3])
-  lcd.font(lcd.FONT_DejaVu18)
+  lcd.font(lcd.FONT_Default)
   lcd.print('DST SELECTION', 80, 70, 0xffffff)
   lcd.print('BACKWARD',  20, 130, 0xff0808)
   lcd.print('[-1 HR]',  35, 150, 0xffffff)
@@ -1843,14 +1845,20 @@ def DST_SETTING():
   lcd.print('[+1 HR]',  210, 150, 0xffffff)
   lcd.print('BACK', 10, 200, 0xffffff)
   while (dst_value==str('9')):
-    lcd.font(lcd.FONT_DefaultSmall)
+    lcd.font(lcd.FONT_Default)
     lcd.print('NOT AVAILABLE', 190, 170, 0xff0808)
     if (touch.status())==1 and (touch.read()[0]) >50 and (touch.read()[0]) <100  and (touch.read()[1]) >140 and  (touch.read()[1]) <170:
       speaker.playWAV('/sd/button.wav')
-      set_new_hour-=1
-      rtc.datetime((int(set_new_year), int(set_new_month), int(set_new_day), 0, int(set_new_hour), int(set_new_minute), 0, 0))
-      nvs.write(str('5'), '8')
-      return 1
+      if set_new_hour==0:
+        set_new_hour=0
+        nvs.write(str('5'), '8')
+        return 1
+      else:
+        set_new_hour-=1
+        rtc.datetime((int(set_new_year), int(set_new_month), int(set_new_day), 0, int(set_new_hour), int(set_new_minute), 0, 0))
+        nvs.write(str('5'), '8')
+        return 1
+  
     if (touch.status())==1 and (touch.read()[0]) >5 and (touch.read()[0]) <100  and (touch.read()[1]) >190 and  (touch.read()[1]) <250:  #back
       rtc.datetime((int(set_new_year), int(set_new_month), int(set_new_day), 0, int(set_new_hour), int(set_new_minute), 0, 0))
       del set_new_hour
@@ -1864,13 +1872,13 @@ def DST_SETTING():
         
    
   while (dst_value==str('8')):
-    lcd.font(lcd.FONT_DefaultSmall)
+    lcd.font(lcd.FONT_Default)
     lcd.print('NOT AVAILABLE', 35, 170, 0xff0808)
     if (touch.status())==1 and (touch.read()[0]) >200 and (touch.read()[0]) <250  and (touch.read()[1]) >140 and  (touch.read()[1]) <170 :
       speaker.playWAV('/sd/button.wav')
       set_new_hour+=1
       if(set_new_hour==23):
-        set_new_hour=0
+        set_new_hour=23
       rtc.datetime((int(set_new_year), int(set_new_month), int(set_new_day), 0, int(set_new_hour), int(set_new_minute), 0, 0))
       nvs.write(str('5'), '9')
       return 1
@@ -1886,6 +1894,7 @@ def DST_SETTING():
       return 0
       
   while (dst_value!=str('8') or dst_value!=str('9')):
+    lcd.font(lcd.FONT_Default)
     lcd.print('INTIAL SELECTION', 90, 10, 0x14e357)
     if (touch.status())==1 and (touch.read()[0]) >50 and (touch.read()[0]) <100  and (touch.read()[1]) >140 and  (touch.read()[1]) <170:
       speaker.playWAV('/sd/button.wav')
@@ -2000,8 +2009,8 @@ def main():
     lcd.font(lcd.FONT_DejaVu24)
     lcd.print('CIN', 65, 130, 0x009900)
     lcd.print('COUT', 190, 130, 0xcc0000)
-    lcd.font(lcd.FONT_DejaVu18)
-    lcd.print(' --------------------------------------', 0, 180, 0x64e6e7)
+    lcd.font(lcd.FONT_Default)
+    lcd.print(' ------------------------------------------------------------', 0, 180, 0x64e6e7)
     lcd.print("HISTORY", 220, 40,  0xffffff)
     lcd.print("SETTINGS", 110, 40,  0xffffff)
     lcd.print('-', 25, 10, 0xffffff)
@@ -2012,7 +2021,7 @@ def main():
     lcd.print((espnow.get_mac_addr()), 120, 200, 0xffffff)
     lcd.print("[ DST ]", 5, 70, 0xffe700) # year
     #lcd.print(str(RAM), 100, 70, 0xffe700) # year
-    lcd.print("VER : 1.6.3", 210, 70,  0xffffff)
+    lcd.print("VER : 1.9.1", 210, 70,  0xffffff)
     
     if CURRENT_MONTH==1 or CURRENT_MONTH==2 or  CURRENT_MONTH ==3 or CURRENT_MONTH==4 or CURRENT_MONTH==5 or  CURRENT_MONTH ==6 or  CURRENT_MONTH ==7 or  CURRENT_MONTH ==8 or  CURRENT_MONTH==9:
       lcd.print("0", 35, 10, 0xffffff) # month
@@ -2054,8 +2063,8 @@ def main():
           CHECK_CLOCK=CLOCK_IN_CHECK()
           if CHECK_CLOCK==1:
             lcd.clear()
-            lcd.font(lcd.FONT_DejaVu18)
-            lcd.print(str("CIN VERIFIED"), 80, 100,  0x18f830)  ## CIN CONFIRMED
+            lcd.font(lcd.FONT_Default)
+            lcd.print(str("CIN VERIFIED"), 70, 100,  0x18f830)  ## CIN CONFIRMED
             speaker.playWAV('/sd/success.wav')
             wait(1)
             lcd.clear()
@@ -2064,7 +2073,7 @@ def main():
               SD_WRITE=PATTERN_CIN_SAVE()
               if SD_WRITE==1:
                 lcd.clear()
-                lcd.font(lcd.FONT_DejaVu18)
+                lcd.font(lcd.FONT_Default)
                 lcd.print("DATA SAVED", 100, 100,0xffffff)
                 speaker.playWAV('/sd/success.wav')
                 wait(1)
@@ -2072,7 +2081,7 @@ def main():
                 ID_WRITE=CLOCK_IN_WRITE()
                 if ID_WRITE==1:
                   lcd.clear()
-                  lcd.font(lcd.FONT_DejaVu18)
+                  lcd.font(lcd.FONT_Default)
                   lcd.print("ID UPDATED", 80, 100,  0x18f830)
                   speaker.playWAV('/sd/success.wav')
                   wait(1)
@@ -2082,19 +2091,20 @@ def main():
                 else:
                   EMPLOYEE_ID=None
                   lcd.clear()
+                  lcd.font(lcd.FONT_Default)
                   lcd.print("ERROR UPDATING", 80, 100,  0xff2727)
                   speaker.playWAV('/sd/warning.wav')
                   wait(20)
             elif SD_CHECK==-1:
               lcd.clear()
               while True:
-                lcd.font(lcd.FONT_DejaVu18)
-                lcd.print('INSERT SD CARD & RESTART!!', 10, 100, 0xcc0000)
+                lcd.font(lcd.FONT_Default)
+                lcd.print('INSERT SD CARD & RESTART!!', 70, 100, 0xcc0000)
       
           elif CHECK_CLOCK==0:
             lcd.clear()
-            lcd.font(lcd.FONT_DejaVu18)
-            lcd.print("ALREADY CLOCKED IN", 40, 100, 0xcc0000)
+            lcd.font(lcd.FONT_Default)
+            lcd.print("ALREADY CLOCKED IN", 70, 100, 0xcc0000)
             speaker.playWAV('/sd/warning.wav')
             wait(2)
             lcd.clear()
@@ -2103,7 +2113,7 @@ def main():
           lcd.clear()
         elif VALID_ID==2:  # ALREADY clkin
           lcd.clear()
-          lcd.font(lcd.FONT_DejaVu18)
+          lcd.font(lcd.FONT_Default)
           lcd.print("INVALID ID", 100, 100, 0xcc0000)
           speaker.playWAV('/sd/warning.wav')
           wait(2)
@@ -2112,8 +2122,8 @@ def main():
       elif SD_CHECK==-1: # sd not found
         lcd.clear()
         while True:
-          lcd.font(lcd.FONT_DejaVu18)
-          lcd.print('INSERT SD CARD & RESTART!!', 10, 100, 0xcc0000)
+          lcd.font(lcd.FONT_Default)
+          lcd.print('INSERT SD CARD & RESTART!!', 70, 100, 0xcc0000)
                     
     if (touch.status()) == 1 and (touch.read()[0]) > 190 and (touch.read()[0]) < 230  and (touch.read()[1]) > 140 and  (touch.read()[1])  < 170 :
       CLOCK="00000000"
@@ -2130,7 +2140,7 @@ def main():
           CHECK_CLOCK=CLOCK_IN_CHECK()
           if CHECK_CLOCK==0:
             lcd.clear()
-            lcd.font(lcd.FONT_DejaVu18)
+            lcd.font(lcd.FONT_Default)
             lcd.print(str("COUT VERIFIED"), 80, 100,  0x18f830)  ## CIN CONFIRMED
             speaker.playWAV('/sd/success.wav')
             wait(1)
@@ -2143,7 +2153,7 @@ def main():
                 SD_WRITE=PATTERN_CIN_SAVE()
                 if SD_WRITE==1:
                   lcd.clear()
-                  lcd.font(lcd.FONT_DejaVu18)
+                  lcd.font(lcd.FONT_Default)
                   lcd.print("DATA SAVED", 100, 100,0xffffff)
                   speaker.playWAV('/sd/success.wav')
                   wait(1)
@@ -2151,7 +2161,7 @@ def main():
                   ID_WRITE=UPDATE_ID()
                   if ID_WRITE==1:
                     lcd.clear()
-                    lcd.font(lcd.FONT_DejaVu18)
+                    lcd.font(lcd.FONT_Default)
                     lcd.print("ID UPDATED", 80, 100,  0x18f830)
                     speaker.playWAV('/sd/success.wav')
                     wait(1)
@@ -2161,6 +2171,7 @@ def main():
                   else:
                     EMPLOYEE_ID=None
                     lcd.clear()
+                    lcd.font(lcd.FONT_Default)
                     lcd.print("ERROR UPDATING", 80, 100,  0xff2727)
                     speaker.playWAV('/sd/warning.wav')
                     wait(20)
@@ -2168,6 +2179,7 @@ def main():
                 else:
                   EMPLOYEE_ID=None
                   lcd.clear()
+                  lcd.font(lcd.FONT_Default)
                   lcd.print("ERROR UPDATING", 80, 100,  0xff2727)
                   speaker.playWAV('/sd/warning.wav')
                   wait(20)
@@ -2175,7 +2187,7 @@ def main():
               else:
                 lcd.clear()
                 while True:
-                  lcd.font(lcd.FONT_DejaVu18)
+                  lcd.font(lcd.FONT_Default)
                   lcd.print('INSERT SD CARD & RESTART!!', 10, 100, 0xcc0000)
 
             elif TASK_CHECK==2:
@@ -2186,7 +2198,7 @@ def main():
                 SD_WRITE=PATTERN_CIN_SAVE()
                 if SD_WRITE==1:
                   lcd.clear()
-                  lcd.font(lcd.FONT_DejaVu18)
+                  lcd.font(lcd.FONT_Default)
                   lcd.print("DATA SAVED", 100, 100,0xffffff)
                   speaker.playWAV('/sd/success.wav')
                   wait(1)
@@ -2194,7 +2206,7 @@ def main():
                   lcd.clear()
                   if ID_WRITE==1:
                     lcd.clear()
-                    lcd.font(lcd.FONT_DejaVu18)
+                    lcd.font(lcd.FONT_Default)
                     lcd.print("ID UPDATED", 80, 100,  0x18f830)
                     speaker.playWAV('/sd/success.wav')
                     wait(1)
@@ -2203,6 +2215,7 @@ def main():
                   else:
                     EMPLOYEE_ID=None
                     lcd.clear()
+                    lcd.font(lcd.FONT_Default)
                     lcd.print("ERROR UPDATING", 80, 100,  0xff2727)
                     speaker.playWAV('/sd/warning.wav')
                     wait(20)
@@ -2217,7 +2230,7 @@ def main():
               
           elif CHECK_CLOCK==1:
             lcd.clear()
-            lcd.font(lcd.FONT_DejaVu18)
+            lcd.font(lcd.FONT_Default)
             lcd.print("NOT CLOCKED IN", 80, 100, 0xcc0000)
             speaker.playWAV('/sd/warning.wav')
             wait(2)
@@ -2227,7 +2240,7 @@ def main():
           lcd.clear()
         elif VALID_ID==2:
           lcd.clear()
-          lcd.font(lcd.FONT_DejaVu18)
+          lcd.font(lcd.FONT_Default)
           lcd.print("INVALID ID", 100, 100, 0xcc0000)
           speaker.playWAV('/sd/warning.wav')
           wait(2)
@@ -2235,8 +2248,8 @@ def main():
       elif SD_CHECK==-1:
         lcd.clear()
         while True:
-          lcd.font(lcd.FONT_DejaVu18)
-          lcd.print('INSERT SD CARD & RESTART!!', 10, 100, 0xcc0000)
+          lcd.font(lcd.FONT_Default)
+          lcd.print('INSERT SD CARD & RESTART!!', 70, 100, 0xcc0000)
         
     if (touch.status())==1 and (touch.read()[0]) > 240 and (touch.read()[0]) <300  and (touch.read()[1]) >60 and  (touch.read()[1]) <100:
        speaker.playWAV('/sd/button.wav')
@@ -2248,21 +2261,23 @@ def main():
            lcd.clear()
          elif HISTORY_STATUS==0:
            lcd.clear()
+           lcd.font(lcd.FONT_Default)
            lcd.print('NO RECORD', 100, 100, 0xcc0000)
            speaker.playWAV('/sd/warning.wav')
            wait(1)
            lcd.clear()
        else:
          while True:
-           lcd.font(lcd.FONT_DejaVu18)
-           lcd.print('INSERT SD CARD & RESTART!!', 10, 100, 0xcc0000)
+           lcd.font(lcd.FONT_Default)
+           lcd.print('INSERT SD CARD & RESTART!!', 70, 100, 0xcc0000)
            
-    if (touch.status())==1 and (touch.read()[0]) >130 and (touch.read()[0]) <190  and (touch.read()[1]) >70 and  (touch.read()[1]) <110:
+    if (touch.status())==1 and (touch.read()[0]) >130 and (touch.read()[0]) <190  and (touch.read()[1]) >60 and  (touch.read()[1]) <80:
       speaker.playWAV('/sd/button.wav')
       lcd.clear()
       LOCK=PASSWORD_WINDOW()
       if LOCK==1:
         lcd.clear()
+        lcd.font(lcd.FONT_Default)
         lcd.print(str("success"), 100, 100, 0xffffff)
         speaker.playWAV('/sd/success.wav')
         wait(1)
@@ -2274,6 +2289,7 @@ def main():
 
       elif LOCK==-1:
         lcd.clear()
+        lcd.font(lcd.FONT_Default)
         lcd.print("WRONG!!", 100, 100,0xff2727)                                # wrong password
         speaker.playWAV('/sd/warning.wav')
         wait(1)
@@ -2286,7 +2302,7 @@ def main():
       DST_STATUS=DST_SETTING()
       if DST_STATUS==1:
         lcd.clear()
-        lcd.font(lcd.FONT_DejaVu18)
+        lcd.font(lcd.FONT_Default)
         lcd.print('DST UPDATED', 100, 100, 0xffffff)
         wait(1)
         lcd.clear()
@@ -2302,7 +2318,7 @@ def main():
 
 
 power.setVibrationIntensity(5)
-lcd.font(lcd.FONT_DejaVu40)
+lcd.font(lcd.FONT_DejaVu24)
 screen.set_screen_brightness(100)
 lcd.print('C', 100, 100,0xe937ff)
 wait(2)
@@ -2312,8 +2328,8 @@ lcd.print('C', 145, 100, 0xfff60b)
 wait(2)
 lcd.print('O', 175, 100, 0xb1cfff)
 wait(1)
-lcd.font(lcd.FONT_DefaultSmall)
-lcd.print('Employee Interactive Voice Response System', 30, 150, 0xffffff)
+lcd.font(lcd.FONT_Default)
+lcd.print('VER 1.9.1', 100, 150, 0xffffff)
 speaker.playWAV('/sd/sd_ok.wav')
 wait(1)
 try:
@@ -2323,11 +2339,11 @@ try:
 except:
   while True:
     lcd.clear()
-    lcd.font(lcd.FONT_DejaVu18)
-    lcd.print('INSERT SD CARD & RESTART!!', 10, 100, 0xcc0000)
+    lcd.font(lcd.FONT_Default)
+    lcd.print('INSERT SD CARD & RESTART!!', 70, 100, 0xcc0000)
     wait(3)
 lcd.clear()
-lcd.font(lcd.FONT_DejaVu18)
+lcd.font(lcd.FONT_Default)
 lcd.print('SD FOUND', 100, 100, 0xffffff)
 speaker.playWAV('/sd/sd_ok.wav')
 wait_ms(200)
